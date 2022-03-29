@@ -89,6 +89,7 @@ model Feeling {
     users       FeelingOnUser[]
     articles    FeelingOnArticle[]
     videos      FeelingOnVideo[]
+    advices     FeelingOnAdvice[]
 }
 
 model FeelingOnDiary {
@@ -145,3 +146,19 @@ model FeelingOnVideo {
     videoId     Int
 }
 
+model Advice {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    adviceType  String
+    text        String
+    feelings    FeelingOnAdvice[]
+}
+
+model FeelingOnAdvice {
+    id          Int            @id @default(autoincrement())
+    feeling     Feeling        @relation(fields: [feelingId], references: [id])
+    feelingId   Int
+    advice      Advice  @relation(fields: [adviceId], references: [id])
+    adviceId    Int
+}
