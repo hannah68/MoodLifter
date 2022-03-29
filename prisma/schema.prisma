@@ -21,59 +21,106 @@ model User {
     gratitude       Gratitude[]
     accomplishment  Accomplishment[]
     passion         Passion[]
+    feelings        FeelingOnUser[]
 }
 
 model Diary {
-    id        Int       @id @default(autoincrement())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    diaryType String
-    text      String
-    user      User      @relation(fields: [userId], references: [id])
-    userId    Int
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    diaryType   String
+    text        String
+    user        User      @relation(fields: [userId], references: [id])
+    userId      Int
+    feelings    FeelingOnDiary[]
 }
 
 model FavPerson {
-    id        Int       @id @default(autoincrement())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    name      String
-    user      User      @relation(fields: [userId], references: [id])
-    userId    Int
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    name        String
+    user        User      @relation(fields: [userId], references: [id])
+    userId      Int
 }
 
 model FavPlace {
-    id        Int       @id @default(autoincrement())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    name      String
-    user      User      @relation(fields: [userId], references: [id])
-    userId    Int
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    name        String
+    user        User      @relation(fields: [userId], references: [id])
+    userId      Int
 }
 
 model Gratitude {
-    id        Int       @id @default(autoincrement())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    text      String
-    user      User      @relation(fields: [userId], references: [id])
-    userId    Int
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    text        String
+    user        User      @relation(fields: [userId], references: [id])
+    userId      Int
 }
 
 model Accomplishment {
-    id        Int       @id @default(autoincrement())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    text      String
-    user      User      @relation(fields: [userId], references: [id])
-    userId    Int
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    text        String
+    user        User      @relation(fields: [userId], references: [id])
+    userId      Int
 }
 
 model Passion {
-    id        Int       @id @default(autoincrement())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    text      String
-    user      User      @relation(fields: [userId], references: [id])
-    userId    Int
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    text        String
+    user        User      @relation(fields: [userId], references: [id])
+    userId      Int
+}
+
+model Feeling {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    name        String
+    diaries     FeelingOnDiary[]
+    users       FeelingOnUser[]
+    articles    FeelingOnArticle[]
+}
+
+model FeelingOnDiary {
+    id          Int       @id @default(autoincrement())
+    diary       Diary     @relation(fields: [diaryId], references: [id])
+    diaryId     Int
+    feeling     Feeling   @relation(fields: [feelingId], references: [id])
+    feelingId   Int
+}
+
+model FeelingOnUser {
+    id          Int       @id @default(autoincrement())
+    user        User      @relation(fields: [userId], references: [id])
+    userId      Int
+    feeling     Feeling   @relation(fields: [feelingId], references: [id])
+    feelingId   Int
+}
+
+model Article {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    articleType String
+    title       String
+    link        String
+    content     String
+    feelings    FeelingOnArticle[]
+}
+
+model FeelingOnArticle {
+    id          Int       @id @default(autoincrement())
+    feeling     Feeling   @relation(fields: [feelingId], references: [id])
+    feelingId   Int
+    article     Article   @relation(fields: [articleId], references: [id])
+    articleId   Int
 }
