@@ -15,12 +15,12 @@ model User {
     username        String    @unique
     email           String
     password        String    
-    diary           Diary[]
-    favPerson       FavPerson[]
-    favPlace        FavPlace[]
-    gratitude       Gratitude[]
-    accomplishment  Accomplishment[]
-    passion         Passion[]
+    diaries         Diary[]
+    favPersons      FavPerson[]
+    favPlaces       FavPlace[]
+    gratitudes      Gratitude[]
+    accomplishments Accomplishment[]
+    passions        Passion[]
     feelings        FeelingOnUser[]
 }
 
@@ -90,6 +90,7 @@ model Feeling {
     articles    FeelingOnArticle[]
     videos      FeelingOnVideo[]
     advices     FeelingOnAdvice[]
+    quotes      Quote[]
 }
 
 model FeelingOnDiary {
@@ -161,4 +162,14 @@ model FeelingOnAdvice {
     feelingId   Int
     advice      Advice  @relation(fields: [adviceId], references: [id])
     adviceId    Int
+}
+
+model Quote {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    text        String
+    author      String
+    feeling     Feeling   @relation(fields: [feelingId], references: [id])
+    feelingId   Int
 }
