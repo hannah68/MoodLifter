@@ -5,8 +5,8 @@
     gap: 1rem;
 }
 
-.signup-page h2,
-.signin-page h1{
+.signup-page h3,
+.signin-page h2{
     text-align: center;
 }
 

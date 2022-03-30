@@ -9,7 +9,7 @@ export interface ISigninProps {}
 const Signin: React.FunctionComponent<ISigninProps> = (props) => {
 	return (
 		<div className="signin-page">
-			<h1>Sign In</h1>
+			<h2>Sign In</h2>
 			<form className="signin-form">
 				<div className="input-groups">
 					<label htmlFor="email">

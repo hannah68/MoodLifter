@@ -11,7 +11,7 @@ export interface ISignupProps {}
 const Signup: React.FunctionComponent<ISignupProps> = (props) => {
 	return (
 		<div className="signup-page">
-			<h2>Please create an account so we can track your mood</h2>
+			<h3>Please create an account so we can track your mood</h3>
 			<form className="signup-form"> 
 				<div className="input-groups">
 					<label htmlFor="username"><FaUser/></label>
