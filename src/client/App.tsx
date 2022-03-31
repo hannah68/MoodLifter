@@ -9,9 +9,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
 
-export interface IAppProps {}
-
-const App: React.FunctionComponent<IAppProps> = (props) => {
+const App = () => {
 	return (
 		<div className="app">
       
