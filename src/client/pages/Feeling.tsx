@@ -9,12 +9,10 @@ export interface IFeelingProps {}
 
 const Feeling = () => {
 	const [showFeelings, setShowFeelings] = useState(true);
-	const [showFeelingQuestions, setShowFeelingQuestions] = useState(true);
 
 	return (
 		<div className="feeling-page">
-			{showFeelings && (
-				<div className="feeling-top">
+				{showFeelings && <div className="feeling-top">
 					<h2 className="feeling-title">
 						Let's get started with a couple of questions about you. This
 						shouldn't take more than a minute.
@@ -26,14 +24,10 @@ const Feeling = () => {
 							src="./assets/images/bike.png"
 							alt="bike guy"
 						/>
-						<button className="start-btn" onClick={() => setShowFeelings(false)}>
-							Start
-						</button>
 					</div>
-				</div>
-			)}
-			{!showFeelings && <FeelingQuestions setShowFeelingQuestions={setShowFeelingQuestions}/>}
-			{!showFeelingQuestions && <FeelingEmoji />}
+					<FeelingQuestions setShowFeelings={setShowFeelings}/>
+				</div>}
+			{!showFeelings && <FeelingEmoji />}
 		</div>
 	);
 };

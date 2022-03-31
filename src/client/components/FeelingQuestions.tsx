@@ -1,16 +1,22 @@
+import { FormEvent } from "react";
 import { questions } from "../data/feelingQuestion";
 
 export type ShowFeeling = true | false;
 
 interface FeelingQProps {
-    setShowFeelingQuestions: (target: ShowFeeling) => void
+    setShowFeelings: (target: ShowFeeling) => void
+}
+
+// submit form handler================
+const submitQuestionHandler = (e: FormEvent<HTMLFormElement>) : void => {
+    e.preventDefault();
 }
 
 const FeelingQuestions = (props: FeelingQProps) => {
-    const { setShowFeelingQuestions } = props;
+    const { setShowFeelings } = props;
 
 	return (
-		<form className="question-form">
+		<form className="question-form" onSubmit={submitQuestionHandler}>
 			{questions.map((question: string, index: number) => {
 				return (
 					<div className="fav-groups" key={index}>
@@ -19,9 +25,11 @@ const FeelingQuestions = (props: FeelingQProps) => {
 					</div>
 				);
 			})}
-            <button type="submit" className="save-btn" onClick={() => setShowFeelingQuestions(false)}>Save</button>
+            <button type="submit" className="save-btn" onClick={() => setShowFeelings(false)}>Save</button>
 		</form>
 	);
 };
+
+
 
 export default FeelingQuestions;

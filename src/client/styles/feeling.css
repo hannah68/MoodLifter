@@ -67,6 +67,10 @@
 	gap: 5px;
 }
 
+.question-form{
+	padding-top: 2rem;
+}
+
 .fav-groups{
 	display: flex;
 	flex-direction: column;
