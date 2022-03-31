@@ -1,0 +1,68 @@
+.feeling-page {
+	width: 70%;
+	margin: 3rem auto;
+}
+
+.feeling-title {
+	line-height: 1.6;
+}
+
+.img-conteiner {
+	display: flex;
+	align-items: flex-end;
+	gap: 5rem;
+}
+
+.guy-img {
+	width: 12rem;
+}
+
+.feeling-subtitle {
+	padding-top: 1rem;
+}
+
+.start-btn {
+	padding: 6px;
+	width: 7rem;
+	background-color: var(--color-yellow);
+	outline: none;
+	cursor: pointer;
+	border: 1px solid rgb(129, 129, 129);
+	border-radius: 5px;
+}
+
+.feeling-bottom{
+	text-align: center;
+}
+
+.emoji-list{
+    display: grid;
+	grid-template-columns: repeat(5,1fr);
+	gap: 1rem;
+	text-align: center;
+	margin: 2rem 0;
+}
+
+.emoji-group{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-yellow);
+	padding: 5px;
+	gap: 10px;
+	width: 5rem;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.emoji-group img{
+	width: 2rem;
+	display: block;
+	margin: auto;
+}
+
+.feeling-date{
+	margin: 1rem 0;
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+}

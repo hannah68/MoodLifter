@@ -1,26 +1,32 @@
-:root{
-    --color-pink: #FFAEBC;
-    --color-blue: #A0E7E5;
-    --color-mint: #B4F8C8;
-    --color-yellow: #FBE7C6;
+:root {
+	--color-pink: #ffaebc;
+	--color-blue: #a0e7e5;
+	--color-mint: #b4f8c8;
+	--color-yellow: #fbe7c6;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 html {
-  font-family: "Roboto", sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
-.app{
-    width: 50%;
-    background: rgb(255,174,188);
-background: linear-gradient(60deg, rgba(255,174,188,1) 0%, rgba(160,231,229,1) 60%, rgba(180,248,200,1) 95%);
-    margin: 5rem auto;
-    height: 50vh;
+.app {
+	width: 50%;
+	background-color: aliceblue;
+	background: rgb(255, 174, 188);
+	background: linear-gradient(
+		60deg,
+		rgba(255, 174, 188, 1) 0%,
+		rgba(160, 231, 229, 1) 60%,
+		rgba(180, 248, 200, 1) 95%
+	);
+	margin: 5rem auto;
+	min-height: 50vh;
 }

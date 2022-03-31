@@ -14,6 +14,7 @@ export interface IAppProps {}
 const App: React.FunctionComponent<IAppProps> = (props) => {
 	return (
 		<div className="app">
+      
 			<Header />
 			<Routes>
 				<Route path="/" element={<Home />} />
