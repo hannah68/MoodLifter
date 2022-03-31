@@ -2,16 +2,18 @@ import React, { useState } from "react";
 
 import "../styles/feeling.css";
 
-import FeelingQuestions from "./FeelingQuestions";
+import FeelingEmoji from "../components/FeelingEmoji";
+import FeelingQuestions from "../components/FeelingQuestions";
 
 export interface IFeelingProps {}
 
-const Feeling: React.FunctionComponent<IFeelingProps> = (props) => {
-	const [showFeelings, setShowFeelings] = useState(false);
+const Feeling = () => {
+	const [showFeelings, setShowFeelings] = useState(true);
+	const [showFeelingQuestions, setShowFeelingQuestions] = useState(true);
 
 	return (
 		<div className="feeling-page">
-			{!showFeelings && (
+			{showFeelings && (
 				<div className="feeling-top">
 					<h2 className="feeling-title">
 						Let's get started with a couple of questions about you. This
@@ -24,13 +26,14 @@ const Feeling: React.FunctionComponent<IFeelingProps> = (props) => {
 							src="./assets/images/bike.png"
 							alt="bike guy"
 						/>
-						<button className="start-btn" onClick={() => setShowFeelings(true)}>
+						<button className="start-btn" onClick={() => setShowFeelings(false)}>
 							Start
 						</button>
 					</div>
 				</div>
 			)}
-			{showFeelings && <FeelingQuestions />}
+			{!showFeelings && <FeelingQuestions setShowFeelingQuestions={setShowFeelingQuestions}/>}
+			{!showFeelingQuestions && <FeelingEmoji />}
 		</div>
 	);
 };

@@ -19,6 +19,7 @@ html {
 
 .app {
 	width: 50%;
+	min-height: 50vh;
 	background-color: aliceblue;
 	background: rgb(255, 174, 188);
 	background: linear-gradient(
@@ -28,5 +29,5 @@ html {
 		rgba(180, 248, 200, 1) 95%
 	);
 	margin: 5rem auto;
-	min-height: 50vh;
+	overflow: hidden;
 }

@@ -26,6 +26,7 @@ model Favourite {
     updatedAt       DateTime  @updatedAt
     favPerson       String
     favPlace        String
+    favFood         String
     gratitude       String
     passion         String
     accomplishment  String

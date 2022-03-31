@@ -66,3 +66,32 @@
 	justify-content: center;
 	gap: 5px;
 }
+
+.fav-groups{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.5rem;
+}
+
+.text-area{
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	background-color: transparent;
+	outline: none;
+	padding-bottom: 0;
+	padding-top: 5px;
+}
+
+.save-btn {
+	border: none;
+	outline: none;
+	padding: 5px;
+	display: block;
+	margin: auto;
+	width: 5rem;
+	font-size: 1.2rem;
+	background-color: var(--color-yellow);
+	border-radius: 5px;
+	cursor: pointer;
+}

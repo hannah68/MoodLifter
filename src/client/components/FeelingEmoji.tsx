@@ -8,7 +8,7 @@ import Emoji from "../components/Emoji";
 
 import { MdDateRange } from "react-icons/md";
 
-const FeelingQuestions = () => {
+const FeelingEmoji = () => {
 	return (
 		<div className="feeling-bottom">
 			<h1>Hi, How are you?</h1>
@@ -25,4 +25,4 @@ const FeelingQuestions = () => {
 	);
 };
 
-export default FeelingQuestions;
+export default FeelingEmoji;
