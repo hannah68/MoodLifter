@@ -26,3 +26,12 @@ export interface Advice {
 	text: string[];
 	adviceType: string;
 }
+
+export interface User {
+	username: string;
+	email: string;
+	password: string;
+}
+
+
+
