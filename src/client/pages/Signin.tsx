@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import "../styles/signup.css";
 
-import {USER_URL} from '../config';
+import {USER_URL} from '../utils/config';
 
 const Signin = () => {
 	const [user, setuser] = useState({

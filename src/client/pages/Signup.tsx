@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import "../styles/signup.css";
 
-import {USER_URL} from '../config';
+import {USER_URL} from '../utils/config';
 
 export interface userType {
 	username: string;
