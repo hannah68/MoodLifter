@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
-import { questions } from "../data/feelingQuestion";
+import { questions, questionType } from "../data/feelingQuestion";
+
 
 export type ShowFeeling = true | false;
 
@@ -17,11 +18,11 @@ const FeelingQuestions = (props: FeelingQProps) => {
 
 	return (
 		<form className="question-form" onSubmit={submitQuestionHandler}>
-			{questions.map((question: string, index: number) => {
+			{questions.map((q: questionType, index: number) => {
 				return (
 					<div className="fav-groups" key={index}>
-						<label htmlFor="fav-person">{question}</label>
-                        <input type="text" className="text-area"/>
+						<label htmlFor="fav-person">{q.question}</label>
+                        <input type="text" className="text-area" placeholder={q.label}/>
 					</div>
 				);
 			})}
