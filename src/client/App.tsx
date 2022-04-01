@@ -11,18 +11,19 @@ import Header from "./components/Header";
 
 const App = () => {
 	return (
-		<div className="app">
-      
+		<>
 			<Header />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/feeling" element={<Feeling />} />
-				<Route path="/profile" element={<Profile />} />
-				<Route path="/recommendation" element={<Recommendation />} />
-				<Route path="/signin" element={<Signin />} />
-				<Route path="/signup" element={<Signup />} />
-			</Routes>
-		</div>
+			<div className="app">
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/feeling" element={<Feeling />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/recommendation" element={<Recommendation />} />
+					<Route path="/signin" element={<Signin />} />
+					<Route path="/signup" element={<Signup />} />
+				</Routes>
+			</div>
+		</>
 	);
 };
 
