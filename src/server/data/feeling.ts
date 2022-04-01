@@ -1,6 +1,6 @@
 import { Feeling } from "../config/interfaces";
 
-export const Moods: Array<Feeling> = [
+export const moods: Array<Feeling> = [
 	{ name: "Happy" },
 	{ name: "Relieved" },
 	{ name: "Confused" },

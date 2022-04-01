@@ -1,6 +1,6 @@
 import { Video } from "../config/interfaces";
 
-export const Videos: Array<Video> = [
+export const videos: Array<Video> = [
 	{
 		title: "6 Differences Between Sadness and Depression",
 		link: "https://www.youtube.com/watch?v=tNwRNmFT7-4&t=34s",
