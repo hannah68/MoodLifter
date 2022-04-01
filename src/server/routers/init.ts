@@ -1,7 +1,11 @@
 import { Router } from 'express';
 
+import { seedMoodDatabase} from '../controllers/init';
+
 const router = Router();
 
+router.post('/', seedMoodDatabase);
+// router.post('/user', seedUser)
 
 
-module.exports = router;
+export default router;
