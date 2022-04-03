@@ -56,6 +56,14 @@
     margin: 1rem 0;
 }
 
+.logo-img{
+    width: 5rem;
+}
+
+.logo-link{
+    display: flex;
+    flex-direction: column;
+}
 .signin-btn{
     cursor: pointer;
     /* text-decoration: none; */

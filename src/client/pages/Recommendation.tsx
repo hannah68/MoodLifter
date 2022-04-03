@@ -1,6 +1,9 @@
 import React from "react";
-import {RiArticleFill} from 'react-icons/ri';
-import {AiFillVideoCamera}from 'react-icons/ai'
+import { RiArticleFill } from "react-icons/ri";
+import { AiFillVideoCamera } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { FaRegHandPointRight } from "react-icons/fa";
+
 import DiaryForm from "../components/DiaryForm";
 
 import "../styles/recommendation.css";
@@ -9,7 +12,7 @@ const Recommendation = () => {
 	return (
 		<div className="recom-page">
 			<div className="quote-container">
-				<h1>“The purpose of our lives is to be happy.”</h1>
+				<h2>“The purpose of our lives is to be happy.”</h2>
 				<p className="quote-author">— Eleanor Roosevelt</p>
 			</div>
 
@@ -17,32 +20,63 @@ const Recommendation = () => {
 			<p>There are some tips that can help you to feel better</p>
 
 			<div className="advice-container">
-				<ul>
-					<li>Cry it out</li>
-					<li>Exercise</li>
-					<li>Shower or bathe in warm water</li>
-					<li>Acknowledge your feelings</li>
-					<li>Practice mindfulness</li>
+				<ul className="advice-container-list">
+					<li className="advice-list">
+						<span>
+							<FaRegHandPointRight />
+						</span>
+						<span>Cry it out</span>
+					</li>
+					<li className="advice-list">
+						<span>
+							<FaRegHandPointRight />
+						</span>
+						<span>Exercise</span>
+					</li>
+					<li className="advice-list">
+						<span>
+							<FaRegHandPointRight />
+						</span>
+						<span>Shower or bathe in warm water</span>
+					</li>
+					<li className="advice-list">
+						<span>
+							<FaRegHandPointRight />
+						</span>
+						<span>Acknowledge your feelings</span>
+					</li>
+					<li className="advice-list">
+						<span>
+							<FaRegHandPointRight />
+						</span>
+						<span>Practice mindfulness</span>
+					</li>
 				</ul>
 			</div>
 
 			<div className="diary-container">
-				<div className="journal">
-					<h3>Do you know journaling can improve your mood ? </h3>
-					<button>Write</button>
-				</div>
-
+				<h3>Did you know journaling can improve your mood ? </h3>
 				<DiaryForm />
 			</div>
 
-			<h3>Still not feeling good? checkout our articles and videos.</h3>
+			<h3 className="content-container">
+				Still not feeling good? checkout our articles and videos.
+			</h3>
 
 			<div className="article-container">
-				<ul className="article">
+				<ul className="article-list">
 					<li>
-						<p className="article-title">
-							<RiArticleFill/>Four Ways Sadness May Be Good for You
-						</p>
+						<div className="article-title">
+							<div className="article">
+								<span>
+									<RiArticleFill />
+								</span>
+								<span>Four Ways Sadness May Be Good for You</span>
+							</div>
+							<span>
+								<AiOutlineHeart />
+							</span>
+						</div>
 						<p className="article-content">
 							Scientists are finding out how sadness works in the brain—and
 							they're discovering that it can confer important advantages.
@@ -56,7 +90,17 @@ const Recommendation = () => {
 					</li>
 
 					<li>
-						<p className="article-title"><RiArticleFill/>yay or You</p>
+						<div className="article-title">
+							<div className="article">
+								<span>
+									<RiArticleFill />
+								</span>
+								<span>yay or You</span>
+							</div>
+							<span>
+								<AiOutlineHeart />
+							</span>
+						</div>
 						<p className="article-content">
 							Scientists are finding out how sadness works in the brain—and
 							they're discovering that it can confer important advantages.
@@ -72,12 +116,20 @@ const Recommendation = () => {
 			</div>
 
 			<div className="video-container">
-				<ul className="video">
+				<ul className="video-list">
 					<li>
-						<p className="video-title">
-							<AiFillVideoCamera/>6 Differences Between Sadness and Depression
-						</p>
-						<p>
+						<div className="video-title">
+							<div className="video">
+								<span>
+									<AiFillVideoCamera />
+								</span>
+								<span>6 Differences Between Sadness and Depression</span>
+							</div>
+							<span>
+								<AiOutlineHeart />
+							</span>
+						</div>
+						<p className="video-content">
 							sadness is more of an emotional reaction and generally short term
 							lasting no more than a few days. In this video, Psych2Go shares 6
 							important distinctions to help you understand the difference
@@ -93,10 +145,20 @@ const Recommendation = () => {
 					</li>
 
 					<li>
-						<p className="video-title">
-							<AiFillVideoCamera/>How to cope with anxiety | Olivia Remes | TEDxUHasselt
-						</p>
-						<p>
+						<div className="video-title">
+							<div className="video">
+								<span>
+									<AiFillVideoCamera />
+								</span>
+								<span>
+									How to cope with anxiety | Olivia Remes | TEDxUHasselt
+								</span>
+							</div>
+							<span>
+								<AiOutlineHeart />
+							</span>
+						</div>
+						<p className="video-content">
 							s is more of an emotional reaction and generally short term
 							lasting no more than a few days. In this video, Psych2Go shares 6
 							important distinctions to help y
