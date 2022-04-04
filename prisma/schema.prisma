@@ -50,13 +50,13 @@ model Feeling {
     id          Int       @id @default(autoincrement())
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
-    name        String
+    name        String    @unique
     diaries     FeelingOnDiary[]
     users       FeelingOnUser[]
-    articles    FeelingOnArticle[]
-    videos      FeelingOnVideo[]
-    advices     FeelingOnAdvice[]
     quotes      Quote[]
+    articles    Article[]
+    videos      Video[]
+    advices     Advice[]
 }
 
 model FeelingOnDiary {
@@ -83,16 +83,11 @@ model Article {
     title       String
     link        String
     content     String
-    feelings    FeelingOnArticle[]
-}
-
-model FeelingOnArticle {
-    id          Int       @id @default(autoincrement())
     feeling     Feeling   @relation(fields: [feelingId], references: [id])
     feelingId   Int
-    article     Article   @relation(fields: [articleId], references: [id])
-    articleId   Int
 }
+
+
 
 model Video {
     id          Int       @id @default(autoincrement())
@@ -101,17 +96,12 @@ model Video {
     videoType   String
     title       String
     link        String
-    video       String
-    feelings    FeelingOnVideo[]
-}
-
-model FeelingOnVideo {
-    id          Int       @id @default(autoincrement())
+    content     String
     feeling     Feeling   @relation(fields: [feelingId], references: [id])
     feelingId   Int
-    video       Video     @relation(fields: [videoId], references: [id])
-    videoId     Int
 }
+
+
 
 model Advice {
     id          Int       @id @default(autoincrement())
@@ -119,16 +109,10 @@ model Advice {
     updatedAt   DateTime  @updatedAt
     adviceType  String
     text        String
-    feelings    FeelingOnAdvice[]
+    feeling     Feeling   @relation(fields: [feelingId], references: [id])
+    feelingId   Int
 }
 
-model FeelingOnAdvice {
-    id          Int            @id @default(autoincrement())
-    feeling     Feeling        @relation(fields: [feelingId], references: [id])
-    feelingId   Int
-    advice      Advice  @relation(fields: [adviceId], references: [id])
-    adviceId    Int
-}
 
 model Quote {
     id          Int       @id @default(autoincrement())
@@ -136,6 +120,7 @@ model Quote {
     updatedAt   DateTime  @updatedAt
     text        String
     author      String
+    quoteType   String
     feeling     Feeling   @relation(fields: [feelingId], references: [id])
     feelingId   Int
 }
