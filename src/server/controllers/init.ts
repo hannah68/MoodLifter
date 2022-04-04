@@ -1,24 +1,22 @@
-import { Prisma } from "@prisma/client";
+
 import { prisma } from "../utils/prisma";
 import { Request, Response } from "express";
 
 // import {fakeUsers} from '../utils/faker';
-import {NUMBER_OF_USER_TO_GENERATE} from '../utils/config';
-import {HTTP_RESPONSE } from '../utils/config'
+// import {NUMBER_OF_USER_TO_GENERATE} from '../utils/config';
+// import {HTTP_RESPONSE } from '../utils/config'
 
-import {Quote, Article, Video, Advice} from '../config/interfaces';
+// import {Quote, Article, Video, Advice} from '../config/interfaces';
 
 import {moods} from '../data/feeling';
-import {articles} from '../data/article';
-import {videos} from '../data/video';
-import {quotes} from '../data/quote';
-
-
+// import {articles} from '../data/article';
+// import {videos} from '../data/video';
+// import {quotes} from '../data/quote';
 
 // seed feelings =============================================
 const seedFeeling = async ():Promise<void> => {
 
-    for(let i: number = 0; i<moods.length; i++){
+    for(let i= 0; i<moods.length; i++){
         const { name } = moods[i];
         const generatedFeeling = await prisma.feeling.create({
             data: {
@@ -66,45 +64,42 @@ const seedFeeling = async ():Promise<void> => {
 // }
 
 // seed quotes =================================================
-const seedQuotes = async(): Promise<void> => {
-    for(let i:number = 0; i<quotes.length; i++){
+// const seedQuotes = async(): Promise<void> => {
+//     for(let i:number = 0; i<quotes.length; i++){
 
-        const {text, author, quoteType} = quotes[i];
+//         const {text, author, quoteType} = quotes[i];
 
-        const feelingid = await getFeelingId(quotes[i].quoteType)
-        if(feelingid){
-            console.log(feelingid)
-        }
+//         const feelingid = await getFeelingId(quotes[i].quoteType)
+//         if(feelingid){
+//             console.log(feelingid)
+//         }
         
 
-        // const generatedQuotes = await prisma.quote.create({
-        //     data: {
-        //         text,
-        //         author,
-        //         quoteType,
-        //         feelingId: 
-        //     }
-        // })
-        // console.log('Created Quotes', generatedQuotes)
-    }
-}
+//         // const generatedQuotes = await prisma.quote.create({
+//         //     data: {
+//         //         text,
+//         //         author,
+//         //         quoteType,
+//         //         feelingId: 
+//         //     }
+//         // })
+//         // console.log('Created Quotes', generatedQuotes)
+//     }
+// }
 
-const getFeelingId = async (quoteType: string) => {
-    const feeling = await prisma.feeling.findFirst({
-        where: {
-            name : quoteType
-        }
-    })
-    return feeling
-}
+// const getFeelingId = async (quoteType: string) => {
+//     const feeling = await prisma.feeling.findFirst({
+//         where: {
+//             name : quoteType
+//         }
+//     })
+//     return feeling
+// }
 
-export const seedMoodDatabase = async(req: Request, res: Response):Promise<void>=> {
+export const seedMoodDatabase = async(req: Request, res: Response)=> {
     console.log('here')
     await seedFeeling();
-    // await seedArticle();
-    // await seedVideos();
-    // await seedQuotes();
-    res.status(HTTP_RESPONSE.OK.CODE).json('Database seeded successfully');
+    res.status(200).json('Database seeded');
 }
 
 
