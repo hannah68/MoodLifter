@@ -15,8 +15,16 @@ export interface userType {
 	password: string;
 }
 
+export interface registeredUserType {
+	data: {
+		id: number,
+        username: string
+	},
+	token: string
+}
+
 const Signup = () => {
-	const [userInfos, setuserInfos] = useState({
+	const [userInfos, setuserInfos] = useState<userType>({
 		username: "",
 		email: "",
 		password: "",
@@ -25,15 +33,15 @@ const Signup = () => {
 	const navigate = useNavigate();
 
 	const postUserInfoToDB = async () => {
-		const res = await fetch(USER_URL.REGISTER, {
+		const userRes = await fetch(USER_URL.REGISTER, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(userInfos)
 		})
-		const data = res.json();
-		console.log(data);
+		const userData = await userRes.json();
+		return userData
 	}
 
 	// handle change================================
@@ -46,7 +54,10 @@ const Signup = () => {
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		await postUserInfoToDB();
+		const registeredUser: registeredUserType = await postUserInfoToDB();
+
+		localStorage.setItem('token', registeredUser.token);
+		localStorage.setItem('userId', registeredUser.data.id.toString());
 
 		setuserInfos({
 			username: "",
@@ -54,7 +65,7 @@ const Signup = () => {
 			password: "",
 		});
 
-		navigate('/signin');
+		navigate('/signin', {replace: true});
 	}
 
 	return (
