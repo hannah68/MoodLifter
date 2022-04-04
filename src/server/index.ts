@@ -9,13 +9,12 @@ import userRouter from "./routers/user";
 import initDBRouter from './routers/init'
 
 const port = process.env.PORT || 4000;
-const url = process.env.REACT_APP_API_URL;
 
 const app = express();
 
 app.use(morgan("dev"));
 app.use(cors());
-app.use(express.json);
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
@@ -27,5 +26,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-	console.log(`server started on port ${url}`);
+	console.log(`server started on port ${port}`);
 });

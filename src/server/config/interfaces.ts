@@ -23,7 +23,7 @@ export interface Video {
 }
 
 export interface Advice {
-	text: string[];
+	text: string;
 	adviceType: string;
 }
 
@@ -33,5 +33,17 @@ export interface User {
 	password: string;
 }
 
+export interface User {
+	username: string;
+	email: string;
+	password: string;
+	id: number
+}
+
+export interface UserWithoutPass {
+	username: string, 
+	email: string,
+	id: number
+}
 
 
