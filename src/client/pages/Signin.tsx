@@ -7,8 +7,21 @@ import "../styles/signup.css";
 
 import {USER_URL} from '../utils/config';
 
+export interface userSigninType {
+	username: string;
+	password: string;
+}
+
+export interface registeredUserType {
+	data: {
+		id: number,
+        username: string
+	},
+	token: string
+}
+
 const Signin = () => {
-	const [user, setuser] = useState({
+	const [user, setuser] = useState<userSigninType>({
 		username: '',
 		password: ''
 	});
@@ -17,15 +30,15 @@ const Signin = () => {
 
 	// post user info ===========================
 	const postUserLoginToDB = async () => {
-		const res = await fetch(USER_URL.LOGIN, {
+		const userRes = await fetch(USER_URL.LOGIN, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(user)
 		})
-		const data = res.json();
-		console.log(data);
+		const userData = await userRes.json();
+		return userData;
 	}
 
 	// handle change==============================
@@ -37,7 +50,12 @@ const Signin = () => {
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		await postUserLoginToDB();
+		const signedInUser: registeredUserType = await postUserLoginToDB();
+
+		// set error if user not found
+
+		localStorage.setItem('token', signedInUser.token);
+		localStorage.setItem('userId', signedInUser.data.id.toString());
 
 		setuser({
 			username: "",

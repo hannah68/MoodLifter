@@ -56,6 +56,8 @@ const Signup = () => {
 
 		const registeredUser: registeredUserType = await postUserInfoToDB();
 
+		// set handle error here
+
 		localStorage.setItem('token', registeredUser.token);
 		localStorage.setItem('userId', registeredUser.data.id.toString());
 
