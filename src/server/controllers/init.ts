@@ -1,16 +1,13 @@
 import { prisma } from "../utils/prisma";
 import { Request, Response } from "express";
 
-// import {fakeUsers} from '../utils/faker';
-// import {NUMBER_OF_USER_TO_GENERATE} from '../utils/config';
-// import {HTTP_RESPONSE } from '../utils/config'
-
-// import {Quote, Article, Video, Advice} from '../config/interfaces';
+import { HTTP_RESPONSE } from "../utils/config";
 
 import { moods } from "../data/feeling";
 import { articles } from "../data/article";
 import { videos } from "../data/video";
 import { quotes } from "../data/quote";
+import { advices } from "../data/advice";
 
 // seed feelings =============================================
 const seedFeeling = async (): Promise<void> => {
@@ -90,6 +87,27 @@ const seedQuotes = async (): Promise<void> => {
 	}
 };
 
+// seed Advice=================================
+const seedAdvice = async (): Promise<void> => {
+	for (let i: number = 0; i < advices.length; i++) {
+		const { text, adviceType } = advices[i];
+
+		const feelingObj = await getFeeling(advices[i].adviceType);
+
+		if (feelingObj) {
+			const generatedAdvice = await prisma.advice.create({
+				data: {
+					text,
+					adviceType,
+					feelingId: feelingObj.id,
+				},
+			});
+			console.log("Created Advices", generatedAdvice);
+		}
+	}
+};
+
+// get feeling================================
 const getFeeling = async (quoteType: string) => {
 	const feeling = await prisma.feeling.findFirst({
 		where: {
@@ -99,10 +117,12 @@ const getFeeling = async (quoteType: string) => {
 	return feeling;
 };
 
+// seed Database===============================
 export const seedMoodDatabase = async (req: Request, res: Response) => {
 	await seedFeeling();
 	await seedArticle();
 	await seedVideos();
 	await seedQuotes();
-	res.status(200).json("Database seeded");
+	await seedAdvice();
+	res.status(HTTP_RESPONSE.OK.CODE).json("Database seeded successfully");
 };

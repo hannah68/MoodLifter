@@ -23,7 +23,7 @@ export interface Video {
 }
 
 export interface Advice {
-	text: string[];
+	text: string;
 	adviceType: string;
 }
 
