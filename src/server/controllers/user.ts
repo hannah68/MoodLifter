@@ -1,38 +1,64 @@
-import { Prisma } from "@prisma/client";
-// import { prisma } from "../utils/prisma";
-// import { Request, Response } from "express";
+import { prisma } from "../utils/prisma";
+import { Request, Response } from "express";
 
-// import { hashedPassword } from "../utils/auth";
+import { hashedPassword, createToken, checkPassword } from "../utils/auth";
 
-// // import { User } from "../config/interfaces";
+import { User , UserWithoutPass } from "../config/interfaces";
 
-// export interface User {
-// 	username: string;
-// 	email: string;
-// 	password: string;
-// }
+import {HTTP_RESPONSE} from '../utils/config';
 
-// // let userType : User;
+const createUserWithoutPass = async (user: UserWithoutPass) => {
+	const newUser = {
+		username: user.username,
+		email: user.email,
+		id: user.id
+	}
+	return newUser;
+}
+// register user=======================================
+export const createUser = async (req: Request, res: Response) => {
+	const { username, email, password } = req.body;
+    
+	const passwordHashed = await hashedPassword(password);
 
-export const createUser = async () => {
-	// const { username, email, password } = req.body;
-    // let name = userType.username
+	let user: User = await prisma.user.create({
+		data: {
+			username,
+			email,
+			password: passwordHashed
+		},
+	});
 
-    // const initUser = {
-    //     username,
-	// 	email,
-	// 	password
-    // }
+	const userWithoutPassword = await createUserWithoutPass(user);
 
-	// const passwordHashed = await hashedPassword(password);
+	const token = await createToken({id: userWithoutPassword.id})
 
-	// const user = await prisma.user.create({
-	// 	data: {
-	// 		name,
-	// 		email,
-	// 		password: passwordHashed
-	// 	},
-	// });
-
-	// res.status(200).json({ data: user });
+	res.status(200).json({ data: userWithoutPassword, token: token });
 };
+
+// login user===========================================
+export const loginUser = async(req: Request, res: Response) => {
+	const {username, password} = req.body;
+
+	let foundUser = await prisma.user.findUnique({
+		where: {
+			username
+		}
+	});
+
+	if(!foundUser){
+		return res.status(HTTP_RESPONSE.UNAUTHORIZED.CODE).json(HTTP_RESPONSE.UNAUTHORIZED.MESSAGE);
+	}
+
+	const checkedPasswordMatch = await checkPassword(password, foundUser.password);
+
+	if (!checkedPasswordMatch) {
+		return res.status(HTTP_RESPONSE.UNAUTHORIZED.CODE).json({ error: HTTP_RESPONSE.UNAUTHORIZED.MESSAGE });
+	}
+	
+	const userWithoutPassword = await createUserWithoutPass(foundUser);
+
+	const token = await createToken({id: userWithoutPassword.id});
+
+	res.status(HTTP_RESPONSE.OK.CODE).json({ data: userWithoutPassword, token: token});
+}
