@@ -9,9 +9,12 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 	return (
 		<header>
 			<nav>
-				<h1>
-					<Link to="/" className="logo-link">MoodLifter</Link>
-				</h1>
+				<div>
+					<Link to="/" className="logo-link">
+						<img src="./assets/images/logo.png" alt="logo" className="logo-img"/>
+						<span className="logo">MoodLifter</span>
+					</Link>
+				</div>
 
 				<ul className="navbar">
 					<li>
