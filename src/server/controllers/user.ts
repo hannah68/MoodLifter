@@ -62,3 +62,22 @@ export const loginUser = async(req: Request, res: Response) => {
 
 	res.status(HTTP_RESPONSE.OK.CODE).json({ data: userWithoutPassword, token: token});
 }
+
+
+export const getUserById = async (req: Request<{ id: number}>, res: Response) => {
+	const {id}= req.params;
+
+	const user = await prisma.user.findUnique({
+		where: {
+			id
+		}
+	});
+
+	if(!user){
+		return res.status(HTTP_RESPONSE.UNAUTHORIZED.CODE).json(HTTP_RESPONSE.UNAUTHORIZED.MESSAGE);
+	}
+
+	const userWithoutPassword = await createUserWithoutPass(user);
+
+	res.status(HTTP_RESPONSE.OK.CODE).json({ data: userWithoutPassword });
+}
