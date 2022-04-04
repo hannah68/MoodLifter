@@ -1,6 +1,6 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { MdEmail } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 import "../styles/signup.css";
@@ -9,7 +9,7 @@ import {USER_URL} from '../utils/config';
 
 const Signin = () => {
 	const [user, setuser] = useState({
-		email: '',
+		username: '',
 		password: ''
 	});
 
@@ -40,7 +40,7 @@ const Signin = () => {
 		await postUserLoginToDB();
 
 		setuser({
-			email: "",
+			username: "",
 			password: "",
 		});
 
@@ -52,15 +52,15 @@ const Signin = () => {
 			<h2>Sign In</h2>
 			<form className="signin-form" onSubmit={submitHandler}>
 				<div className="input-groups">
-					<label htmlFor="email">
-						<MdEmail />
+					<label htmlFor="username">
+						<FaUser />
 					</label>
 					<input 
 					type="text" 
-					placeholder="Email" 
-					id="email" 
-					name="email"
-					value={user.email}
+					placeholder="username" 
+					id="username" 
+					name="username"
+					value={user.username}
 					onChange={changeHandler}
 					/>
 				</div>
