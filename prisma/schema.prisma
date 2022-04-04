@@ -50,7 +50,7 @@ model Feeling {
     id          Int       @id @default(autoincrement())
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
-    name        String
+    name        String    @unique
     diaries     FeelingOnDiary[]
     users       FeelingOnUser[]
     quotes      Quote[]
