@@ -38,7 +38,7 @@ const getTodayDate = (month: string, day: number, hour: string | number, minute:
 
 export const todayDate = getTodayDate(month, day, hour, minute);
 
-
+export const capitaliseFirstLetter = (name: string) => name.replace(/\b\w/g, (c) => c.toUpperCase());
 
 
 
