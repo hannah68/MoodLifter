@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import Favourite from "./pages/Favourite";
 import Feeling from "./pages/Feeling";
 import Profile from "./pages/Profile";
 import Recommendation from "./pages/Recommendation";
@@ -16,6 +17,7 @@ const App = () => {
 			<div className="app">
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/favourite" element={<Favourite />} />
 					<Route path="/feeling" element={<Feeling />} />
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/recommendation" element={<Recommendation />} />

@@ -5,6 +5,7 @@ import { HTTP_RESPONSE } from "../utils/config";
 
 export const createFavourite = async(req: Request, res: Response) => {
     const {favPerson, favPlace, favFood, gratitude, passion, accomplishment, userId} = req.body;
+    console.log('body',req.body)
 
     const favourite = await prisma.favourite.create({
         data: {
