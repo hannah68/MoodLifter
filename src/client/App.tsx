@@ -12,11 +12,14 @@ import Header from "./components/Header";
 
 import { USER_URL } from "./utils/config";
 
-import {RegisteredUserType} from './interfaces';
+import {RegisteredUserType, RecommendationType} from './interfaces';
+
+let recomInit : RecommendationType[] = [];
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [user, setUser] = useState<RegisteredUserType['data'] | null>(null);
+	const [user, setUser] = useState<RegisteredUserType['data']>(null);
+	const [recomData, setRecomData] = useState(recomInit);
 
 	useEffect(() => {
 		localStorage.getItem(localStorage.token)
@@ -45,8 +48,7 @@ const App = () => {
 		};
 		fetchUser();
 	}, [isLoggedIn, user]);
-
-	console.log(user);
+	
 
 	return (
 		<>
@@ -60,9 +62,9 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/favourite" element={<Favourite />} />
-					<Route path="/feeling" element={<Feeling />} />
+					<Route path="/feeling" element={<Feeling setRecomData={setRecomData}/>} />
 					<Route path="/profile" element={<Profile />} />
-					<Route path="/recommendation" element={<Recommendation />} />
+					<Route path="/recommendation" element={<Recommendation recomData={recomData}/>} />
 					<Route path="/signin" element={<Signin setIsLoggedIn={setIsLoggedIn}/>} />
 					<Route path="/signup" element={<Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn}/>} />
 				</Routes>

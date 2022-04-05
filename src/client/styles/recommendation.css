@@ -3,6 +3,7 @@
 	border: 0;
 	background-color: var(--color-yellow);
 	padding: 2rem;
+	margin-bottom: 1rem;
 }
 
 .quote-author {

@@ -40,5 +40,12 @@ export const todayDate = getTodayDate(month, day, hour, minute);
 
 export const capitaliseFirstLetter = (name: string) => name.replace(/\b\w/g, (c) => c.toUpperCase());
 
+const happyArray : Array<string>= ['Happy', 'Relieved', 'Romantic', 'Proud', 'Neutral', 'Bored', 'Excited'];
 
+export const existFeelings = (feelingArr:  Array<string>) : boolean => {
+    const res = feelingArr.every(feeling => {
+        return happyArray.includes(feeling);
+    })
+    return res;
+}
 

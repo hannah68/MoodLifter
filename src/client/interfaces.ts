@@ -1,3 +1,5 @@
+import {Article, Video, Advice, Quote} from '../server/config/interfaces';
+
 export interface UserSignup {
 	username: string;
 	email: string;
@@ -15,4 +17,11 @@ export interface RegisteredUserType {
         username: string
 	}| null,
 	token: string
+}
+
+export interface RecommendationType {
+	article: Article[],
+	video: Video[],
+	quote: Quote[],
+	advice: Advice[]
 }
