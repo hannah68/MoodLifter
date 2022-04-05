@@ -59,7 +59,7 @@ const Signin = (props: ISigninProps) => {
 			password: "",
 		});
 
-		navigate('/feeling');
+		navigate('/favourite');
 	}
 
 	return (

@@ -1,10 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { questions, questionType } from "../data/feelingQuestion";
-
-interface FeelingQProps {
-	setShowFeelings: (target: boolean) => void;
-}
 
 interface AnswersType {
 	favPerson: string;
@@ -15,7 +10,7 @@ interface AnswersType {
 	accomplishment: string;
 }
 
-const FavouriteQuestions = (props: FeelingQProps) => {
+const FavouriteQuestions = () => {
 	const [answers, setAnswers] = useState<AnswersType>({
 		favPerson: "",
 		favPlace: "",
@@ -24,7 +19,6 @@ const FavouriteQuestions = (props: FeelingQProps) => {
 		passion: "",
 		accomplishment: "",
 	});
-	const { setShowFeelings } = props;
 
 	const navigate = useNavigate();
 
@@ -40,9 +34,7 @@ const FavouriteQuestions = (props: FeelingQProps) => {
 			body: JSON.stringify({...answers, userId: id}),
 		});
 		const data = await res.json();
-		console.log(data);
 		return data;
-		
 	};
 
 	// submit form handler================
@@ -57,8 +49,6 @@ const FavouriteQuestions = (props: FeelingQProps) => {
 
 		setAnswers({ ...answers, [name]: value });
 	};
-
-	console.log('answers', answers);
 
 	return (
 		<form className="question-form" onSubmit={submitQuestionHandler}>
