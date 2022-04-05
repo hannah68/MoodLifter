@@ -31,7 +31,7 @@ const Feeling = (props: IFeelingProps) => {
 			const checkTypeOfFeeling = existFeelings(feeling);
 
 			if(checkTypeOfFeeling){
-				navigate('/recommendation/good');
+				navigate('/recommendation/goodmood');
 			}
 			const recomRes = await fetch(`http://localhost:4000/recommendation/${feeling[0]}`);
 			const recomData = await recomRes.json();

@@ -6,6 +6,7 @@ import Favourite from "./pages/Favourite";
 import Feeling from "./pages/Feeling";
 import Profile from "./pages/Profile";
 import Recommendation from "./pages/Recommendation";
+import GoodMood from "./pages/GoodMood";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
@@ -65,6 +66,7 @@ const App = () => {
 					<Route path="/feeling" element={<Feeling setRecomData={setRecomData}/>} />
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/recommendation" element={<Recommendation recomData={recomData}/>} />
+					<Route path="/recommendation/goodmood" element={<GoodMood/>} />
 					<Route path="/signin" element={<Signin setIsLoggedIn={setIsLoggedIn}/>} />
 					<Route path="/signup" element={<Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn}/>} />
 				</Routes>
