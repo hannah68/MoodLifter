@@ -9,22 +9,17 @@ import "../styles/signup.css";
 
 import {USER_URL} from '../utils/config';
 
-export interface userType {
-	username: string;
-	email: string;
-	password: string;
+import {UserSignup, RegisteredUserType} from '../interfaces';
+
+
+export interface ISignupProps {
+	setUser: (target: RegisteredUserType['data']) => void;
+	setIsLoggedIn: (target: boolean) => void;
+	// user: any;
 }
 
-export interface registeredUserType {
-	data: {
-		id: number,
-        username: string
-	},
-	token: string
-}
-
-const Signup = () => {
-	const [userInfos, setuserInfos] = useState<userType>({
+const Signup = (props: ISignupProps) => {
+	const [userInfos, setuserInfos] = useState<UserSignup>({
 		username: "",
 		email: "",
 		password: "",
@@ -54,12 +49,17 @@ const Signup = () => {
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const registeredUser: registeredUserType = await postUserInfoToDB();
+		const registeredUser: RegisteredUserType = await postUserInfoToDB();
 
 		// set handle error here
 
 		localStorage.setItem('token', registeredUser.token);
-		localStorage.setItem('userId', registeredUser.data.id.toString());
+		if(registeredUser.data){
+			localStorage.setItem('userId', registeredUser.data.id.toString());
+
+			props.setUser(registeredUser.data);
+        	props.setIsLoggedIn(true);
+		}
 
 		setuserInfos({
 			username: "",
@@ -70,6 +70,7 @@ const Signup = () => {
 		navigate('/signin', {replace: true});
 	}
 
+	// console.log('signup', props.user);
 	return (
 		<div className="signup-page">
 			<h3>Please create an account so we can track your mood</h3>

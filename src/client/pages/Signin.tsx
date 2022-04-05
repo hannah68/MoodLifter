@@ -7,21 +7,14 @@ import "../styles/signup.css";
 
 import {USER_URL} from '../utils/config';
 
-export interface userSigninType {
-	username: string;
-	password: string;
+import {UserSignin, RegisteredUserType} from '../interfaces';
+
+export interface ISigninProps {
+	setIsLoggedIn: (target: boolean) => void;
 }
 
-export interface registeredUserType {
-	data: {
-		id: number,
-        username: string
-	},
-	token: string
-}
-
-const Signin = () => {
-	const [user, setuser] = useState<userSigninType>({
+const Signin = (props: ISigninProps) => {
+	const [user, setuser] = useState<UserSignin>({
 		username: '',
 		password: ''
 	});
@@ -46,16 +39,20 @@ const Signin = () => {
 		const {name, value} = e.target;
 		setuser({...user, [name]: value});
 	}
+
 	// handle submit==============================
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const signedInUser: registeredUserType = await postUserLoginToDB();
+		const signedInUser: RegisteredUserType = await postUserLoginToDB();
 
 		// set error if user not found
-
 		localStorage.setItem('token', signedInUser.token);
-		localStorage.setItem('userId', signedInUser.data.id.toString());
+		if(signedInUser.data){
+			localStorage.setItem('userId', signedInUser.data.id.toString());
+		}
+		
+		props.setIsLoggedIn(true);
 
 		setuser({
 			username: "",
