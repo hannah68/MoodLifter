@@ -1,33 +1,26 @@
-import React, { useState } from "react";
-
 import "../styles/feeling.css";
 
-import FeelingEmoji from "../components/FeelingEmoji";
-import FeelingQuestions from "../components/FeelingQuestions";
+import { emojis } from "../data/emoji";
+import { EmojiType } from "../data/emoji";
+import { todayDate } from "../utils/utils";
 
-export interface IFeelingProps {}
+import Emoji from "../components/Emoji";
+
+import { MdDateRange } from "react-icons/md";
 
 const Feeling = () => {
-	const [showFeelings, setShowFeelings] = useState(true);
-
 	return (
-		<div className="feeling-page">
-				{showFeelings && <div className="feeling-top">
-					<h2 className="feeling-title">
-						Let's get started with a couple of questions about you. This
-						shouldn't take more than a minute.
-					</h2>
-					<h2 className="feeling-subtitle">we're almost there...</h2>
-					<div className="img-conteiner">
-						<img
-							className="guy-img"
-							src="./assets/images/bike.png"
-							alt="bike guy"
-						/>
-					</div>
-					<FeelingQuestions setShowFeelings={setShowFeelings}/>
-				</div>}
-			{!showFeelings && <FeelingEmoji />}
+		<div className="feeling-bottom">
+			<h1>Hi, How are you?</h1>
+			<p className="feeling-date">
+				<span><MdDateRange /></span>
+				<span>today, {todayDate}</span>
+			</p>
+			<div className="emoji-list">
+				{emojis.map((emj: EmojiType, index: number) => {
+					return <Emoji key={index} emj={emj} />;
+				})}
+			</div>
 		</div>
 	);
 };

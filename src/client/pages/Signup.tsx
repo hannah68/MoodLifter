@@ -9,14 +9,17 @@ import "../styles/signup.css";
 
 import {USER_URL} from '../utils/config';
 
-export interface userType {
-	username: string;
-	email: string;
-	password: string;
+import {UserSignup, RegisteredUserType} from '../interfaces';
+
+
+export interface ISignupProps {
+	setUser: (target: RegisteredUserType['data']) => void;
+	setIsLoggedIn: (target: boolean) => void;
+	// user: any;
 }
 
-const Signup = () => {
-	const [userInfos, setuserInfos] = useState({
+const Signup = (props: ISignupProps) => {
+	const [userInfos, setuserInfos] = useState<UserSignup>({
 		username: "",
 		email: "",
 		password: "",
@@ -25,15 +28,15 @@ const Signup = () => {
 	const navigate = useNavigate();
 
 	const postUserInfoToDB = async () => {
-		const res = await fetch(USER_URL.REGISTER, {
+		const userRes = await fetch(USER_URL.REGISTER, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(userInfos)
 		})
-		const data = res.json();
-		console.log(data);
+		const userData = await userRes.json();
+		return userData
 	}
 
 	// handle change================================
@@ -46,7 +49,17 @@ const Signup = () => {
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		await postUserInfoToDB();
+		const registeredUser: RegisteredUserType = await postUserInfoToDB();
+
+		// set handle error here
+
+		localStorage.setItem('token', registeredUser.token);
+		if(registeredUser.data){
+			localStorage.setItem('userId', registeredUser.data.id.toString());
+
+			props.setUser(registeredUser.data);
+        	props.setIsLoggedIn(true);
+		}
 
 		setuserInfos({
 			username: "",
@@ -54,9 +67,10 @@ const Signup = () => {
 			password: "",
 		});
 
-		navigate('/signin');
+		navigate('/signin', {replace: true});
 	}
 
+	// console.log('signup', props.user);
 	return (
 		<div className="signup-page">
 			<h3>Please create an account so we can track your mood</h3>

@@ -7,8 +7,14 @@ import "../styles/signup.css";
 
 import {USER_URL} from '../utils/config';
 
-const Signin = () => {
-	const [user, setuser] = useState({
+import {UserSignin, RegisteredUserType} from '../interfaces';
+
+export interface ISigninProps {
+	setIsLoggedIn: (target: boolean) => void;
+}
+
+const Signin = (props: ISigninProps) => {
+	const [user, setuser] = useState<UserSignin>({
 		username: '',
 		password: ''
 	});
@@ -17,15 +23,15 @@ const Signin = () => {
 
 	// post user info ===========================
 	const postUserLoginToDB = async () => {
-		const res = await fetch(USER_URL.LOGIN, {
+		const userRes = await fetch(USER_URL.LOGIN, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(user)
 		})
-		const data = res.json();
-		console.log(data);
+		const userData = await userRes.json();
+		return userData;
 	}
 
 	// handle change==============================
@@ -33,18 +39,27 @@ const Signin = () => {
 		const {name, value} = e.target;
 		setuser({...user, [name]: value});
 	}
+
 	// handle submit==============================
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		await postUserLoginToDB();
+		const signedInUser: RegisteredUserType = await postUserLoginToDB();
+
+		// set error if user not found
+		localStorage.setItem('token', signedInUser.token);
+		if(signedInUser.data){
+			localStorage.setItem('userId', signedInUser.data.id.toString());
+		}
+		
+		props.setIsLoggedIn(true);
 
 		setuser({
 			username: "",
 			password: "",
 		});
 
-		navigate('/feeling');
+		navigate('/favourite');
 	}
 
 	return (

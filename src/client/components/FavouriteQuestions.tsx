@@ -1,16 +1,17 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-// import { questions, questionType } from "../data/feelingQuestion";
+import { useNavigate } from "react-router-dom";
 
-export type ShowFeeling = true | false;
-
-interface FeelingQProps {
-	setShowFeelings: (target: ShowFeeling) => void;
+interface AnswersType {
+	favPerson: string;
+	favPlace: string;
+	favFood: string;
+	gratitude: string;
+	passion: string;
+	accomplishment: string;
 }
 
-
-const FeelingQuestions = (props: FeelingQProps) => {
-	const [answers, setAnswers] = useState({
+const FavouriteQuestions = () => {
+	const [answers, setAnswers] = useState<AnswersType>({
 		favPerson: "",
 		favPlace: "",
 		favFood: "",
@@ -18,27 +19,29 @@ const FeelingQuestions = (props: FeelingQProps) => {
 		passion: "",
 		accomplishment: "",
 	});
-	const { setShowFeelings } = props;
 
 	const navigate = useNavigate();
 
-	const postAnswersToDB = async() => {
-		const res = await fetch('http://localhost:4000/favourite', {
-			method: 'POST',
+	const postAnswersToDB = async () => {
+		const id =  Number(localStorage.getItem('userId'));
+
+		const res = await fetch("http://localhost:4000/feeling/favourite", {
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
+				Authorization: localStorage.getItem('token') as string
 			},
-			body: JSON.stringify(answers)
+			body: JSON.stringify({...answers, userId: id}),
 		});
-		const data = await res.json()
-		console.log(data);
-	}
+		const data = await res.json();
+		return data;
+	};
 
 	// submit form handler================
 	const submitQuestionHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		await postAnswersToDB();
-		navigate('/feeling');
+		navigate("/feeling");
 	};
 
 	const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -129,7 +132,6 @@ const FeelingQuestions = (props: FeelingQProps) => {
 			<button
 				type="submit"
 				className="save-btn"
-				onClick={() => setShowFeelings(false)}
 			>
 				Save
 			</button>
@@ -137,4 +139,4 @@ const FeelingQuestions = (props: FeelingQProps) => {
 	);
 };
 
-export default FeelingQuestions;
+export default FavouriteQuestions;

@@ -30,7 +30,7 @@ model Favourite {
     gratitude       String
     passion         String
     accomplishment  String
-    user            User     @relation(fields: [userId], references: [id])
+    user            User     @relation(fields: [userId], references: [id], onDelete: SetNull)
     userId          Int
 }
 
