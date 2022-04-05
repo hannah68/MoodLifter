@@ -8,6 +8,7 @@ import morgan from "morgan";
 import userRouter from "./routers/user";
 import initDBRouter from './routers/init';
 import feelingRouter from './routers/feeling';
+import recommendationRouter from './routers/recommendation';
 
 const port = process.env.PORT || 4000;
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/user", userRouter);
 app.use("/init", initDBRouter);
 app.use('/feeling', feelingRouter);
+app.use('/recommendation', recommendationRouter);
 
 app.get("*", (req, res) => {
 	res.json("server is running");
