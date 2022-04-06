@@ -1,4 +1,4 @@
-import {Article, Video, Advice, Quote} from '../server/config/interfaces';
+import { Article, Video, Advice, Quote } from "../server/config/interfaces";
 
 export interface UserSignup {
 	username: string;
@@ -13,15 +13,24 @@ export interface UserSignin {
 
 export interface RegisteredUserType {
 	data: {
-		id: number,
-        username: string
-	}| null,
-	token: string
+		id: number;
+		username: string;
+	} | null;
+	token: string;
 }
 
 export interface RecommendationType {
-	article: Article[],
-	video: Video[],
-	quote: Quote[],
-	advice: Advice[]
+	article: Article[];
+	video: Video[];
+	quote: Quote[];
+	advice: Advice[];
+}
+
+export interface FavouriteType {
+	accomplishment: string;
+	favFood: string;
+	favPerson: string;
+	favPlace: string;
+	gratitude: string;
+	passion: string;
 }

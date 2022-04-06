@@ -118,3 +118,16 @@
 	cursor: pointer;
 	outline: none;
 }
+
+.fav-container{
+	background-color: var(--color-yellow);
+	padding: 1rem 2rem;
+}
+
+.fav-container li{
+	padding-bottom: 8px;
+}
+
+.fav-res{
+	font-weight: bold;
+}

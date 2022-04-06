@@ -13,14 +13,23 @@ import Header from "./components/Header";
 
 import { USER_URL } from "./utils/config";
 
-import { RegisteredUserType, RecommendationType } from "./interfaces";
+import { RegisteredUserType, RecommendationType, FavouriteType} from "./interfaces";
 
 let recomInit: RecommendationType[] = [];
+let favInit: FavouriteType = {
+	accomplishment: 'string',
+	favFood: 'string',
+	favPerson: 'string',
+	favPlace: 'string',
+	gratitude: 'string',
+	passion: 'string'
+};
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState<RegisteredUserType["data"]>(null);
 	const [recomData, setRecomData] = useState(recomInit);
+	const [favouriteData, setfavouriteData] = useState<FavouriteType>(favInit);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -65,12 +74,12 @@ const App = () => {
 					<Route path="/favourite" element={<Favourite />} />
 					<Route
 						path="/feeling"
-						element={<Feeling setRecomData={setRecomData} user={user} />}
+						element={<Feeling setRecomData={setRecomData} user={user} setfavouriteData={setfavouriteData}/>}
 					/>
 					<Route path="/profile" element={<Profile />} />
 					<Route
 						path="/recommendation"
-						element={<Recommendation recomData={recomData} />}
+						element={<Recommendation recomData={recomData} favouriteData={favouriteData}/>}
 					/>
 					<Route path="/recommendation/goodmood" element={<GoodMood />} />
 					<Route

@@ -6,20 +6,21 @@ import { FaRegHandPointRight } from "react-icons/fa";
 
 import DiaryForm from "../components/DiaryForm";
 
-import { RecommendationType } from "../interfaces";
+import { RecommendationType, FavouriteType } from "../interfaces";
 
 import "../styles/recommendation.css";
 
 export interface IRecommendationProps {
 	recomData: RecommendationType[];
+	favouriteData: FavouriteType;
 }
 
 const Recommendation = (props: IRecommendationProps) => {
-	const { recomData } = props;
+	const { recomData, favouriteData } = props;
 	const [article, video, advice, quote] = recomData;
 
-	const typeOfFeeling = quote.quote.map(qt =>{
-		return qt.quoteType
+	const typeOfFeeling = quote.quote.map((qt) => {
+		return qt.quoteType;
 	});
 
 	return (
@@ -41,7 +42,7 @@ const Recommendation = (props: IRecommendationProps) => {
 					{advice.advice.map((ad, index) => {
 						return (
 							<li className="advice-list" key={index}>
-								{ad.text.split(",").map((txt,index) => {
+								{ad.text.split(",").map((txt, index) => {
 									return (
 										<div key={index}>
 											<span>
@@ -56,6 +57,27 @@ const Recommendation = (props: IRecommendationProps) => {
 					})}
 				</ul>
 			</div>
+
+			<ul className="fav-container">
+				<li>
+					Do you want to talk to your favourite person? <span className="fav-res">{favouriteData.favPerson}</span>
+				</li>
+				<li>
+					Why don't you go to .... <span className="fav-res">{favouriteData.favPlace}</span>
+				</li>
+				<li>
+					Do you want to order...<span className="fav-res">{favouriteData.favFood}</span>
+				</li>
+				<li>
+					Imagin life without ...<span className="fav-res">{favouriteData.gratitude}</span>
+				</li>
+				<li>
+					Remember your passion...<span className="fav-res">{favouriteData.passion}</span>
+				</li>
+				<li>
+					think about your accomplishment...<span className="fav-res">{favouriteData.accomplishment}</span>
+				</li>
+			</ul>
 
 			<div className="diary-container">
 				<h3>Did you know journaling can improve your mood ? </h3>
