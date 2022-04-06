@@ -13,43 +13,43 @@ import Header from "./components/Header";
 
 import { USER_URL } from "./utils/config";
 
-import {RegisteredUserType, RecommendationType} from './interfaces';
+import { RegisteredUserType, RecommendationType } from "./interfaces";
 
-let recomInit : RecommendationType[] = [];
+let recomInit: RecommendationType[] = [];
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [user, setUser] = useState<RegisteredUserType['data']>(null);
+	const [user, setUser] = useState<RegisteredUserType["data"]>(null);
 	const [recomData, setRecomData] = useState(recomInit);
 
 	useEffect(() => {
-		localStorage.getItem(localStorage.token)
-			? setIsLoggedIn(true)
-			: setIsLoggedIn(false);
+		const token = localStorage.getItem("token");
+		if (token) {
+			setIsLoggedIn(true);
+		} else {
+			setIsLoggedIn(false);
+		}
 	}, []);
 
 	useEffect(() => {
-		if (!isLoggedIn) {
-			return;
+		if (isLoggedIn) {
+			const id = localStorage.getItem("userId");
+			const auth = localStorage.getItem("token") as string;
+
+			const fetchUser = async () => {
+				const UserResponse = await fetch(`${USER_URL.USER_ROOT}${id}`, {
+					method: "GET",
+					headers: {
+						Authorization: auth,
+					},
+				});
+
+				const userData = await UserResponse.json();
+				setUser(userData.data);
+			};
+			fetchUser();
 		}
-		const id = localStorage.getItem(localStorage.userId);
-		const auth = localStorage.getItem(localStorage.token) as string;
-
-		const fetchUser = async () => {
-
-			const UserResponse = await fetch(`${USER_URL.USER_ROOT}${id}`, {
-				method: "GET",
-				headers: {
-					Authorization: auth,
-				},
-			});
-
-			const userData = await UserResponse.json();
-			setUser(userData.data);
-		};
-		fetchUser();
-	}, [isLoggedIn, user]);
-	
+	}, [isLoggedIn]);
 
 	return (
 		<>
@@ -63,12 +63,24 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/favourite" element={<Favourite />} />
-					<Route path="/feeling" element={<Feeling setRecomData={setRecomData}/>} />
+					<Route
+						path="/feeling"
+						element={<Feeling setRecomData={setRecomData} user={user} />}
+					/>
 					<Route path="/profile" element={<Profile />} />
-					<Route path="/recommendation" element={<Recommendation recomData={recomData}/>} />
-					<Route path="/recommendation/goodmood" element={<GoodMood/>} />
-					<Route path="/signin" element={<Signin setIsLoggedIn={setIsLoggedIn}/>} />
-					<Route path="/signup" element={<Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn}/>} />
+					<Route
+						path="/recommendation"
+						element={<Recommendation recomData={recomData} />}
+					/>
+					<Route path="/recommendation/goodmood" element={<GoodMood />} />
+					<Route
+						path="/signin"
+						element={<Signin setIsLoggedIn={setIsLoggedIn} />}
+					/>
+					<Route
+						path="/signup"
+						element={<Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />}
+					/>
 				</Routes>
 			</div>
 		</>
