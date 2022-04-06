@@ -1,66 +1,63 @@
-import {ChangeEvent, FormEvent, useState} from "react";
-import { RiLockPasswordFill } from "react-icons/ri";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { RiCollageLine, RiLockPasswordFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import "../styles/signup.css";
 
-import {USER_URL} from '../utils/config';
+import { USER_URL } from "../utils/config";
 
-import {UserSignin, RegisteredUserType} from '../interfaces';
+import { UserSignin } from "../interfaces";
 
 export interface ISigninProps {
 	setIsLoggedIn: (target: boolean) => void;
 }
 
 const Signin = (props: ISigninProps) => {
-	const [user, setuser] = useState<UserSignin>({
-		username: '',
-		password: ''
+	const { setIsLoggedIn } = props;
+	const [submit, setsubmit] = useState(false);
+	const [userInfo, setuserInfo] = useState<UserSignin>({
+		username: "",
+		password: "",
 	});
 
 	const navigate = useNavigate();
 
 	// post user info ===========================
-	const postUserLoginToDB = async () => {
-		const userRes = await fetch(USER_URL.LOGIN, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(user)
-		})
-		const userData = await userRes.json();
-		return userData;
-	}
+	useEffect(() => {
+		if (submit) {
+			const postUserLoginToDB = async () => {
+				const userRes = await fetch(USER_URL.LOGIN, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(userInfo),
+				});
+				const userData = await userRes.json();
+
+				if (userData.data) {
+					localStorage.setItem("userId", userData.data.id.toString());
+					setIsLoggedIn(true);
+					navigate("/favourite");
+				}
+			};
+			postUserLoginToDB();
+		}
+		setsubmit(false);
+	}, [submit, setIsLoggedIn, userInfo, navigate]);
 
 	// handle change==============================
-	const changeHandler = (e: ChangeEvent<HTMLInputElement>) : void => {
-		const {name, value} = e.target;
-		setuser({...user, [name]: value});
-	}
+	const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+		const { name, value } = e.target;
+		setuserInfo({ ...userInfo, [name]: value });
+	};
 
 	// handle submit==============================
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		const signedInUser: RegisteredUserType = await postUserLoginToDB();
-
-		// set error if user not found
-		localStorage.setItem('token', signedInUser.token);
-		if(signedInUser.data){
-			localStorage.setItem('userId', signedInUser.data.id.toString());
-		}
-		
-		props.setIsLoggedIn(true);
-
-		setuser({
-			username: "",
-			password: "",
-		});
-
-		navigate('/favourite');
-	}
+		setsubmit(true);
+	};
 
 	return (
 		<div className="signin-page">
@@ -70,29 +67,31 @@ const Signin = (props: ISigninProps) => {
 					<label htmlFor="username">
 						<FaUser />
 					</label>
-					<input 
-					type="text" 
-					placeholder="username" 
-					id="username" 
-					name="username"
-					value={user.username}
-					onChange={changeHandler}
+					<input
+						type="text"
+						placeholder="username"
+						id="username"
+						name="username"
+						value={userInfo.username}
+						onChange={changeHandler}
 					/>
 				</div>
 				<div className="input-groups">
 					<label htmlFor="password">
 						<RiLockPasswordFill />
 					</label>
-					<input 
-					type="text" 
-					placeholder="Password" 
-					id="password"
-					name="password"
-					value={user.password}
-					onChange={changeHandler} 
+					<input
+						type="text"
+						placeholder="Password"
+						id="password"
+						name="password"
+						value={userInfo.password}
+						onChange={changeHandler}
 					/>
 				</div>
-        <button type="submit" className="register-btn login">Sign In</button>
+				<button type="submit" className="register-btn login">
+					Sign In
+				</button>
 			</form>
 		</div>
 	);

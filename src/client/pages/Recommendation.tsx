@@ -6,53 +6,78 @@ import { FaRegHandPointRight } from "react-icons/fa";
 
 import DiaryForm from "../components/DiaryForm";
 
+import { RecommendationType, FavouriteType } from "../interfaces";
+
 import "../styles/recommendation.css";
 
-const Recommendation = () => {
+export interface IRecommendationProps {
+	recomData: RecommendationType[];
+	favouriteData: FavouriteType;
+}
+
+const Recommendation = (props: IRecommendationProps) => {
+	const { recomData, favouriteData } = props;
+	const [article, video, advice, quote] = recomData;
+
+	const typeOfFeeling = quote.quote.map((qt) => {
+		return qt.quoteType;
+	});
+
 	return (
 		<div className="recom-page">
-			<div className="quote-container">
-				<h2>“The purpose of our lives is to be happy.”</h2>
-				<p className="quote-author">— Eleanor Roosevelt</p>
-			</div>
+			{quote.quote.map((qt, index: number) => {
+				return (
+					<div className="quote-container" key={index}>
+						<h2>“{qt.text}”</h2>
+						<p className="quote-author">— {qt.author}</p>
+					</div>
+				);
+			})}
 
-			<h3 className="subtitle">Sorry that you feel worried</h3>
+			<h3 className="subtitle">Sorry that you feel {typeOfFeeling[0]}</h3>
 			<p>There are some tips that can help you to feel better</p>
 
 			<div className="advice-container">
 				<ul className="advice-container-list">
-					<li className="advice-list">
-						<span>
-							<FaRegHandPointRight />
-						</span>
-						<span>Cry it out</span>
-					</li>
-					<li className="advice-list">
-						<span>
-							<FaRegHandPointRight />
-						</span>
-						<span>Exercise</span>
-					</li>
-					<li className="advice-list">
-						<span>
-							<FaRegHandPointRight />
-						</span>
-						<span>Shower or bathe in warm water</span>
-					</li>
-					<li className="advice-list">
-						<span>
-							<FaRegHandPointRight />
-						</span>
-						<span>Acknowledge your feelings</span>
-					</li>
-					<li className="advice-list">
-						<span>
-							<FaRegHandPointRight />
-						</span>
-						<span>Practice mindfulness</span>
-					</li>
+					{advice.advice.map((ad, index) => {
+						return (
+							<li className="advice-list" key={index}>
+								{ad.text.split(",").map((txt, index) => {
+									return (
+										<div key={index}>
+											<span>
+												<FaRegHandPointRight />
+											</span>
+											<span>{txt}</span>
+										</div>
+									);
+								})}
+							</li>
+						);
+					})}
 				</ul>
 			</div>
+
+			<ul className="fav-container">
+				<li>
+					Do you want to talk to your favourite person? <span className="fav-res">{favouriteData.favPerson}</span>
+				</li>
+				<li>
+					Why don't you go to .... <span className="fav-res">{favouriteData.favPlace}</span>
+				</li>
+				<li>
+					Do you want to order...<span className="fav-res">{favouriteData.favFood}</span>
+				</li>
+				<li>
+					Imagin life without ...<span className="fav-res">{favouriteData.gratitude}</span>
+				</li>
+				<li>
+					Remember your passion...<span className="fav-res">{favouriteData.passion}</span>
+				</li>
+				<li>
+					think about your accomplishment...<span className="fav-res">{favouriteData.accomplishment}</span>
+				</li>
+			</ul>
 
 			<div className="diary-container">
 				<h3>Did you know journaling can improve your mood ? </h3>
@@ -65,111 +90,53 @@ const Recommendation = () => {
 
 			<div className="article-container">
 				<ul className="article-list">
-					<li>
-						<div className="article-title">
-							<div className="article">
-								<span>
-									<RiArticleFill />
-								</span>
-								<span>Four Ways Sadness May Be Good for You</span>
-							</div>
-							<span>
-								<AiOutlineHeart />
-							</span>
-						</div>
-						<p className="article-content">
-							Scientists are finding out how sadness works in the brain—and
-							they're discovering that it can confer important advantages.
-						</p>
-						<a
-							href="https://greatergood.berkeley.edu/article/item/four_ways_sadness_may_be_good_for_you "
-							className="article-link"
-						>
-							Click here
-						</a>
-					</li>
-
-					<li>
-						<div className="article-title">
-							<div className="article">
-								<span>
-									<RiArticleFill />
-								</span>
-								<span>yay or You</span>
-							</div>
-							<span>
-								<AiOutlineHeart />
-							</span>
-						</div>
-						<p className="article-content">
-							Scientists are finding out how sadness works in the brain—and
-							they're discovering that it can confer important advantages.
-						</p>
-						<a
-							href="https://greatergood.berkeley.edu/article/item/four_ways_sadness_may_be_good_for_you "
-							className="article-link"
-						>
-							Click here
-						</a>
-					</li>
+					{article.article.map((art, index) => {
+						return (
+							<li key={index}>
+								<div className="article-title">
+									<div className="article">
+										<span>
+											<RiArticleFill />
+										</span>
+										<span>{art.title}</span>
+									</div>
+									<span>
+										<AiOutlineHeart />
+									</span>
+								</div>
+								<p className="article-content">{art.content}</p>
+								<a href={art.link} className="article-link">
+									Click here
+								</a>
+							</li>
+						);
+					})}
 				</ul>
 			</div>
 
 			<div className="video-container">
 				<ul className="video-list">
-					<li>
-						<div className="video-title">
-							<div className="video">
-								<span>
-									<AiFillVideoCamera />
-								</span>
-								<span>6 Differences Between Sadness and Depression</span>
-							</div>
-							<span>
-								<AiOutlineHeart />
-							</span>
-						</div>
-						<p className="video-content">
-							sadness is more of an emotional reaction and generally short term
-							lasting no more than a few days. In this video, Psych2Go shares 6
-							important distinctions to help you understand the difference
-							between sadness and depression. Share this video with those who
-							could benefit.{" "}
-						</p>
-						<a
-							href="https://greatergood.berkeley.edu/article/item/four_ways_sadness_may_be_good_for_you "
-							className="article-link"
-						>
-							Click here
-						</a>
-					</li>
-
-					<li>
-						<div className="video-title">
-							<div className="video">
-								<span>
-									<AiFillVideoCamera />
-								</span>
-								<span>
-									How to cope with anxiety | Olivia Remes | TEDxUHasselt
-								</span>
-							</div>
-							<span>
-								<AiOutlineHeart />
-							</span>
-						</div>
-						<p className="video-content">
-							s is more of an emotional reaction and generally short term
-							lasting no more than a few days. In this video, Psych2Go shares 6
-							important distinctions to help y
-						</p>
-						<a
-							href="https://greatergood.berkeley.edu/article/item/four_ways_sadness_may_be_good_for_you "
-							className="article-link"
-						>
-							Click here
-						</a>
-					</li>
+					{video.video.map((vid, index) => {
+						return (
+							<li key={index}>
+								<div className="video-title">
+									<div className="video">
+										<span>
+											<AiFillVideoCamera />
+										</span>
+										<span>{vid.title}</span>
+									</div>
+									<span>
+										<AiOutlineHeart />
+									</span>
+								</div>
+								<p className="video-content">{vid.content}</p>
+								<a href={vid.link} className="article-link">
+									Click here
+								</a>
+							</li>
+						);
+					})}
 				</ul>
 			</div>
 		</div>

@@ -2,23 +2,23 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/signup.css";
 
-import {USER_URL} from '../utils/config';
+import { USER_URL } from "../utils/config";
 
-import {UserSignup, RegisteredUserType} from '../interfaces';
-
+import { UserSignup, RegisteredUserType } from "../interfaces";
 
 export interface ISignupProps {
-	setUser: (target: RegisteredUserType['data']) => void;
+	setUser: (target: RegisteredUserType["data"] | null) => void;
 	setIsLoggedIn: (target: boolean) => void;
-	// user: any;
 }
 
 const Signup = (props: ISignupProps) => {
+	const { setUser, setIsLoggedIn } = props;
+	const [submit, setsubmit] = useState(false);
 	const [userInfos, setuserInfos] = useState<UserSignup>({
 		username: "",
 		email: "",
@@ -27,50 +27,44 @@ const Signup = (props: ISignupProps) => {
 
 	const navigate = useNavigate();
 
-	const postUserInfoToDB = async () => {
-		const userRes = await fetch(USER_URL.REGISTER, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(userInfos)
-		})
-		const userData = await userRes.json();
-		return userData
-	}
+	useEffect(() => {
+		if (submit) {
+			const postUserInfoToDB = async () => {
+				const userRes = await fetch(USER_URL.REGISTER, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(userInfos),
+				});
+
+				const userData = await userRes.json();
+
+				localStorage.setItem("token", userData.token);
+
+				if (userData.data) {
+					localStorage.setItem("userId", userData.data.id.toString());
+					setUser(userData.data);
+					navigate("/signin");
+				}
+			};
+			postUserInfoToDB();
+		}
+		setsubmit(false);
+	}, [submit, setUser, userInfos, navigate, setIsLoggedIn]);
 
 	// handle change================================
-	const changeHandler = (e: ChangeEvent<HTMLInputElement>) : void => {
+	const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target;
-		setuserInfos({...userInfos, [name]: value})
+		setuserInfos({ ...userInfos, [name]: value });
 	};
 
 	// handle submit===============================
 	const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setsubmit(true);
+	};
 
-		const registeredUser: RegisteredUserType = await postUserInfoToDB();
-
-		// set handle error here
-
-		localStorage.setItem('token', registeredUser.token);
-		if(registeredUser.data){
-			localStorage.setItem('userId', registeredUser.data.id.toString());
-
-			props.setUser(registeredUser.data);
-        	props.setIsLoggedIn(true);
-		}
-
-		setuserInfos({
-			username: "",
-			email: "",
-			password: "",
-		});
-
-		navigate('/signin', {replace: true});
-	}
-
-	// console.log('signup', props.user);
 	return (
 		<div className="signup-page">
 			<h3>Please create an account so we can track your mood</h3>

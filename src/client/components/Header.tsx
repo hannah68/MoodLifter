@@ -13,13 +13,14 @@ export interface IHeaderProps {
 }
 
 const Header = (props: IHeaderProps) => {
+	const {setIsLoggedIn, setUser, user, isLoggedIn} = props;
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		localStorage.removeItem(localStorage.token);
-        localStorage.removeItem(localStorage.userId);
-        props.setIsLoggedIn(false);
-        props.setUser(null);
+		localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        setIsLoggedIn(false);
+        setUser(null);
         navigate('/');
 	}
 
@@ -28,9 +29,6 @@ const Header = (props: IHeaderProps) => {
         username = username.toLowerCase();
         return capitaliseFirstLetter(username);
     };
-
-	// console.log('header user', props.user);
-	console.log('header login', props.isLoggedIn);
 
 	return (
 		<header>
@@ -46,7 +44,7 @@ const Header = (props: IHeaderProps) => {
 					</Link>
 				</div>
 				<ul className="navbar">
-					{!props.isLoggedIn && (
+					{!isLoggedIn && (
 						<>
 							<li>
 								<Link to="/signup" className="navbar-link">
@@ -60,7 +58,7 @@ const Header = (props: IHeaderProps) => {
 							</li>
 						</>
 					)}
-					{props.isLoggedIn && props.user && (
+					{isLoggedIn && user && (
 						<>
 							<li>
 								<Link to="/profile" className="navbar-link">
