@@ -4,7 +4,8 @@ import {createFavourite, getFavouriteById} from '../controllers/feeling';
 
 const router = Router();
 
-router.post('/favourite', createFavourite);
 router.get('/favourite/:id', getFavouriteById);
+router.post('/favourite', createFavourite);
+
 
 export default router;

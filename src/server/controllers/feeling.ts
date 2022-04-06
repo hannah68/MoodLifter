@@ -23,11 +23,18 @@ export const createFavourite = async(req: Request, res: Response) => {
 export const getFavouriteById = async(req: Request, res: Response) => {
     const id: number = Number(req.params.id);
 
-    const favourite = await prisma.favourite.findUnique({
-        where: {
+    const foundUser = await prisma.user.findUnique({
+        where:{
             id
         }
-    })
+    });
 
-    return res.status(HTTP_RESPONSE.OK.CODE).json({ data: favourite });
+    if(foundUser){
+        const favourite = await prisma.favourite.findUnique({
+            where: {
+                userId: foundUser.id
+            }
+        })
+        return res.status(HTTP_RESPONSE.OK.CODE).json({ data: favourite });
+    };
 }
