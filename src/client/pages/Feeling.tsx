@@ -1,65 +1,63 @@
+import { FormEvent, useState } from "react";
+import { MdDateRange } from "react-icons/md";
+import { TiArrowRightThick } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
+
 import "../styles/feeling.css";
 
 import { emojis } from "../data/emoji";
 import { EmojiType } from "../data/emoji";
-import { todayDate } from "../utils/utils";
 
 import Emoji from "../components/Emoji";
 
-import { FormEvent, useState } from "react";
-import { MdDateRange } from "react-icons/md";
-import { TiArrowRightThick } from "react-icons/ti";
-import { useNavigate } from 'react-router-dom';
-import {existFeelings} from '../utils/utils';
-import {RecommendationType} from '../interfaces';
-
-import { RegisteredUserType, FavouriteType } from "../interfaces";
+import { existFeelings, todayDate} from "../utils/utils";
+import { FavouriteType, RecommendationType } from "../interfaces";
 
 export const FeelingType: string[] = [];
 
 export interface IFeelingProps {
 	setRecomData: (target: RecommendationType[]) => void;
-	user: RegisteredUserType["data"]
 	setfavouriteData: (target: FavouriteType) => void;
+	getFavourites: () => Promise<FavouriteType>;
+	setIsLoggedIn: (target: boolean) => void;
 }
 
 const Feeling = (props: IFeelingProps) => {
-	const { setRecomData, user, setfavouriteData} = props;
+	const { setRecomData, setfavouriteData, getFavourites, setIsLoggedIn } = props;
 	const [feeling, setFeeling] = useState(FeelingType);
-	
+
 	const navigate = useNavigate();
 
-	const getFavourites = async() => {
-		if(user) {
-			const id = user.id;
-			const favRes = await fetch(`http://localhost:4000/feeling/favourite/${id}`)
-			const favData = await favRes.json();
-			return favData.data;
-		}
-	}
-
-	const getAllRecommendations = async() => {
-		if(feeling){
+	const getAllRecommendations = async () => {
+		if (feeling) {
 			const checkTypeOfFeeling = existFeelings(feeling);
 
-			if(checkTypeOfFeeling){
-				navigate('/recommendation/goodmood');
+			if (checkTypeOfFeeling) {
+				navigate("/recommendation/goodmood");
+			} else {
+				const recomRes = await fetch(
+					`http://localhost:4000/recommendation/badmood/${feeling[0]}`
+				);
+				const recomData = await recomRes.json();
+
+				return recomData.data;
 			}
-			const recomRes = await fetch(`http://localhost:4000/recommendation/${feeling[0]}`);
-			const recomData = await recomRes.json();
-			
-			return recomData
 		}
-	}
+	};
 
 	const submitFeelingFormHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const allData = await getAllRecommendations();
-		const favData = await getFavourites()
-		setRecomData(allData.data);
-		setfavouriteData(favData);
-		navigate('/recommendation');
-	}
+		const favData = await getFavourites();
+		const checkTypeOfFeeling = existFeelings(feeling);
+
+		if (!checkTypeOfFeeling) {
+			setRecomData(allData);
+			setfavouriteData(favData);
+			setIsLoggedIn(true);
+			navigate("/recommendation/badmood");
+		}
+	};
 
 	return (
 		<form className="feeling-bottom" onSubmit={submitFeelingFormHandler}>

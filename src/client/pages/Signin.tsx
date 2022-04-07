@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
-import { RiCollageLine, RiLockPasswordFill } from "react-icons/ri";
+import { RiLockPasswordFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import "../styles/signup.css";
 import { USER_URL } from "../utils/config";
 
 import { UserSignin } from "../interfaces";
+
 
 export interface ISigninProps {
 	setIsLoggedIn: (target: boolean) => void;
@@ -36,10 +37,11 @@ const Signin = (props: ISigninProps) => {
 				});
 				const userData = await userRes.json();
 
+				localStorage.setItem('token', userData.token);
 				if (userData.data) {
 					localStorage.setItem("userId", userData.data.id.toString());
 					setIsLoggedIn(true);
-					navigate("/favourite");
+					navigate("/feeling");
 				}
 			};
 			postUserLoginToDB();
