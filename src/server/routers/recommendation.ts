@@ -4,6 +4,6 @@ import { getAllFeelingMaterials} from '../controllers/recommendation';
 
 const router = Router();
 
-router.get('/:feeling', getAllFeelingMaterials);
+router.get('/badmood/:feeling', getAllFeelingMaterials);
 
 export default router;

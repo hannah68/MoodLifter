@@ -41,7 +41,7 @@ const FavouriteQuestions = () => {
 	const submitQuestionHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		await postAnswersToDB();
-		navigate("/feeling");
+		navigate("/signin");
 	};
 
 	const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {

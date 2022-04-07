@@ -31,6 +31,17 @@ const App = () => {
 	const [recomData, setRecomData] = useState(recomInit);
 	const [favouriteData, setfavouriteData] = useState<FavouriteType>(favInit);
 
+	const getFavourites = async () => {
+		if (user) {
+			const id = user.id;
+			const favRes = await fetch(
+				`http://localhost:4000/feeling/favourite/${id}`
+			);
+			const favData = await favRes.json();
+			return favData.data;
+		}
+	};
+
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		if (token) {
@@ -70,21 +81,28 @@ const App = () => {
 			/>
 			<div className="app">
 				<Routes>
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
 					<Route path="/favourite" element={<Favourite />} />
 					<Route
 						path="/feeling"
-						element={<Feeling setRecomData={setRecomData} user={user} setfavouriteData={setfavouriteData}/>}
+						element={<Feeling 
+							setRecomData={setRecomData} 
+							setfavouriteData={setfavouriteData}
+							getFavourites={getFavourites}
+							setIsLoggedIn={setIsLoggedIn}
+							/>}
 					/>
 					<Route path="/profile" element={<Profile />} />
 					<Route
-						path="/recommendation"
-						element={<Recommendation recomData={recomData} favouriteData={favouriteData}/>}
+						path="/recommendation/badmood"
+						element={<Recommendation 
+							recomData={recomData} 
+							favouriteData={favouriteData}/>}
 					/>
 					<Route path="/recommendation/goodmood" element={<GoodMood />} />
 					<Route
 						path="/signin"
-						element={<Signin setIsLoggedIn={setIsLoggedIn} />}
+						element={<Signin setIsLoggedIn={setIsLoggedIn}/>}
 					/>
 					<Route
 						path="/signup"

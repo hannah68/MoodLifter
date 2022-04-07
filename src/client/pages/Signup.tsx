@@ -45,7 +45,7 @@ const Signup = (props: ISignupProps) => {
 				if (userData.data) {
 					localStorage.setItem("userId", userData.data.id.toString());
 					setUser(userData.data);
-					navigate("/signin");
+					navigate("/favourite");
 				}
 			};
 			postUserInfoToDB();
