@@ -42,6 +42,9 @@ export const capitaliseFirstLetter = (name: string) => name.replace(/\b\w/g, (c)
 
 const happyArray : Array<string>= ['Happy', 'Relieved', 'Romantic', 'Proud', 'Neutral', 'Bored', 'Excited'];
 
+export const iconStyle = {color: '#d77283'};
+export const iconStyleSize = {fontSize: '1.3rem', color: '#d77283'};
+
 export const existFeelings = (feelingArr:  Array<string>) : boolean => {
     const res = feelingArr.every(feeling => {
         return happyArray.includes(feeling);

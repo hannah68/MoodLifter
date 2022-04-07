@@ -2,9 +2,11 @@ import React from "react";
 import { RiArticleFill } from "react-icons/ri";
 import { AiFillVideoCamera } from "react-icons/ai";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { FaRegHandPointRight } from "react-icons/fa";
+import { FaHandPointRight } from "react-icons/fa";
 
 import DiaryForm from "../components/DiaryForm";
+
+import { iconStyle, iconStyleSize } from "../utils/utils";
 
 import { RecommendationType, FavouriteType } from "../interfaces";
 
@@ -28,13 +30,20 @@ const Recommendation = (props: IRecommendationProps) => {
 			{quote.quote.map((qt, index: number) => {
 				return (
 					<div className="quote-container" key={index}>
-						<h2>“{qt.text}”</h2>
+						<div className="quote-title">
+							<h3>“{qt.text}”</h3>
+							<AiOutlineHeart style={iconStyleSize} />
+						</div>
+
 						<p className="quote-author">— {qt.author}</p>
 					</div>
 				);
 			})}
 
-			<h3 className="subtitle">Sorry that you feel {typeOfFeeling[0]}</h3>
+			<h3 className="subtitle">
+				Sorry that you feel{" "}
+				<span className="recom-sub">{typeOfFeeling[0]}</span>
+			</h3>
 			<p>There are some tips that can help you to feel better</p>
 
 			<div className="advice-container">
@@ -44,9 +53,9 @@ const Recommendation = (props: IRecommendationProps) => {
 							<li className="advice-list" key={index}>
 								{ad.text.split(",").map((txt, index) => {
 									return (
-										<div key={index}>
+										<div key={index} className="group-list">
 											<span>
-												<FaRegHandPointRight />
+												<FaHandPointRight style={iconStyle} />
 											</span>
 											<span>{txt}</span>
 										</div>
@@ -60,22 +69,28 @@ const Recommendation = (props: IRecommendationProps) => {
 
 			<ul className="fav-container">
 				<li>
-					Do you want to talk to your favourite person? <span className="fav-res">{favouriteData.favPerson}</span>
+					Do you want to talk to your favourite person?{" "}
+					<span className="fav-res">{favouriteData.favPerson}</span>
 				</li>
 				<li>
-					Why don't you go to .... <span className="fav-res">{favouriteData.favPlace}</span>
+					Why don't you go to ....{" "}
+					<span className="fav-res">{favouriteData.favPlace}</span>
 				</li>
 				<li>
-					Do you want to order...<span className="fav-res">{favouriteData.favFood}</span>
+					Do you want to order...
+					<span className="fav-res">{favouriteData.favFood}</span>
 				</li>
 				<li>
-					Imagin life without ...<span className="fav-res">{favouriteData.gratitude}</span>
+					Imagin life without ...
+					<span className="fav-res">{favouriteData.gratitude}</span>
 				</li>
 				<li>
-					Remember your passion...<span className="fav-res">{favouriteData.passion}</span>
+					Remember your passion...
+					<span className="fav-res">{favouriteData.passion}</span>
 				</li>
 				<li>
-					think about your accomplishment...<span className="fav-res">{favouriteData.accomplishment}</span>
+					think about your accomplishment...
+					<span className="fav-res">{favouriteData.accomplishment}</span>
 				</li>
 			</ul>
 
@@ -96,12 +111,12 @@ const Recommendation = (props: IRecommendationProps) => {
 								<div className="article-title">
 									<div className="article">
 										<span>
-											<RiArticleFill />
+											<RiArticleFill style={iconStyle} />
 										</span>
 										<span>{art.title}</span>
 									</div>
 									<span>
-										<AiOutlineHeart />
+										<AiOutlineHeart style={iconStyle} />
 									</span>
 								</div>
 								<p className="article-content">{art.content}</p>
@@ -122,12 +137,12 @@ const Recommendation = (props: IRecommendationProps) => {
 								<div className="video-title">
 									<div className="video">
 										<span>
-											<AiFillVideoCamera />
+											<AiFillVideoCamera style={iconStyle} />
 										</span>
 										<span>{vid.title}</span>
 									</div>
 									<span>
-										<AiOutlineHeart />
+										<AiOutlineHeart style={iconStyle} />
 									</span>
 								</div>
 								<p className="video-content">{vid.content}</p>

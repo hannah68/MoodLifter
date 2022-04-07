@@ -100,7 +100,7 @@ const Signup = (props: ISignupProps) => {
 						<RiLockPasswordFill />
 					</label>
 					<input
-						type="text"
+						type="password"
 						placeholder="Password"
 						name="password"
 						id="password"

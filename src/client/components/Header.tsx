@@ -36,7 +36,7 @@ const Header = (props: IHeaderProps) => {
 				<div>
 					<Link to="/" className="logo-link">
 						<img
-							src="./assets/images/logo.png"
+							src="./assets/images/girl.png"
 							alt="logo"
 							className="logo-img"
 						/>
@@ -62,7 +62,7 @@ const Header = (props: IHeaderProps) => {
 						<>
 							<li>
 								<Link to="/profile" className="navbar-link">
-									Hi {formatUserName(props.user)}
+									Hi <span className="user-name">{formatUserName(props.user)}</span>
 								</Link>
 							</li>
 							<li onClick={handleClick}>

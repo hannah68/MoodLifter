@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Mono:wght@400;500;700&display=swap");
+
 :root {
 	--color-pink: #ffaebc;
 	--color-blue: #a0e7e5;
@@ -14,10 +16,10 @@
 }
 
 html {
-	font-family: "Roboto", sans-serif;
+	font-family: "Roboto Mono", monospace;
 }
 
-body{
+body {
 	background: rgb(255, 174, 188);
 	background: linear-gradient(
 		60deg,
