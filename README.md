@@ -1,7 +1,8 @@
 # MoodLifter
 > Moodlifter is an app that recommends appropriate content based on one's instantaneous mood.
 
-![MoodLifter Demo](./images/moodlifter.gif)
+<!-- ![MoodLifter Demo](images/moodlifter.gif) -->
+<!-- <img src="./moodlifter.gif"/> -->
 
 ## How does MoodLifter works
 When in a good mood, MoodLifter shows the user a random quote and lets them note down how they feel in their daily journal. Besides, users can share their positive moment with other users in the MoodLifter Forum.
