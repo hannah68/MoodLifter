@@ -1,6 +1,8 @@
 # MoodLifter
 > Moodlifter is an app that recommends appropriate content based on one's instantaneous mood.
 
+![MoodLifter Demo](./images/moodlifter.gif)
+
 ## How does MoodLifter works
 When in a good mood, MoodLifter shows the user a random quote and lets them note down how they feel in their daily journal. Besides, users can share their positive moment with other users in the MoodLifter Forum.
 
@@ -11,7 +13,7 @@ Additionally, MoodLifter allows you to keep daily journals, and provides releven
 The idea of MoodLifter came to my mind when I wasn't in a good mood. I wanted to build an app that tracked the way I felt and allowed me to see how my mood would fluctuate over time. I was also looking for advice and helpful materials to keep up my spirits.
 
 ## How to run it
-- First, run `npm install` to install the dependencies (need node.js for npm)
+- First, run `npm ci` to install the dependencies (need node.js for npm)
 - Finally, run `npm run devstart` to run the app via <a href="http://localhost:3000">localhost<a/>
 
 ## Tech stack
