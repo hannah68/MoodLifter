@@ -119,9 +119,9 @@ const Recommendation = (props: IRecommendationProps) => {
 										<AiOutlineHeart style={iconStyle} />
 									</span>
 								</div>
-								<p className="article-content">{art.content}</p>
+								<p className="article-content">{art.content}...</p>
 								<a href={art.link} className="article-link">
-									Click here
+									Read more
 								</a>
 							</li>
 						);
@@ -145,9 +145,9 @@ const Recommendation = (props: IRecommendationProps) => {
 										<AiOutlineHeart style={iconStyle} />
 									</span>
 								</div>
-								<p className="video-content">{vid.content}</p>
+								<p className="video-content">{vid.content}...</p>
 								<a href={vid.link} className="article-link">
-									Click here
+									Watch here
 								</a>
 							</li>
 						);
