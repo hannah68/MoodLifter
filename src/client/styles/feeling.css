@@ -116,7 +116,9 @@
 	width: 8rem;
 	border-radius: 5px;
 	cursor: pointer;
-	margin: 4rem auto;
+	/* margin: 4rem auto; */
+	margin-left: 28rem;
+	margin-top: 4rem;
 	transform: translate(-50%);
 	display: flex;
 	justify-content: center;
