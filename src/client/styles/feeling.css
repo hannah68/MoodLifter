@@ -31,65 +31,69 @@
 	border-radius: 5px;
 }
 
-.feeling-bottom{
+.feeling-bottom {
 	text-align: center;
 }
 
-.emoji-list{
-    display: grid;
-	grid-template-columns: repeat(5,1fr);
+.emoji-list {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
 	gap: 1rem;
 	text-align: center;
 	margin: 2rem 0;
 }
 
-.emoji-group{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-yellow);
+.emoji-group {
+	display: flex;
+	flex-direction: column;
+	background-color: #ffe7ea;
 	padding: 5px;
 	gap: 10px;
-	width: 5rem;
+	width: 7rem;
 	border-radius: 10px;
 	cursor: pointer;
 }
 
 .emoji-group.selected {
-	background-color: #ffe1b1;
+	background-color: #ffccd2;
 	border: 1px solid rgb(86, 86, 86);
 }
 
-.emoji-group img{
+.emoji-group img {
 	width: 2rem;
 	display: block;
 	margin: auto;
 }
 
-.feeling-date{
+.feeling-date {
 	margin: 1rem 0;
 	display: flex;
 	justify-content: center;
 	gap: 5px;
 }
 
-.question-form{
+.question-form {
 	padding-top: 2rem;
 }
 
-.fav-groups{
+.fav-groups {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 1.5rem;
 }
 
-.text-area{
+.fav-groups label{
+	margin-bottom: 1rem;
+}
+
+.text-area {
 	border-top: none;
 	border-left: none;
 	border-right: none;
 	background-color: transparent;
 	outline: none;
 	padding-bottom: 0;
-	padding-top: 5px;
+	padding: 5px;
 }
 
 .save-btn {
@@ -100,17 +104,16 @@
 	margin: auto;
 	width: 5rem;
 	font-size: 1.2rem;
-	background-color: var(--color-yellow);
+	background-color: #d88492;
 	border-radius: 5px;
 	cursor: pointer;
 }
 
-.next-btn{
+.next-btn {
 	padding: 1rem 0;
 	outline: none;
 	border: none;
 	width: 8rem;
-	/* margin-top: 4rem; */
 	border-radius: 5px;
 	cursor: pointer;
 	margin: 4rem auto;
@@ -118,6 +121,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	gap: 5px;
-	font-size: 1rem;
+	gap: 8px;
+	font-size: 1.3rem;
+	background-color: #d88492;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+	border: 0 solid;
 }

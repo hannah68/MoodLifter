@@ -29,7 +29,12 @@ const GoodMood = () => {
 
             <div className="sharing-container">
                 <h3>You can share your feeling with others here:</h3>
-
+                {/* <div className="sharing">
+                    <div className="share">
+                        <img src="" alt="" />
+                        <p></p>
+                    </div>
+                </div> */}
             </div>
 		</div>
 	);
