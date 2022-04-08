@@ -30,7 +30,7 @@ The idea of MoodLifter came to my mind when I wasn't in a good mood. I wanted to
 5. Journaling, whenever users feel good, is as beneficial as when they are in a low mood. Importantly, saving users' diaries into a database whenever they feel good enables us to show them that they had good days as well. This is another feature that needs to be added.
 
 ## Limitations
-- There are limited materials for suggesting to users. I didn't find an external API to use for materials.
+- There are limited materials for suggesting to users. I didn't find an external API to use for materials, except for the random quotes, I Used <a href='https://api.adviceslip.com/'>Advice Slip<a/>.
 
 
 
