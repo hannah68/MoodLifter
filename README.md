@@ -3,12 +3,13 @@
 
 ## How does MoodLifter works
 When in a good mood, MoodLifter shows the user a random quote and lets the user note down how they feel in their daily journal. Besides, they can share their positive moment with other users in the MoodLifter Forum.
+
 In case of low moods, depending on the selected feeling, MoodLifter uses the saved information provided by the user to remind them of ways that can improve how they feel. For instance, it suggests calling the favourite person as a potential remedy for one's low mood. 
 Additionally, MoodLifter allows you to keep daily journals, and provides relevent articles, videos and motivational quotes.
 
 ## How to run it
-- First, run npm install to install the dependencies (need node.js for npm)
-- Finally, run npm start to run the app via localhost
+- First, run `npm install` to install the dependencies (need node.js for npm)
+- Finally, run `npm run devstart` to run the app via localhost [http://localhost:3000](http://localhost:3000)
 
 ## Tech stack
 - HTML, CSS
@@ -29,9 +30,4 @@ Additionally, MoodLifter allows you to keep daily journals, and provides releven
 - There are limited materials for suggesting to users. I didn't find an external API to use for materials.
 
 
-
-
-### `npm start`
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
