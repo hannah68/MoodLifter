@@ -7,12 +7,15 @@ When in a good mood, MoodLifter shows the user a random quote and lets the user 
 In case of low moods, depending on the selected feeling, MoodLifter uses the saved information provided by the user to remind them of ways that can improve how they feel. For instance, it suggests calling the favourite person as a potential remedy for one's low mood. 
 Additionally, MoodLifter allows you to keep daily journals, and provides relevent articles, videos and motivational quotes.
 
+## What was the problem
+The idea of MoodLifter came to my mind when I wasn't in a good mood. I wanted to build an app that tracks my mood and allows me to see how my mood fluctuates during the week. I was looking for advice and helpful materials to keep up my spirit.
+
 ## How to run it
 - First, run `npm install` to install the dependencies (need node.js for npm)
 - Finally, run `npm run devstart` to run the app via localhost [http://localhost:3000](http://localhost:3000)
 
 ## Tech stack
-- HTML, CSS
+- HTML, CSS, Figma
 - React
 - Typescript
 - Node.js, Express
