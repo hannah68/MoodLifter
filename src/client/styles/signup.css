@@ -6,7 +6,8 @@
 }
 
 .signup-page h3,
-.signin-page h2{
+.signin-page h2,
+.signin-page h3{
     text-align: center;
 }
 

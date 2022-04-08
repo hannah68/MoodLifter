@@ -63,7 +63,8 @@ const Signin = (props: ISigninProps) => {
 
 	return (
 		<div className="signin-page">
-			<h2>Sign In</h2>
+			<h2>Thanks for answering the questions, </h2>
+			<h3>Sign in to get started ...</h3>
 			<form className="signin-form" onSubmit={submitHandler}>
 				<div className="input-groups">
 					<label htmlFor="username">
