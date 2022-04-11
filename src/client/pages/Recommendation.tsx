@@ -1,4 +1,4 @@
-import React from "react";
+import {useState} from "react";
 import { RiArticleFill } from "react-icons/ri";
 import { AiFillVideoCamera } from "react-icons/ai";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -6,10 +6,10 @@ import { FaHandPointRight } from "react-icons/fa";
 
 import DiaryForm from "../components/DiaryForm";
 
-import { iconStyle, iconStyleSize } from "../utils/utils";
+import { iconStyle, iconStyleSize, uniqueArrHandler } from "../utils/utils";
 
 import { RecommendationType, FavouriteType } from "../interfaces";
-import { Quote, Article} from '../../server/config/interfaces';
+import { Quote, Article, Video} from '../../server/config/interfaces';
 
 import "../styles/recommendation.css";
 
@@ -20,11 +20,16 @@ export interface IRecommendationProps {
 	savedQuote: RecommendationType['quote'];
 	savedArticle: RecommendationType['article'];
 	setSavedArticle: (target: RecommendationType['article']) => void;
+	savedVideo: RecommendationType['video'];
+	setSavedVideo: (target: RecommendationType['video']) => void;
 }
 
 const Recommendation = (props: IRecommendationProps) => {
-	const { recomData, favouriteData, setSavedQuote, savedQuote,savedArticle, setSavedArticle} = props;
+	const { recomData, favouriteData, setSavedQuote, savedQuote,savedArticle, setSavedArticle, savedVideo, setSavedVideo} = props;
+
 	const [article, video, advice, quote] = recomData;
+
+	// const [fillHeartIcon, setFillHeartIcon] = useState(false);
 
 	const typeOfFeeling = quote.quote.map((qt) => {
 		return qt.quoteType;
@@ -32,10 +37,15 @@ const Recommendation = (props: IRecommendationProps) => {
 
 	const savedQuoteHandler = (quote: Quote) => {
 		setSavedQuote([...savedQuote, quote]);
+		// setFillHeartIcon(true);
 	}
 
 	const savedArticleHandler = (article: Article) => {
 		setSavedArticle([...savedArticle, article]);
+	}
+
+	const savedVideoHandler = (video: Video) => {
+		setSavedVideo([...savedVideo, video]);
 	}
 
 	return (
@@ -45,7 +55,7 @@ const Recommendation = (props: IRecommendationProps) => {
 					<div className="quote-container" key={index}>
 						<div className="quote-title">
 							<h3>“{qt.text}”</h3>
-							<span onClick={() => savedQuoteHandler(qt)}><AiOutlineHeart style={iconStyleSize} /></span>
+							<span onClick={() => savedQuoteHandler(qt)}> <AiOutlineHeart style={iconStyleSize} /></span>
 						</div>
 
 						<p className="quote-author">— {qt.author}</p>
@@ -154,7 +164,7 @@ const Recommendation = (props: IRecommendationProps) => {
 										</span>
 										<span>{vid.title}</span>
 									</div>
-									<span>
+									<span onClick={() => savedVideoHandler(vid)}>
 										<AiOutlineHeart style={iconStyle} />
 									</span>
 								</div>

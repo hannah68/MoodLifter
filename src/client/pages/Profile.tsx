@@ -8,67 +8,84 @@ import { FaBook } from "react-icons/fa";
 
 import { RecommendationType } from "../interfaces";
 
+import { uniqueArrHandler } from "../utils/utils";
+
 export interface IProfileProps {
 	savedQuote: RecommendationType["quote"];
 	savedArticle: RecommendationType["article"];
+	savedVideo: RecommendationType["video"];
 }
 
 const Profile = (props: IProfileProps) => {
-	const { savedQuote, savedArticle } = props;
-	console.log(savedArticle);
+	const { savedQuote, savedArticle, savedVideo } = props;
+
+	const checkUniqueQuote = (): RecommendationType["quote"] => {
+		return uniqueArrHandler(savedQuote);
+	};
+
+	const checkUniqueArticle = (): RecommendationType["article"] => {
+		return uniqueArrHandler(savedArticle);
+	};
+
+	const checkUniqueVideo = (): RecommendationType["video"] => {
+		return uniqueArrHandler(savedVideo);
+	};
+
 	return (
 		<div className="profile-page">
 			<div className="quote-save-container">
 				<h2>My Favourite quotes</h2>
 				<ul className="quote-list">
-					{savedQuote.map((quote, index: number) => {
-						return (
-							<li key={index}>
-								<span>
-									<BsFillChatRightQuoteFill />
-								</span>
-								{quote.text}
-							</li>
-						);
-					})}
+					{savedQuote
+						? checkUniqueQuote().map((quote, index: number) => {
+								return (
+									<li key={index}>
+										<span>
+											<BsFillChatRightQuoteFill />
+										</span>
+										{quote.text}
+									</li>
+								);
+						  })
+						: "There is not any Favourite quote"}
 				</ul>
 			</div>
 			<div className="read-container">
 				<h2>Articles to read later</h2>
 				<ul className="article-save-list">
-					{savedArticle.map((article, index: number) => {
-						return (
-							<li key={index}>
-								<a href={article.link}>
-									<span>
-										<FaBook />
-									</span>
-									{article.title}
-								</a>
-							</li>
-						);
-					})}
+					{savedArticle
+						? checkUniqueArticle().map((article, index: number) => {
+								return (
+									<li key={index}>
+										<a href={article.link}>
+											<span>
+												<FaBook />
+											</span>
+											{article.title}
+										</a>
+									</li>
+								);
+						  })
+						: "There is not any article to read"}
 				</ul>
 			</div>
 			<div className="see-container">
 				<h2>Videos to watch later</h2>
 				<ul className="video-save-list">
-					<li>
-						<a href="/">
-							<span>
-								<GoDeviceCameraVideo />
-							</span>
-							6 Differences Between Sadness and Depression
-						</a>
-					</li>
-					<li>
-						<a href="/">
-							<span>
-								<GoDeviceCameraVideo />
-							</span>
-							How to cope with anxiety | Olivia Remes | TEDxUHasselt
-						</a>
-					</li>
+					{savedVideo
+						? checkUniqueVideo().map((video, id: number) => {
+								return (
+									<li key={id}>
+										<a href={video.link}>
+											<span>
+												<GoDeviceCameraVideo />
+											</span>
+											{video.title}
+										</a>
+									</li>
+								);
+						  })
+						: "There is not any video to watch"}
 				</ul>
 			</div>
 			<div className="diary-save-container">

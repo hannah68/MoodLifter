@@ -35,9 +35,8 @@ const App = () => {
 	const [recomData, setRecomData] = useState(recomInit);
 	const [favouriteData, setfavouriteData] = useState<FavouriteType>(favInit);
 	const [savedQuote, setSavedQuote] = useState<RecommendationType["quote"]>([]);
-	const [savedArticle, setSavedArticle] = useState<
-		RecommendationType["article"]
-	>([]);
+	const [savedArticle, setSavedArticle] = useState<RecommendationType["article"]>([]);
+	const [savedVideo, setSavedVideo] = useState<RecommendationType["video"]>([]);
 
 	const getFavourites = async () => {
 		if (user) {
@@ -105,7 +104,11 @@ const App = () => {
 					<Route
 						path="/profile"
 						element={
-							<Profile savedQuote={savedQuote} savedArticle={savedArticle} />
+							<Profile 
+							savedQuote={savedQuote} 
+							savedArticle={savedArticle} 
+							savedVideo={savedVideo}
+							/>
 						}
 					/>
 					<Route
@@ -118,6 +121,8 @@ const App = () => {
 								savedQuote={savedQuote}
 								setSavedArticle={setSavedArticle}
 								savedArticle={savedArticle}
+								setSavedVideo={setSavedVideo}
+								savedVideo={savedVideo}
 							/>
 						}
 					/>
