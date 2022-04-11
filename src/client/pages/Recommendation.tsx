@@ -9,7 +9,7 @@ import DiaryForm from "../components/DiaryForm";
 import { iconStyle, iconStyleSize } from "../utils/utils";
 
 import { RecommendationType, FavouriteType } from "../interfaces";
-import { Quote} from '../../server/config/interfaces';
+import { Quote, Article} from '../../server/config/interfaces';
 
 import "../styles/recommendation.css";
 
@@ -18,10 +18,12 @@ export interface IRecommendationProps {
 	favouriteData: FavouriteType;
 	setSavedQuote: (target: RecommendationType['quote']) => void;
 	savedQuote: RecommendationType['quote'];
+	savedArticle: RecommendationType['article'];
+	setSavedArticle: (target: RecommendationType['article']) => void;
 }
 
 const Recommendation = (props: IRecommendationProps) => {
-	const { recomData, favouriteData, setSavedQuote, savedQuote} = props;
+	const { recomData, favouriteData, setSavedQuote, savedQuote,savedArticle, setSavedArticle} = props;
 	const [article, video, advice, quote] = recomData;
 
 	const typeOfFeeling = quote.quote.map((qt) => {
@@ -29,8 +31,11 @@ const Recommendation = (props: IRecommendationProps) => {
 	});
 
 	const savedQuoteHandler = (quote: Quote) => {
-		let singleQuote: Quote = quote;
-		setSavedQuote([...savedQuote, singleQuote]);
+		setSavedQuote([...savedQuote, quote]);
+	}
+
+	const savedArticleHandler = (article: Article) => {
+		setSavedArticle([...savedArticle, article]);
 	}
 
 	return (
@@ -49,7 +54,7 @@ const Recommendation = (props: IRecommendationProps) => {
 			})}
 
 			<h3 className="subtitle">
-				Sorry that you feel{" "}
+				Sorry that you feel
 				<span className="recom-sub">{typeOfFeeling[0]}</span>
 			</h3>
 			<p>There are some tips that can help you to feel better</p>
@@ -123,7 +128,7 @@ const Recommendation = (props: IRecommendationProps) => {
 										</span>
 										<span>{art.title}</span>
 									</div>
-									<span>
+									<span onClick={() => savedArticleHandler(art)}>
 										<AiOutlineHeart style={iconStyle} />
 									</span>
 								</div>

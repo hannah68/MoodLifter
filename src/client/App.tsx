@@ -13,16 +13,20 @@ import Header from "./components/Header";
 
 import { USER_URL } from "./utils/config";
 
-import { RegisteredUserType, RecommendationType, FavouriteType} from "./interfaces";
+import {
+	RegisteredUserType,
+	RecommendationType,
+	FavouriteType,
+} from "./interfaces";
 
 let recomInit: RecommendationType[] = [];
 let favInit: FavouriteType = {
-	accomplishment: 'string',
-	favFood: 'string',
-	favPerson: 'string',
-	favPlace: 'string',
-	gratitude: 'string',
-	passion: 'string'
+	accomplishment: "string",
+	favFood: "string",
+	favPerson: "string",
+	favPlace: "string",
+	gratitude: "string",
+	passion: "string",
 };
 
 const App = () => {
@@ -30,7 +34,10 @@ const App = () => {
 	const [user, setUser] = useState<RegisteredUserType["data"]>(null);
 	const [recomData, setRecomData] = useState(recomInit);
 	const [favouriteData, setfavouriteData] = useState<FavouriteType>(favInit);
-	const [savedQuote, setSavedQuote] = useState<RecommendationType['quote']>([]);
+	const [savedQuote, setSavedQuote] = useState<RecommendationType["quote"]>([]);
+	const [savedArticle, setSavedArticle] = useState<
+		RecommendationType["article"]
+	>([]);
 
 	const getFavourites = async () => {
 		if (user) {
@@ -82,31 +89,42 @@ const App = () => {
 			/>
 			<div className="app">
 				<Routes>
-					<Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
+					<Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
 					<Route path="/favourite" element={<Favourite />} />
 					<Route
 						path="/feeling"
-						element={<Feeling 
-							setRecomData={setRecomData} 
-							setfavouriteData={setfavouriteData}
-							getFavourites={getFavourites}
-							setIsLoggedIn={setIsLoggedIn}
-							/>}
+						element={
+							<Feeling
+								setRecomData={setRecomData}
+								setfavouriteData={setfavouriteData}
+								getFavourites={getFavourites}
+								setIsLoggedIn={setIsLoggedIn}
+							/>
+						}
 					/>
-					<Route path="/profile" element={<Profile savedQuote={savedQuote}/>} />
+					<Route
+						path="/profile"
+						element={
+							<Profile savedQuote={savedQuote} savedArticle={savedArticle} />
+						}
+					/>
 					<Route
 						path="/recommendation/badmood"
-						element={<Recommendation 
-							recomData={recomData} 
-							favouriteData={favouriteData}
-							setSavedQuote={setSavedQuote}
-							savedQuote={savedQuote}
-							/>}
+						element={
+							<Recommendation
+								recomData={recomData}
+								favouriteData={favouriteData}
+								setSavedQuote={setSavedQuote}
+								savedQuote={savedQuote}
+								setSavedArticle={setSavedArticle}
+								savedArticle={savedArticle}
+							/>
+						}
 					/>
 					<Route path="/recommendation/goodmood" element={<GoodMood />} />
 					<Route
 						path="/signin"
-						element={<Signin setIsLoggedIn={setIsLoggedIn}/>}
+						element={<Signin setIsLoggedIn={setIsLoggedIn} />}
 					/>
 					<Route
 						path="/signup"
