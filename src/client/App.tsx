@@ -10,6 +10,7 @@ import GoodMood from "./pages/GoodMood";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
+import Journal from "./pages/Journal";
 
 import { USER_URL } from "./utils/config";
 
@@ -35,8 +36,11 @@ const App = () => {
 	const [recomData, setRecomData] = useState(recomInit);
 	const [favouriteData, setfavouriteData] = useState<FavouriteType>(favInit);
 	const [savedQuote, setSavedQuote] = useState<RecommendationType["quote"]>([]);
-	const [savedArticle, setSavedArticle] = useState<RecommendationType["article"]>([]);
+	const [savedArticle, setSavedArticle] = useState<
+		RecommendationType["article"]
+	>([]);
 	const [savedVideo, setSavedVideo] = useState<RecommendationType["video"]>([]);
+	const [diaries, setDiaries] = useState<RecommendationType["diary"]>([]);
 
 	const getFavourites = async () => {
 		if (user) {
@@ -102,12 +106,18 @@ const App = () => {
 						}
 					/>
 					<Route
+						path="/journal"
+						element={
+							<Journal setDiaries={setDiaries} diaries={diaries} user={user} />
+						}
+					/>
+					<Route
 						path="/profile"
 						element={
-							<Profile 
-							savedQuote={savedQuote} 
-							savedArticle={savedArticle} 
-							savedVideo={savedVideo}
+							<Profile
+								savedQuote={savedQuote}
+								savedArticle={savedArticle}
+								savedVideo={savedVideo}
 							/>
 						}
 					/>
