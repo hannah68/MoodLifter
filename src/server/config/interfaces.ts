@@ -27,6 +27,10 @@ export interface Advice {
 	adviceType: string;
 }
 
+export interface Diary {
+	text: string;
+}
+
 export interface User {
 	username: string;
 	email: string;
