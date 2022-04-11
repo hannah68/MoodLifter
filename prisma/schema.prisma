@@ -38,11 +38,9 @@ model Diary {
     id          Int       @id @default(autoincrement())
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
-    diaryType   String
     text        String
     user        User      @relation(fields: [userId], references: [id])
     userId      Int
-    feelings    FeelingOnDiary[]
 }
 
 
@@ -51,20 +49,11 @@ model Feeling {
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
     name        String    @unique
-    diaries     FeelingOnDiary[]
     users       FeelingOnUser[]
     quotes      Quote[]
     articles    Article[]
     videos      Video[]
     advices     Advice[]
-}
-
-model FeelingOnDiary {
-    id          Int       @id @default(autoincrement())
-    diary       Diary     @relation(fields: [diaryId], references: [id])
-    diaryId     Int
-    feeling     Feeling   @relation(fields: [feelingId], references: [id])
-    feelingId   Int
 }
 
 model FeelingOnUser {
