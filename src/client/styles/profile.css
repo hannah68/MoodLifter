@@ -7,15 +7,13 @@
 
 .quote-save-container h2,
 .read-container h2,
-.see-container h2,
-.diary-save-container h2{
+.see-container h2{
     margin-bottom: 1rem;
 }
 
 .quote-list,
 .article-save-list,
-.video-save-list,
-.diary-list{
+.video-save-list{
     list-style: none;
     background-color: #ffe7ea;
     padding: 1rem;
@@ -24,8 +22,7 @@
 
 .quote-list li,
 .article-save-list li,
-.video-save-list li,
-.diary-list li{
+.video-save-list li{
     padding-bottom: 1rem;
 }
 

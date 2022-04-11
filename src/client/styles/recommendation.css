@@ -154,3 +154,27 @@
 .fav-res {
 	font-weight: bold;
 }
+
+/* journal page */
+
+.journal-container{
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.diary-save-container h2{
+    margin-bottom: 1rem;
+}
+
+.diary-list{
+	margin-top: 4rem;
+    list-style: none;
+    background-color: #ffe7ea;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.diary-list li{
+    padding-bottom: 1rem;
+}

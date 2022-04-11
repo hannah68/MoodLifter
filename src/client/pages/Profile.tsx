@@ -1,8 +1,5 @@
 import "../styles/profile.css";
-import {
-	BsFillChatRightQuoteFill,
-	BsFillJournalBookmarkFill,
-} from "react-icons/bs";
+import { BsFillChatRightQuoteFill } from "react-icons/bs";
 import { GoDeviceCameraVideo } from "react-icons/go";
 import { FaBook } from "react-icons/fa";
 
@@ -47,7 +44,7 @@ const Profile = (props: IProfileProps) => {
 									</li>
 								);
 						  })
-						: "There is not any Favourite quote"}
+						: <li>There is not any Favourite quote</li>}
 				</ul>
 			</div>
 			<div className="read-container">
@@ -66,7 +63,7 @@ const Profile = (props: IProfileProps) => {
 									</li>
 								);
 						  })
-						: "There is not any article to read"}
+						: <p>There is not any article to read</p>}
 				</ul>
 			</div>
 			<div className="see-container">
@@ -85,33 +82,7 @@ const Profile = (props: IProfileProps) => {
 									</li>
 								);
 						  })
-						: "There is not any video to watch"}
-				</ul>
-			</div>
-			<div className="diary-save-container">
-				<h2>My Diaries</h2>
-				<ul className="diary-list">
-					<li>
-						<p>
-							<span>
-								<BsFillJournalBookmarkFill />
-							</span>
-							readable content of a page when looking at its layout. The point
-							of using Lorem Ipsum is that it has a more-or-less normal
-							distribution of letters, as opposed to using 'Content here,
-							content here', making it look like readable English.
-						</p>
-					</li>
-					<li>
-						<p>
-							<span>
-								<BsFillJournalBookmarkFill />
-							</span>
-							0s, when an unknown printer took a galley of type and scrambled it
-							to make a type specimen book. It has survived not only five
-							centuries, but also the leap into{" "}
-						</p>
-					</li>
+						: <p>There is not any video to watch</p>}
 				</ul>
 			</div>
 		</div>

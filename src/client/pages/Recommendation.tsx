@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import { RiArticleFill } from "react-icons/ri";
 import { AiFillVideoCamera } from "react-icons/ai";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -9,23 +9,32 @@ import DiaryForm from "../components/DiaryForm";
 import { iconStyle, iconStyleSize, uniqueArrHandler } from "../utils/utils";
 
 import { RecommendationType, FavouriteType } from "../interfaces";
-import { Quote, Article, Video} from '../../server/config/interfaces';
+import { Quote, Article, Video } from "../../server/config/interfaces";
 
 import "../styles/recommendation.css";
 
 export interface IRecommendationProps {
 	recomData: RecommendationType[];
 	favouriteData: FavouriteType;
-	setSavedQuote: (target: RecommendationType['quote']) => void;
-	savedQuote: RecommendationType['quote'];
-	savedArticle: RecommendationType['article'];
-	setSavedArticle: (target: RecommendationType['article']) => void;
-	savedVideo: RecommendationType['video'];
-	setSavedVideo: (target: RecommendationType['video']) => void;
+	setSavedQuote: (target: RecommendationType["quote"]) => void;
+	savedQuote: RecommendationType["quote"];
+	savedArticle: RecommendationType["article"];
+	setSavedArticle: (target: RecommendationType["article"]) => void;
+	savedVideo: RecommendationType["video"];
+	setSavedVideo: (target: RecommendationType["video"]) => void;
 }
 
 const Recommendation = (props: IRecommendationProps) => {
-	const { recomData, favouriteData, setSavedQuote, savedQuote,savedArticle, setSavedArticle, savedVideo, setSavedVideo} = props;
+	const {
+		recomData,
+		favouriteData,
+		setSavedQuote,
+		savedQuote,
+		savedArticle,
+		setSavedArticle,
+		savedVideo,
+		setSavedVideo,
+	} = props;
 
 	const [article, video, advice, quote] = recomData;
 
@@ -38,15 +47,15 @@ const Recommendation = (props: IRecommendationProps) => {
 	const savedQuoteHandler = (quote: Quote) => {
 		setSavedQuote([...savedQuote, quote]);
 		// setFillHeartIcon(true);
-	}
+	};
 
 	const savedArticleHandler = (article: Article) => {
 		setSavedArticle([...savedArticle, article]);
-	}
+	};
 
 	const savedVideoHandler = (video: Video) => {
 		setSavedVideo([...savedVideo, video]);
-	}
+	};
 
 	return (
 		<div className="recom-page">
@@ -55,7 +64,10 @@ const Recommendation = (props: IRecommendationProps) => {
 					<div className="quote-container" key={index}>
 						<div className="quote-title">
 							<h3>“{qt.text}”</h3>
-							<span onClick={() => savedQuoteHandler(qt)}> <AiOutlineHeart style={iconStyleSize} /></span>
+							<span onClick={() => savedQuoteHandler(qt)}>
+								{" "}
+								<AiOutlineHeart style={iconStyleSize} />
+							</span>
 						</div>
 
 						<p className="quote-author">— {qt.author}</p>
@@ -96,7 +108,7 @@ const Recommendation = (props: IRecommendationProps) => {
 					<span className="fav-res">{favouriteData.favPerson}</span>
 				</li>
 				<li>
-					Why don't you go to ....{" "}
+					Why don't you go to ....
 					<span className="fav-res">{favouriteData.favPlace}</span>
 				</li>
 				<li>
@@ -116,11 +128,6 @@ const Recommendation = (props: IRecommendationProps) => {
 					<span className="fav-res">{favouriteData.accomplishment}</span>
 				</li>
 			</ul>
-
-			<div className="diary-container">
-				<h3>Did you know journaling can improve your mood ? </h3>
-				<DiaryForm />
-			</div>
 
 			<h3 className="content-container">
 				Still not feeling good? checkout our articles and videos.
