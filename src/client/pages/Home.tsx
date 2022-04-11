@@ -21,3 +21,4 @@ const Home = (props: IHomeProps) => {
 };
 
 export default Home;
+
