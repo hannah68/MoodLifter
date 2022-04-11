@@ -65,6 +65,11 @@ const Header = (props: IHeaderProps) => {
 									Hi <span className="user-name">{formatUserName(props.user)}</span>
 								</Link>
 							</li>
+							<li>
+								<Link to="/journal" className="navbar-link">
+									my Diary
+								</Link>
+							</li>
 							<li onClick={handleClick}>
 								<Link to="/" className="navbar-link">
 									Sign out
