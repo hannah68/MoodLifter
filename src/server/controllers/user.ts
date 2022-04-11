@@ -81,3 +81,49 @@ export const getUserById = async (req: Request<{ id: number}>, res: Response) =>
 
 	res.status(HTTP_RESPONSE.OK.CODE).json({ data: userWithoutPassword });
 }
+
+
+export const createUserDiary = async (req: Request, res: Response) => {
+	const { text, userId} = req.body;
+
+	const diary = await prisma.diary.create({
+		data: {
+			text,
+			user: {
+				connect: {
+					id: Number(userId)
+				},
+			}
+		}
+	})
+
+	res.status(HTTP_RESPONSE.OK.CODE).json({ data: diary });
+}
+
+export const getUserDiary = async(req: Request, res: Response) => {
+	const id = Number(req.params.id)
+
+	const findUser = await prisma.user.findUnique({
+		where: {
+			id
+		}
+	});
+
+	// if(!findUser){
+
+	// }
+	if(findUser){
+		const diary = await prisma.diary.findMany({
+			where: {
+				userId: findUser.id
+			}
+		});
+		res.status(HTTP_RESPONSE.OK.CODE).json({ data: diary });
+	}
+
+	// if(!diary){
+
+	// }
+	
+
+}
