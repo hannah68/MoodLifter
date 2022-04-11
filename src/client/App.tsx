@@ -30,6 +30,7 @@ const App = () => {
 	const [user, setUser] = useState<RegisteredUserType["data"]>(null);
 	const [recomData, setRecomData] = useState(recomInit);
 	const [favouriteData, setfavouriteData] = useState<FavouriteType>(favInit);
+	const [savedQuote, setSavedQuote] = useState<RecommendationType['quote']>([]);
 
 	const getFavourites = async () => {
 		if (user) {
@@ -92,12 +93,15 @@ const App = () => {
 							setIsLoggedIn={setIsLoggedIn}
 							/>}
 					/>
-					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile" element={<Profile savedQuote={savedQuote}/>} />
 					<Route
 						path="/recommendation/badmood"
 						element={<Recommendation 
 							recomData={recomData} 
-							favouriteData={favouriteData}/>}
+							favouriteData={favouriteData}
+							setSavedQuote={setSavedQuote}
+							savedQuote={savedQuote}
+							/>}
 					/>
 					<Route path="/recommendation/goodmood" element={<GoodMood />} />
 					<Route

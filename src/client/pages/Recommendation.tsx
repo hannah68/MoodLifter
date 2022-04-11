@@ -9,21 +9,29 @@ import DiaryForm from "../components/DiaryForm";
 import { iconStyle, iconStyleSize } from "../utils/utils";
 
 import { RecommendationType, FavouriteType } from "../interfaces";
+import { Quote} from '../../server/config/interfaces';
 
 import "../styles/recommendation.css";
 
 export interface IRecommendationProps {
 	recomData: RecommendationType[];
 	favouriteData: FavouriteType;
+	setSavedQuote: (target: RecommendationType['quote']) => void;
+	savedQuote: RecommendationType['quote'];
 }
 
 const Recommendation = (props: IRecommendationProps) => {
-	const { recomData, favouriteData } = props;
+	const { recomData, favouriteData, setSavedQuote, savedQuote} = props;
 	const [article, video, advice, quote] = recomData;
 
 	const typeOfFeeling = quote.quote.map((qt) => {
 		return qt.quoteType;
 	});
+
+	const savedQuoteHandler = (quote: Quote) => {
+		let singleQuote: Quote = quote;
+		setSavedQuote([...savedQuote, singleQuote]);
+	}
 
 	return (
 		<div className="recom-page">
@@ -32,7 +40,7 @@ const Recommendation = (props: IRecommendationProps) => {
 					<div className="quote-container" key={index}>
 						<div className="quote-title">
 							<h3>“{qt.text}”</h3>
-							<AiOutlineHeart style={iconStyleSize} />
+							<span onClick={() => savedQuoteHandler(qt)}><AiOutlineHeart style={iconStyleSize} /></span>
 						</div>
 
 						<p className="quote-author">— {qt.author}</p>

@@ -1,18 +1,27 @@
 import '../styles/profile.css';
 import {BsFillChatRightQuoteFill, BsFillJournalBookmarkFill} from 'react-icons/bs'
 import {GoDeviceCameraVideo} from 'react-icons/go'
-import {FaBook} from 'react-icons/fa'
+import {FaBook} from 'react-icons/fa';
 
-export interface IProfileProps {}
+import { RecommendationType } from "../interfaces";
 
-const Profile = () => {
+export interface IProfileProps {
+  savedQuote: RecommendationType['quote'];
+}
+
+const Profile = (props: IProfileProps) => {
+  const {savedQuote} = props;
+  console.log(savedQuote);
 	return (
 		<div className="profile-page">
       <div className="quote-save-container">
         <h2>My Favourite quotes</h2>
         <ul className='quote-list'>
-          <li><span><BsFillChatRightQuoteFill/></span>Life is a circle of happiness, sadness, hard times, and good times. If you are going through hard times, have faith that good times are on the way.</li>
-          <li><span><BsFillChatRightQuoteFill/></span>The more powerful and original a mind, the more it will incline towards the religion of solitude.</li>
+          {savedQuote.map((quote, index: number) => {
+            return(
+              <li key={index}><span><BsFillChatRightQuoteFill/></span>{quote.text}</li>
+            )
+          })}
         </ul>
       </div>
 			<div className="read-container">
