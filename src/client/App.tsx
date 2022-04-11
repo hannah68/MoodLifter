@@ -56,18 +56,18 @@ const App = () => {
 			const id = localStorage.getItem("userId");
 			const auth = localStorage.getItem("token") as string;
 
-			// const fetchUser = async () => {
-			// 	const UserResponse = await fetch(`${USER_URL.USER_ROOT}${id}`, {
-			// 		method: "GET",
-			// 		headers: {
-			// 			Authorization: auth,
-			// 		},
-			// 	});
+			const fetchUser = async () => {
+				const UserResponse = await fetch(`${USER_URL.USER_ROOT}${id}`, {
+					method: "GET",
+					headers: {
+						Authorization: auth,
+					},
+				});
 
-			// 	const userData = await UserResponse.json();
-			// 	setUser(userData.data);
-			// };
-			// fetchUser();
+				const userData = await UserResponse.json();
+				setUser(userData.data);
+			};
+			fetchUser();
 		}
 	}, [isLoggedIn]);
 
