@@ -18,7 +18,11 @@ import {
 	RegisteredUserType,
 	RecommendationType,
 	FavouriteType,
+	FavUserQuote,
+	FavUserArticle,
+	FavUserVideo,
 } from "./interfaces";
+
 
 let recomInit: RecommendationType[] = [];
 let favInit: FavouriteType = {
@@ -30,6 +34,10 @@ let favInit: FavouriteType = {
 	passion: "string",
 };
 
+let initQuote: FavUserQuote[] = [];
+let initArticle: FavUserArticle[] = [];
+let initVideo: FavUserVideo[] = [];
+
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [user, setUser] = useState<RegisteredUserType["data"]>(null);
@@ -40,7 +48,8 @@ const App = () => {
 		RecommendationType["article"]
 	>([]);
 	const [savedVideo, setSavedVideo] = useState<RecommendationType["video"]>([]);
-	const [diaries, setDiaries] = useState<RecommendationType["diary"]>([]);
+
+	
 
 	const getFavourites = async () => {
 		if (user) {
@@ -52,6 +61,69 @@ const App = () => {
 			return favData.data;
 		}
 	};
+
+	console.log(savedQuote)
+	// useEffect(() => {
+	// 	if (savedQuote && user) {
+			
+	// 		const postQuoteToDB = async () => {
+	// 			for (let i: number = 0; i < savedQuote.length; i++) {
+	// 				const quoteRes = await fetch(
+	// 					"http://localhost:4000/user/profile/favouriteQuote",
+	// 					{
+	// 						method: "POST",
+	// 						headers: {
+	// 							"Content-Type": "application/json",
+	// 						},
+	// 						body: JSON.stringify({...savedQuote[i], userId: user.id}),
+	// 					}
+	// 				);
+	// 				const quoteData = await quoteRes.json();
+					
+	// 			}
+	// 		};
+	// 		postQuoteToDB()
+	// 	}
+	// 	if(savedArticle && user){
+			
+	// 		const postArticleToDB = async () => {
+	// 			for (let i: number = 0; i < savedArticle.length; i++) {
+	// 				const articleRes = await fetch(
+	// 					"http://localhost:4000/user/profile/favouriteArticle",
+	// 					{
+	// 						method: "POST",
+	// 						headers: {
+	// 							"Content-Type": "application/json",
+	// 						},
+	// 						body: JSON.stringify({...savedArticle[i], userId: user.id}),
+	// 					}
+	// 				);
+	// 				const articleData = await articleRes.json();
+					
+	// 			}
+	// 		};
+	// 		postArticleToDB()
+	// 	}
+	// 	if(savedVideo && user){
+	// 		const postVideoToDB = async () => {
+	// 			for (let i: number = 0; i < savedVideo.length; i++) {
+	// 				const videoRes = await fetch(
+	// 					"http://localhost:4000/user/profile/favouriteVideo",
+	// 					{
+	// 						method: "POST",
+	// 						headers: {
+	// 							"Content-Type": "application/json",
+	// 						},
+	// 						body: JSON.stringify({...savedVideo[i], userId: user.id}),
+	// 					}
+	// 				);
+	// 				const videoData = await videoRes.json();
+					
+	// 			}
+	// 		};
+	// 		postVideoToDB();
+	// 	}
+	// }, [savedQuote, user, savedArticle, savedVideo]);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -105,19 +177,15 @@ const App = () => {
 							/>
 						}
 					/>
-					<Route
-						path="/journal"
-						element={
-							<Journal setDiaries={setDiaries} diaries={diaries} user={user} />
-						}
-					/>
+					<Route path="/journal" element={<Journal user={user} />} />
 					<Route
 						path="/profile"
 						element={
 							<Profile
-								savedQuote={savedQuote}
-								savedArticle={savedArticle}
-								savedVideo={savedVideo}
+							user={user}
+								// savedQuote={savedQuote}
+								// savedArticle={savedArticle}
+								// savedVideo={savedVideo}
 							/>
 						}
 					/>
@@ -133,6 +201,7 @@ const App = () => {
 								savedArticle={savedArticle}
 								setSavedVideo={setSavedVideo}
 								savedVideo={savedVideo}
+								user={user}
 							/>
 						}
 					/>

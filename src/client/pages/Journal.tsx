@@ -1,31 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import {MdDeleteForever} from 'react-icons/md';
-import DiaryForm from "../components/DiaryForm";
+import JournalForm from "../components/JournalForm";
 
 import '../styles/recommendation.css';
 
 import { Diary } from "../../server/config/interfaces";
 
+import { USER_URL } from "../utils/config";
+
 import { RegisteredUserType, RecommendationType } from "../interfaces";
 
 export interface IJournal {
 	user: RegisteredUserType["data"];
-	diaries: RecommendationType["diary"];
-	setDiaries: (target: RecommendationType["diary"]) => void;
 }
 
 const Journal = (props: IJournal) => {
-	const { user, diaries, setDiaries } = props;
+	const { user } = props;
 	const [diary, setDiary] = useState<Diary>({
 		text: "",
 	});
+
+	const [diaries, setDiaries] = useState<RecommendationType["diary"]>([]);
+
+	useEffect(() => {
+		
+		if(user){
+			const fetchUserDiaries = async() => {
+				const userDiariesResponse = await fetch(`${USER_URL.USER_ROOT}${user.id}/diary`)
+				const userDiariesData = await userDiariesResponse.json();
+				setDiaries(userDiariesData.data);
+			}
+			fetchUserDiaries()
+		}
+		
+		
+	}, [user]);
+	
+
+	
 
 	return (
 		<div className="diary-save-container">
 			<div className="diary-container">
 				<h3>Did you know journaling can improve your mood ? </h3>
-				<DiaryForm
+				<JournalForm
 					setDiary={setDiary}
 					diary={diary}
 					user={user}

@@ -4,11 +4,11 @@ import { AiFillVideoCamera } from "react-icons/ai";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaHandPointRight } from "react-icons/fa";
 
-import DiaryForm from "../components/DiaryForm";
+import JournalForm from "../components/JournalForm";
 
 import { iconStyle, iconStyleSize, uniqueArrHandler } from "../utils/utils";
 
-import { RecommendationType, FavouriteType } from "../interfaces";
+import { RecommendationType, FavouriteType, RegisteredUserType } from "../interfaces";
 import { Quote, Article, Video } from "../../server/config/interfaces";
 
 import "../styles/recommendation.css";
@@ -22,6 +22,7 @@ export interface IRecommendationProps {
 	setSavedArticle: (target: RecommendationType["article"]) => void;
 	savedVideo: RecommendationType["video"];
 	setSavedVideo: (target: RecommendationType["video"]) => void;
+	user: RegisteredUserType["data"]
 }
 
 const Recommendation = (props: IRecommendationProps) => {
@@ -34,19 +35,22 @@ const Recommendation = (props: IRecommendationProps) => {
 		setSavedArticle,
 		savedVideo,
 		setSavedVideo,
+		user
 	} = props;
 
 	const [article, video, advice, quote] = recomData;
 
 	// const [fillHeartIcon, setFillHeartIcon] = useState(false);
 
-	const typeOfFeeling = quote.quote.map((qt) => {
-		return qt.quoteType;
-	});
+	// const typeOfFeeling = quote.quote.map((qt) => {
+	// 	return qt.quoteType;
+	// });
 
-	const savedQuoteHandler = (quote: Quote) => {
-		setSavedQuote([...savedQuote, quote]);
-		// setFillHeartIcon(true);
+	const savedQuoteHandler = async (quote: Quote) => {
+		const cleanedArr = uniqueArrHandler([...savedQuote, quote]);
+		console.log('cleaned arr', cleanedArr);
+		setSavedQuote(cleanedArr);
+		await postQuoteToDB();
 	};
 
 	const savedArticleHandler = (article: Article) => {
@@ -56,6 +60,27 @@ const Recommendation = (props: IRecommendationProps) => {
 	const savedVideoHandler = (video: Video) => {
 		setSavedVideo([...savedVideo, video]);
 	};
+
+	const postQuoteToDB = async () => {
+		if(user){
+			for (let i: number = 0; i < savedQuote.length; i++) {
+				const quoteRes = await fetch(
+					"http://localhost:4000/user/profile/favouriteQuote",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({...savedQuote[i], userId: user.id}),
+					}
+				);
+				const quoteData = await quoteRes.json();
+				console.log(quoteData);
+			}
+		}
+		
+	};
+	
 
 	return (
 		<div className="recom-page">
@@ -76,8 +101,8 @@ const Recommendation = (props: IRecommendationProps) => {
 			})}
 
 			<h3 className="subtitle">
-				Sorry that you feel
-				<span className="recom-sub">{typeOfFeeling[0]}</span>
+				Sorry that you feel {" "}
+				{/* <span className="recom-sub">{typeOfFeeling[0]}</span> */}
 			</h3>
 			<p>There are some tips that can help you to feel better</p>
 
