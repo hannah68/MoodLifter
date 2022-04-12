@@ -1,7 +1,14 @@
 import { prisma } from "../utils/prisma";
 import { Request, Response } from "express";
 
-import { HTTP_RESPONSE } from "../utils/config";
+import {
+	HTTP_RESPONSE,
+	NUMBER_OF_USERS_AND_PROFILES_TO_GENERATE,
+} from "../utils/config";
+
+import {generateRandomNum} from '../utils/utils';
+
+import { fakeProfile, fakeUsers } from "../utils/faker";
 
 import { moods } from "../data/feeling";
 import { articles } from "../data/article";
@@ -29,6 +36,8 @@ const seedArticle = async (): Promise<void> => {
 
 		const feelingObj = await getFeeling(articles[i].articleType);
 
+		// const num = await generateRandomNum(NUMBER_OF_USERS_AND_PROFILES_TO_GENERATE);
+
 		if (feelingObj) {
 			const generatedArticle = await prisma.article.create({
 				data: {
@@ -51,6 +60,8 @@ const seedVideos = async (): Promise<void> => {
 
 		const feelingObj = await getFeeling(videos[i].videoType);
 
+		// const num = await generateRandomNum(NUMBER_OF_USERS_AND_PROFILES_TO_GENERATE);
+
 		if (feelingObj) {
 			const generatedVideos = await prisma.video.create({
 				data: {
@@ -72,6 +83,8 @@ const seedQuotes = async (): Promise<void> => {
 		const { text, author, quoteType } = quotes[i];
 
 		const feelingObj = await getFeeling(quotes[i].quoteType);
+
+		// const num = await generateRandomNum(NUMBER_OF_USERS_AND_PROFILES_TO_GENERATE);
 
 		if (feelingObj) {
 			const generatedQuotes = await prisma.quote.create({
@@ -107,6 +120,39 @@ const seedAdvice = async (): Promise<void> => {
 	}
 };
 
+// seed users================================
+const seedUsers = async (): Promise<void> => {
+	for (let i: number = 0; i < NUMBER_OF_USERS_AND_PROFILES_TO_GENERATE; i++) {
+		const fakeUserGenerated = fakeUsers();
+
+		const generatedUser = await prisma.user.create({
+			data: {
+				...fakeUserGenerated,
+			},
+		});
+
+		console.log("Created User:", generatedUser);
+
+		// if (!generatedUser) {
+		//     return res.status(500).json({ error: SERVER_ERROR_MESSAGE.INTERNAL_SERVER });
+		// }
+
+		const fakedProfileGenerated = fakeProfile(generatedUser.id);
+
+		const generatedProfile = await prisma.profile.create({
+			data: {
+				...fakedProfileGenerated,
+			},
+		});
+
+		console.log("Created Profile:", generatedProfile);
+
+		// if (!generatedProfile) {
+		//     return res.status(SERVER_ERROR.INTERNAL.CODE).json({ error: SERVER_ERROR.INTERNAL.MESSAGE });
+		// }
+	}
+};
+
 // get feeling================================
 const getFeeling = async (quoteType: string) => {
 	const feeling = await prisma.feeling.findFirst({
@@ -119,10 +165,11 @@ const getFeeling = async (quoteType: string) => {
 
 // seed Database===============================
 export const seedMoodDatabase = async (req: Request, res: Response) => {
+	await seedUsers();
 	await seedFeeling();
+	await seedAdvice();
 	await seedArticle();
 	await seedVideos();
 	await seedQuotes();
-	await seedAdvice();
 	res.status(HTTP_RESPONSE.OK.CODE).json("Database seeded successfully");
 };
