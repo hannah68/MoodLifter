@@ -14,10 +14,23 @@ model User {
     updatedAt       DateTime  @updatedAt
     username        String    @unique
     email           String
-    password        String    
+    password        String  
+    profile         Profile?
     diaries         Diary[]
     feelings        FeelingOnUser[]
     favourite       Favourite?
+    favUserQuotes    FavQuoteOnUser[]
+    favUserArticles  FavArticleOnUser[]
+    favUserVideos    FavVideoOnUser[]
+}
+
+model Profile {
+    id             Int      @id @default(autoincrement())
+    profilePicture String?
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+    user           User     @relation(fields: [userId], references: [id])
+    userId         Int      @unique
 }
 
 model Favourite {
@@ -42,7 +55,6 @@ model Diary {
     user        User      @relation(fields: [userId], references: [id])
     userId      Int
 }
-
 
 model Feeling {
     id          Int       @id @default(autoincrement())
@@ -76,8 +88,6 @@ model Article {
     feelingId   Int
 }
 
-
-
 model Video {
     id          Int       @id @default(autoincrement())
     createdAt   DateTime  @default(now())
@@ -90,8 +100,6 @@ model Video {
     feelingId   Int
 }
 
-
-
 model Advice {
     id          Int       @id @default(autoincrement())
     createdAt   DateTime  @default(now())
@@ -102,7 +110,6 @@ model Advice {
     feelingId   Int
 }
 
-
 model Quote {
     id          Int       @id @default(autoincrement())
     createdAt   DateTime  @default(now())
@@ -112,4 +119,54 @@ model Quote {
     quoteType   String
     feeling     Feeling   @relation(fields: [feelingId], references: [id])
     feelingId   Int
+}
+
+model FavUserArticle {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    title       String
+    link        String
+    users       FavArticleOnUser[]
+}
+
+model FavUserVideo {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    title       String
+    link        String
+    users        FavVideoOnUser[]
+}
+
+model FavUserQuote {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    text       String
+    users       FavQuoteOnUser[]
+}
+
+model FavQuoteOnUser {
+    id                  Int      @id @default(autoincrement())
+    user                User      @relation(fields: [userId], references: [id])
+    userId              Int
+    favUserQuote        FavUserQuote @relation(fields: [favUserQuoteId], references: [id])
+    favUserQuoteId      Int
+}
+
+model FavArticleOnUser {
+    id                   Int             @id @default(autoincrement())
+    user                 User            @relation(fields: [userId], references: [id])
+    userId               Int
+    favUserArticle       FavUserArticle  @relation(fields: [favUserArticleId], references: [id])
+    favUserArticleId     Int
+}
+
+model FavVideoOnUser {
+    id                    Int           @id @default(autoincrement())
+    user                  User          @relation(fields: [userId], references: [id])
+    userId                Int
+    favUserVideo          FavUserVideo  @relation(fields: [favUserVideoId], references: [id])
+    favUserVideoId        Int
 }
