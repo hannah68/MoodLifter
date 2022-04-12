@@ -36,4 +36,18 @@ export interface FavouriteType {
 	passion: string;
 }
 
+export interface FavUserQuote {
+	title: string,
+}
+
+export interface FavUserArticle {
+	title: string,
+	link: string
+}
+
+export interface FavUserVideo {
+	title: string,
+	link: string
+}
+
 

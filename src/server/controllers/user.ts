@@ -97,7 +97,7 @@ export const createUserDiary = async (req: Request, res: Response) => {
 		}
 	})
 
-	res.status(HTTP_RESPONSE.OK.CODE).json({ data: diary });
+	return res.status(HTTP_RESPONSE.OK.CODE).json({ data: diary });
 }
 
 export const getUserDiary = async(req: Request, res: Response) => {
@@ -118,12 +118,133 @@ export const getUserDiary = async(req: Request, res: Response) => {
 				userId: findUser.id
 			}
 		});
-		res.status(HTTP_RESPONSE.OK.CODE).json({ data: diary });
+		return res.status(HTTP_RESPONSE.OK.CODE).json({ data: diary });
 	}
 
 	// if(!diary){
 
 	// }
-	
-
 }
+
+export const createProfile = async(req: Request, res: Response) => {
+	const userId = Number(req.body.userId);
+
+	let { profilePicture } = req.body;
+
+    if (!profilePicture) {
+        profilePicture = "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png";
+    }
+
+	const createdProfile = await prisma.profile.create({
+		data: {
+			userId: userId,
+			profilePicture: profilePicture,
+		},
+	});
+
+	return res.status(HTTP_RESPONSE.OK.CODE).json({ data: createdProfile });
+}
+
+export const saveQuoteForUser = async (req: Request, res: Response) => {
+	const userId = Number(req.body.userId);
+	const { text, id } = req.body;
+
+	// const findUser = await prisma.favUserQuote.findMany({
+	// 	where: {
+	// 		userId
+	// 	}
+	// });
+
+	// console.log(findSavedQuote);
+
+	// if(!findSavedQuote){
+		const savedQuote = await prisma.favUserQuote.create({
+			data: {
+				text,
+				
+				
+			}
+		})
+	// 	return res.status(HTTP_RESPONSE.OK.CODE).json({ data: savedQuote });
+	// }
+}
+
+
+export const getAllFavQuote = async (req: Request, res: Response) => {
+	const userId = Number(req.params.id);
+
+
+	// const favQuote = await prisma.favUserQuote.findMany({
+	// 	where: {
+	// 		userId
+	// 	}
+	// });
+	// if(!favQuote){
+	// 	return res.status(HTTP_RESPONSE.NOT_FOUND.CODE).json(HTTP_RESPONSE.NOT_FOUND.MESSAGE)
+	// }
+	
+	// return res.status(HTTP_RESPONSE.OK.CODE).json({ data: favQuote });
+}
+
+export const saveArticleForUser = async (req: Request, res: Response) => {
+	const userId = Number(req.body.userId);
+	const { title, link } = req.body;
+
+	// const savedArticle = await prisma.favUserArticle.create({
+	// 	data: {
+	// 		title,
+	// 		link,
+	// 		userId
+	// 	}
+	// })
+	
+	// return res.status(HTTP_RESPONSE.OK.CODE).json({ data: savedArticle });
+}
+
+
+export const getAllFavArticle = async (req: Request, res: Response) => {
+	const userId = Number(req.params.id);
+	// const favArticle = await prisma.favUserArticle.findMany({
+	// 	where: {
+	// 		userId
+	// 	}
+	// });
+	// if(!favArticle){
+	// 	return res.status(HTTP_RESPONSE.NOT_FOUND.CODE).json(HTTP_RESPONSE.NOT_FOUND.MESSAGE)
+	// }
+	// console.log(favArticle);
+	// res.status(HTTP_RESPONSE.OK.CODE).json({ data: favArticle });
+}
+
+export const saveVideoForUser = async (req: Request, res: Response) => {
+	const userId = Number(req.body.userId);
+	const { title, link } = req.body;
+
+	// const savedVideo = await prisma.favUserVideo.create({
+	// 	data: {
+	// 		title,
+	// 		link,
+	// 		userId
+	// 	}
+	// })
+	// res.status(HTTP_RESPONSE.OK.CODE).json({ data: savedVideo });
+}
+
+
+export const getAllFavVideo = async (req: Request, res: Response) => {
+	const userId = Number(req.params.id);
+
+	// const favVideo = await prisma.favUserVideo.findMany({
+	// 	where: {
+	// 		userId
+	// 	}
+	// });
+
+	// if(!favVideo){
+	// 	return res.status(HTTP_RESPONSE.NOT_FOUND.CODE).json(HTTP_RESPONSE.NOT_FOUND.MESSAGE)
+	// }
+	// console.log(favVideo);
+	// res.status(HTTP_RESPONSE.OK.CODE).json({ data: favVideo });
+}
+
+

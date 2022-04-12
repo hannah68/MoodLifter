@@ -13,7 +13,10 @@ const Home = (props: IHomeProps) => {
 		<div className="home-page">
 			<h1>Get in tune with your <span className="home-title">emotions</span> &</h1>
 			<h2>keep track of your mood with <span className="home-title">MoodLifter</span></h2>
-			<Link to={isLoggedIn ? '/feeling' : '/signup'}>
+			{/* <Link to={isLoggedIn ? '/feeling' : '/signup'}>
+				<button className="home-btn">Start</button>
+			</Link> */}
+			<Link to='/signup'>
 				<button className="home-btn">Start</button>
 			</Link>
 		</div>
@@ -21,4 +24,6 @@ const Home = (props: IHomeProps) => {
 };
 
 export default Home;
+
+
 
