@@ -44,7 +44,7 @@
     ]
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.1.1",
+    "@faker-js/faker": "^6.1.2",
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/jsonwebtoken": "^8.5.8",

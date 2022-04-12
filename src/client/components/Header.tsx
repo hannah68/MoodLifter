@@ -67,7 +67,7 @@ const Header = (props: IHeaderProps) => {
 							</li>
 							<li>
 								<Link to="/journal" className="navbar-link">
-									my Diary
+									my Journal
 								</Link>
 							</li>
 							<li onClick={handleClick}>

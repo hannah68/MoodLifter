@@ -13,3 +13,15 @@ export const fakeUsers = () => {
     
     return initUsers;
 }
+
+
+export const fakeProfile = (userId: number) => {
+    const fakedProfilePicture = faker.image.avatar();
+
+    const fakedProfile = {
+        userId: userId,
+        profilePicture: fakedProfilePicture,
+    }
+
+    return fakedProfile;
+}
