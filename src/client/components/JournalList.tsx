@@ -4,6 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { Diary } from "../../server/interface/interfaces";
 
 import { RecommendationType } from "../interface/interfaces";
+
 import { USER_URL } from "../utils/config";
 
 // Journal list props interface===============================
@@ -21,12 +22,9 @@ const JournalList = (props: IJournalList) => {
 	const deleteJournalHandler = async (diary: any) => {
 		const journalId = diary.id;
 
-		const journalRes = await fetch(
-			`${USER_URL.JOURNAL}${journalId}`,
-			{
-				method: "DELETE",
-			}
-		);
+		const journalRes = await fetch(`${USER_URL.JOURNAL}${journalId}`, {
+			method: "DELETE",
+		});
 		const journalData = await journalRes.json();
 
 		const newList = diaries.filter((diary) => {

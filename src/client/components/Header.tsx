@@ -1,36 +1,41 @@
-import { Link, useNavigate  } from "react-router-dom";
-import {capitaliseFirstLetter} from '../utils/utils';
+import { Link, useNavigate } from "react-router-dom";
 
 import "../styles/header.css";
 
-import {RegisteredUserType} from '../interface/interfaces';
+import { RegisteredUserType } from "../interface/interfaces";
+
+import { capitaliseFirstLetter } from "../utils/utils";
 
 import { PAGE_LINK } from "../utils/config";
 
+// Header props interface=============================
 export interface IHeaderProps {
-	user: RegisteredUserType['data'];
-	setUser: (target: RegisteredUserType['data']) => void;
+	user: RegisteredUserType["data"];
+	setUser: (target: RegisteredUserType["data"]) => void;
 	isLoggedIn: boolean;
 	setIsLoggedIn: (target: boolean) => void;
 }
 
+// Header component===================================
 const Header = (props: IHeaderProps) => {
-	const {setIsLoggedIn, setUser, user, isLoggedIn} = props;
+	const { setIsLoggedIn, setUser, user, isLoggedIn } = props;
 	const navigate = useNavigate();
 
+	// handle click===================================
 	const handleClick = () => {
-		localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        setIsLoggedIn(false);
-        setUser(null);
-        navigate(PAGE_LINK.HOME);
-	}
+		localStorage.removeItem("token");
+		localStorage.removeItem("userId");
+		setIsLoggedIn(false);
+		setUser(null);
+		navigate(PAGE_LINK.HOME);
+	};
 
+	// format username================================
 	const formatUserName = (user: any) => {
-        let username = user.username;
-        username = username.toLowerCase();
-        return capitaliseFirstLetter(username);
-    };
+		let username = user.username;
+		username = username.toLowerCase();
+		return capitaliseFirstLetter(username);
+	};
 
 	return (
 		<header>
@@ -64,7 +69,10 @@ const Header = (props: IHeaderProps) => {
 						<>
 							<li>
 								<Link to={PAGE_LINK.PROFILE} className="navbar-link">
-									Hi <span className="user-name">{formatUserName(props.user)}</span>
+									Hi{" "}
+									<span className="user-name">
+										{formatUserName(props.user)}
+									</span>
 								</Link>
 							</li>
 							<li>

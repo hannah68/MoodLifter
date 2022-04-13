@@ -5,7 +5,10 @@ import "../styles/journal.css";
 import JournalForm from "../components/JournalForm";
 import JournalList from "../components/JournalList";
 
-import { RegisteredUserType, RecommendationType } from "../interface/interfaces";
+import {
+	RegisteredUserType,
+	RecommendationType,
+} from "../interface/interfaces";
 
 import { Diary } from "../../server/interface/interfaces";
 

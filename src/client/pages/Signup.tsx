@@ -11,11 +11,13 @@ import { PAGE_LINK, USER_URL } from "../utils/config";
 
 import { UserSignup, RegisteredUserType } from "../interface/interfaces";
 
+// signup props interface==========================
 export interface ISignupProps {
 	setUser: (target: RegisteredUserType["data"] | null) => void;
 	setIsLoggedIn: (target: boolean) => void;
 }
 
+// Signup componenet================================
 const Signup = (props: ISignupProps) => {
 	const { setUser, setIsLoggedIn } = props;
 	const [submit, setsubmit] = useState(false);
@@ -27,6 +29,7 @@ const Signup = (props: ISignupProps) => {
 
 	const navigate = useNavigate();
 
+	// post user data to DB==========================
 	useEffect(() => {
 		if (submit) {
 			const postUserInfoToDB = async () => {

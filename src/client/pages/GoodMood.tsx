@@ -4,12 +4,14 @@ import "../styles/goodmood.css";
 
 import { EXTERNAL_API } from "../utils/config";
 
+// Goodmood component==================================
 const GoodMood = () => {
 	const [quote, setQuote] = useState("");
 
+	// fetch quote from external api====================
 	useEffect(() => {
 		const fetchQuoteFromApi = async () => {
-			const quoteRes = await fetch(EXTERNAL_API );
+			const quoteRes = await fetch(EXTERNAL_API);
 			const quoteData = await quoteRes.json();
 			setQuote(quoteData.slip.advice);
 		};

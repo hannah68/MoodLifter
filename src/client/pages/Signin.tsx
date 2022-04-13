@@ -9,11 +9,12 @@ import { PAGE_LINK, USER_URL } from "../utils/config";
 
 import { UserSignin } from "../interface/interfaces";
 
-
+// Signin props interface========================
 export interface ISigninProps {
 	setIsLoggedIn: (target: boolean) => void;
 }
 
+// signin component=============================
 const Signin = (props: ISigninProps) => {
 	const { setIsLoggedIn } = props;
 	const [submit, setsubmit] = useState(false);
@@ -37,7 +38,7 @@ const Signin = (props: ISigninProps) => {
 				});
 				const userData = await userRes.json();
 
-				localStorage.setItem('token', userData.token);
+				localStorage.setItem("token", userData.token);
 				if (userData.data) {
 					localStorage.setItem("userId", userData.data.id.toString());
 					setIsLoggedIn(true);
