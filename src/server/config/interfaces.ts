@@ -28,19 +28,18 @@ export interface Advice {
 }
 export interface Diary {
 	text: string;
+	id: number | null;
 }
 
 export interface User {
 	username: string;
 	email: string;
 	password: string;
-	id: number
+	id: number;
 }
 
 export interface UserWithoutPass {
-	username: string, 
-	email: string,
-	id: number
+	username: string;
+	email: string;
+	id: number;
 }
-
-

@@ -66,7 +66,7 @@ export const loginUser = async(req: Request, res: Response) => {
 }
 
 // get user by id ========================================
-export const getUserById = async (req: Request<{ id: number}>, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
 	const id = Number(req.params.id)
 
 	const user = await prisma.user.findUnique({
@@ -123,7 +123,7 @@ export const createUserJournal = async (req: Request, res: Response) => {
 }
 
 // get user Journals==================================
-export const getUserJournal = async(req: Request, res: Response) => {
+export const getAllUserJournals = async(req: Request, res: Response) => {
 	const id = Number(req.params.id)
 
 	const findUser = await prisma.user.findUnique({
@@ -152,6 +152,13 @@ export const getUserJournal = async(req: Request, res: Response) => {
 // delete user journal ===================================
 export const deleteUserJournal = async (req: Request, res: Response) => {
 	const journalId = Number(req.params.journalId);
+	// const userId = Number(req.params.userId);
+
+	// const findAllUserJournals = await prisma.diary.findMany({
+	// 	where: {
+	// 		userId
+	// 	}
+	// });
 
 	const journal = await prisma.diary.delete({
 		where: {

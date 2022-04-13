@@ -1,20 +1,29 @@
-import { RegisteredUserType } from "../interfaces";
-import { Diary } from "../../server/config/interfaces";
 import { ChangeEvent, FormEvent } from "react";
 
-interface IJournalProps {
+import { RegisteredUserType } from "../interfaces";
+
+import { Diary } from "../../server/config/interfaces";
+
+import "../styles/journal.css";
+
+// props interface========================================
+interface IJournalFormProps {
 	setDiary: (target: Diary) => void;
 	diary: Diary;
 	user: RegisteredUserType["data"];
 }
 
-const JournalForm = (props: IJournalProps) => {
-	const { setDiary, diary, user} = props;
+// journal form component==================================
+const JournalForm = (props: IJournalFormProps) => {
+	const { setDiary, diary, user } = props;
 
+	// change diary input handler=========================
 	const diaryChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>): void => {
-		setDiary({ text: e.target.value });
+		const { name, value } = e.target;
+		setDiary({ ...diary, [name]: value });
 	};
 
+	// post diary to db====================================
 	const postDiaryToDB = async () => {
 		if (user) {
 			const diaryRes = await fetch("http://localhost:4000/user/journal", {
@@ -25,15 +34,17 @@ const JournalForm = (props: IJournalProps) => {
 				body: JSON.stringify({ ...diary, userId: Number(user.id) }),
 			});
 			const diaryData = await diaryRes.json();
-			return diaryData.data
+			return diaryData.data;
 		}
 		return;
 	};
 
+	// submit diary form ==================================
 	const submitDiaryHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		await postDiaryToDB();
-		setDiary({ text: "" });
+		setDiary({ ...diary, text: "" });
+		window.location.reload();
 	};
 
 	return (
