@@ -4,8 +4,6 @@ import { AiFillVideoCamera } from "react-icons/ai";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaHandPointRight } from "react-icons/fa";
 
-import DiaryForm from "../components/DiaryForm";
-
 import { iconStyle, iconStyleSize } from "../utils/utils";
 
 import { RecommendationType, FavouriteType } from "../interfaces";
@@ -93,11 +91,6 @@ const Recommendation = (props: IRecommendationProps) => {
 					<span className="fav-res">{favouriteData.accomplishment}</span>
 				</li>
 			</ul>
-
-			<div className="diary-container">
-				<h3>Did you know journaling can improve your mood ? </h3>
-				<DiaryForm />
-			</div>
 
 			<h3 className="content-container">
 				Still not feeling good? checkout our articles and videos.

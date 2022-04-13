@@ -10,6 +10,7 @@ import GoodMood from "./pages/GoodMood";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
+import Journal from "./pages/Journal";
 
 import { USER_URL } from "./utils/config";
 
@@ -93,6 +94,7 @@ const App = () => {
 							/>}
 					/>
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/journal" element={<Journal user={user} />} />
 					<Route
 						path="/recommendation/badmood"
 						element={<Recommendation 
