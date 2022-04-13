@@ -1,4 +1,4 @@
-import { Article, Video, Advice, Quote, Diary } from "../server/config/interfaces";
+import { Article, Video, Advice, Quote, Diary } from "../../server/interface/interfaces";
 
 export interface UserSignup {
 	username: string;

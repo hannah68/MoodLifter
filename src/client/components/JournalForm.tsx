@@ -1,8 +1,10 @@
 import { ChangeEvent, FormEvent } from "react";
 
-import { RegisteredUserType } from "../interfaces";
+import { RegisteredUserType } from "../interface/interfaces";
 
-import { Diary } from "../../server/config/interfaces";
+import { Diary } from "../../server/interface/interfaces";
+
+import { USER_URL } from "../utils/config";
 
 import "../styles/journal.css";
 
@@ -26,7 +28,7 @@ const JournalForm = (props: IJournalFormProps) => {
 	// post diary to db====================================
 	const postDiaryToDB = async () => {
 		if (user) {
-			const diaryRes = await fetch("http://localhost:4000/user/journal", {
+			const diaryRes = await fetch(`${USER_URL.JOURNAL}`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

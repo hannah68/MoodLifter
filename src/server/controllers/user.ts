@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 import { hashedPassword, createToken, checkPassword } from "../utils/auth";
 
-import { User , UserWithoutPass } from "../config/interfaces";
+import { User , UserWithoutPass } from "../interface/interfaces";
 
 import {HTTP_RESPONSE} from '../utils/config';
 

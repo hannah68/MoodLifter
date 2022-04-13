@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 import "../styles/signup.css";
 
-import { USER_URL } from "../utils/config";
+import { PAGE_LINK, USER_URL } from "../utils/config";
 
-import { UserSignin } from "../interfaces";
+import { UserSignin } from "../interface/interfaces";
 
 
 export interface ISigninProps {
@@ -41,7 +41,7 @@ const Signin = (props: ISigninProps) => {
 				if (userData.data) {
 					localStorage.setItem("userId", userData.data.id.toString());
 					setIsLoggedIn(true);
-					navigate("/feeling");
+					navigate(PAGE_LINK.FELLING);
 				}
 			};
 			postUserLoginToDB();

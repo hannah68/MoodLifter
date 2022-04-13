@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import {FEELING_URL, PAGE_LINK} from '../utils/config';
+
 interface AnswersType {
 	favPerson: string;
 	favPlace: string;
@@ -25,7 +27,7 @@ const FavouriteQuestions = () => {
 	const postAnswersToDB = async () => {
 		const id =  Number(localStorage.getItem('userId'));
 
-		const res = await fetch("http://localhost:4000/feeling/favourite", {
+		const res = await fetch(`${FEELING_URL.FAVOURITE_ROOT}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -41,7 +43,7 @@ const FavouriteQuestions = () => {
 	const submitQuestionHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		await postAnswersToDB();
-		navigate("/signin");
+		navigate(PAGE_LINK.LOGIN);
 	};
 
 	const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {

@@ -1,9 +1,10 @@
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 
-import { Diary } from "../../server/config/interfaces";
+import { Diary } from "../../server/interface/interfaces";
 
-import { RecommendationType } from "../interfaces";
+import { RecommendationType } from "../interface/interfaces";
+import { USER_URL } from "../utils/config";
 
 // Journal list props interface===============================
 export interface IJournalList {
@@ -21,7 +22,7 @@ const JournalList = (props: IJournalList) => {
 		const journalId = diary.id;
 
 		const journalRes = await fetch(
-			`http://localhost:4000/user/journal/${journalId}`,
+			`${USER_URL.JOURNAL}${journalId}`,
 			{
 				method: "DELETE",
 			}

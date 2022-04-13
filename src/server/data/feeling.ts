@@ -1,4 +1,4 @@
-import { Feeling } from "../config/interfaces";
+import { Feeling } from "../interface/interfaces";
 
 export const moods: Array<Feeling> = [
 	{ name: "Confused" },

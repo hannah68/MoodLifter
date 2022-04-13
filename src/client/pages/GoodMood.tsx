@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 
 import "../styles/goodmood.css";
 
+import { EXTERNAL_API } from "../utils/config";
+
 const GoodMood = () => {
 	const [quote, setQuote] = useState("");
 
 	useEffect(() => {
 		const fetchQuoteFromApi = async () => {
-			const quoteRes = await fetch("https://api.adviceslip.com/advice");
+			const quoteRes = await fetch(EXTERNAL_API );
 			const quoteData = await quoteRes.json();
 			setQuote(quoteData.slip.advice);
 		};

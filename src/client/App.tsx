@@ -12,9 +12,9 @@ import Signup from "./pages/Signup";
 import Header from "./components/Header";
 import Journal from "./pages/Journal";
 
-import { USER_URL } from "./utils/config";
+import { USER_URL, PAGE_LINK, FEELING_URL } from "./utils/config";
 
-import { RegisteredUserType, RecommendationType, FavouriteType} from "./interfaces";
+import { RegisteredUserType, RecommendationType, FavouriteType} from "./interface/interfaces";
 
 let recomInit: RecommendationType[] = [];
 let favInit: FavouriteType = {
@@ -41,7 +41,7 @@ const App = () => {
 		if (user) {
 			const id = user.id;
 			const favRes = await fetch(
-				`http://localhost:4000/feeling/favourite/${id}`
+				`${FEELING_URL.FAVOURITE_ROOT}${id}`
 			);
 			const favData = await favRes.json();
 			return favData.data;
@@ -87,10 +87,10 @@ const App = () => {
 			/>
 			<div className="app">
 				<Routes>
-					<Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
-					<Route path="/favourite" element={<Favourite />} />
+					<Route path={PAGE_LINK.HOME} element={<Home isLoggedIn={isLoggedIn}/>} />
+					<Route path={PAGE_LINK.FAVOURITE} element={<Favourite />} />
 					<Route
-						path="/feeling"
+						path={PAGE_LINK.FELLING}
 						element={<Feeling 
 							setRecomData={setRecomData} 
 							setfavouriteData={setfavouriteData}
@@ -98,10 +98,10 @@ const App = () => {
 							setIsLoggedIn={setIsLoggedIn}
 							/>}
 					/>
-					<Route path="/profile" element={<Profile savedQuote={savedQuote} savedArticle={savedArticle} savedVideo={savedVideo}/>} />
-					<Route path="/journal" element={<Journal user={user} />} />
+					<Route path={PAGE_LINK.PROFILE} element={<Profile savedQuote={savedQuote} savedArticle={savedArticle} savedVideo={savedVideo}/>} />
+					<Route path={PAGE_LINK.JOURNAL} element={<Journal user={user} />} />
 					<Route
-						path="/recommendation/badmood"
+						path={PAGE_LINK.RECOMMENDATION_LOW}
 						element={<Recommendation
 							recomData={recomData}
 							favouriteData={favouriteData}
@@ -113,13 +113,13 @@ const App = () => {
 							savedVideo={savedVideo}
 							/>}
 					/>
-					<Route path="/recommendation/goodmood" element={<GoodMood />} />
+					<Route path={PAGE_LINK.RECOMMENDATION_GOOD} element={<GoodMood />} />
 					<Route
-						path="/signin"
+						path={PAGE_LINK.LOGIN}
 						element={<Signin setIsLoggedIn={setIsLoggedIn}/>}
 					/>
 					<Route
-						path="/signup"
+						path={PAGE_LINK.REGISTER}
 						element={<Signup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />}
 					/>
 				</Routes>

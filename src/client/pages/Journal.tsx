@@ -5,9 +5,11 @@ import "../styles/journal.css";
 import JournalForm from "../components/JournalForm";
 import JournalList from "../components/JournalList";
 
-import { RegisteredUserType, RecommendationType } from "../interfaces";
+import { RegisteredUserType, RecommendationType } from "../interface/interfaces";
 
-import { Diary } from "../../server/config/interfaces";
+import { Diary } from "../../server/interface/interfaces";
+
+import { USER_URL } from "../utils/config";
 
 // journal interface====================================
 export interface IJournal {
@@ -30,7 +32,7 @@ const Journal = (props: IJournal) => {
 			// get user's journal
 			const fetchUserDiaries = async () => {
 				const userDiariesResponse = await fetch(
-					`http://localhost:4000/user/${userId}/journal`
+					`${USER_URL.USER_ROOT}${userId}/journal`
 				);
 				const userDiariesData = await userDiariesResponse.json();
 				setDiaries(userDiariesData.data);

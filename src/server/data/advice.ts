@@ -1,4 +1,4 @@
-import { Advice } from "../config/interfaces";
+import { Advice } from "../interface/interfaces";
 
 export const advices: Array<Advice> = [
 	{

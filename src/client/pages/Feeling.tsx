@@ -11,7 +11,9 @@ import { EmojiType } from "../data/emoji";
 import Emoji from "../components/Emoji";
 
 import { existFeelings, todayDate} from "../utils/utils";
-import { FavouriteType, RecommendationType } from "../interfaces";
+import { FavouriteType, RecommendationType } from "../interface/interfaces";
+
+import { PAGE_LINK, RECOMMENDATION } from "../utils/config";
 
 export const FeelingType: string[] = [];
 
@@ -33,10 +35,10 @@ const Feeling = (props: IFeelingProps) => {
 			const checkTypeOfFeeling = existFeelings(feeling);
 
 			if (checkTypeOfFeeling) {
-				navigate("/recommendation/goodmood");
+				navigate(PAGE_LINK.RECOMMENDATION_GOOD);
 			} else {
 				const recomRes = await fetch(
-					`http://localhost:4000/recommendation/badmood/${feeling[0]}`
+					`${RECOMMENDATION.RECOMMENDATION_LOW}${feeling[0]}`
 				);
 				const recomData = await recomRes.json();
 
@@ -55,7 +57,7 @@ const Feeling = (props: IFeelingProps) => {
 			setRecomData(allData);
 			setfavouriteData(favData);
 			setIsLoggedIn(true);
-			navigate("/recommendation/badmood");
+			navigate(PAGE_LINK.RECOMMENDATION_LOW);
 		}
 	};
 

@@ -1,4 +1,4 @@
-import { Article } from "../config/interfaces";
+import { Article } from "../interface/interfaces";
 
 export const articles: Array<Article> = [
 	{

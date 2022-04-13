@@ -1,10 +1,10 @@
 import {Router} from 'express';
 
-import {createFavourite, getFavouriteById} from '../controllers/feeling';
+import {createFavourite, getFavouriteById} from '../controllers/favourite';
 
 const router = Router();
 
-router.get('/favourite/:id', getFavouriteById);
+router.get('/:id', getFavouriteById);
 router.post('/favourite', createFavourite);
 
 

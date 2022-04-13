@@ -1,4 +1,4 @@
-import { Quote } from "../config/interfaces";
+import { Quote } from "../interface/interfaces";
 
 export const quotes: Array<Quote> = [
 	{
