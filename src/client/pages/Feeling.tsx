@@ -61,7 +61,7 @@ const Feeling = (props: IFeelingProps) => {
 
 	return (
 		<form className="feeling-bottom" onSubmit={submitFeelingFormHandler}>
-			<h1>Hi, How are you?</h1>
+			<h1>Hi, Select one emotion that best desribes how you feel?</h1>
 			<p className="feeling-date">
 				<span>
 					<MdDateRange />
@@ -75,7 +75,6 @@ const Feeling = (props: IFeelingProps) => {
 							key={index}
 							emj={emj}
 							setFeeling={setFeeling}
-							feeling={feeling}
 						/>
 					);
 				})}
