@@ -5,18 +5,17 @@ import "../styles/feeling.css";
 
 interface EmojiProps {
 	emj: EmojiType;
-	feeling: Array<string>;
 	setFeeling: (target: Array<string>) => void;
 }
 
 const Emoji = (props: EmojiProps) => {
-    const {emj, feeling, setFeeling} = props;
+    const {emj, setFeeling} = props;
 	const [changeColor, setchangeColor] = useState(false);
 
 	const clickEmojiHandler = (emj: EmojiType) => {
 		const feelingName = emj.label;
-		setFeeling([...feeling, feelingName]);
-		setchangeColor(true);
+		setFeeling([feelingName]);
+		setchangeColor(!changeColor);
 	}
 
 	return (

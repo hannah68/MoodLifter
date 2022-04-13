@@ -1,10 +1,7 @@
-import React from "react";
 import { RiArticleFill } from "react-icons/ri";
 import { AiFillVideoCamera } from "react-icons/ai";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaHandPointRight } from "react-icons/fa";
-
-import DiaryForm from "../components/DiaryForm";
 
 import { iconStyle, iconStyleSize } from "../utils/utils";
 
@@ -12,11 +9,13 @@ import { RecommendationType, FavouriteType } from "../interfaces";
 
 import "../styles/recommendation.css";
 
+// recommendation props interface=======================
 export interface IRecommendationProps {
 	recomData: RecommendationType[];
 	favouriteData: FavouriteType;
 }
 
+// Recommendation component =============================
 const Recommendation = (props: IRecommendationProps) => {
 	const { recomData, favouriteData } = props;
 	const [article, video, advice, quote] = recomData;
@@ -27,6 +26,7 @@ const Recommendation = (props: IRecommendationProps) => {
 
 	return (
 		<div className="recom-page">
+			{/* quote section */}
 			{quote.quote.map((qt, index: number) => {
 				return (
 					<div className="quote-container" key={index}>
@@ -39,13 +39,14 @@ const Recommendation = (props: IRecommendationProps) => {
 					</div>
 				);
 			})}
-
+			{/* subtitle section */}
 			<h3 className="subtitle">
 				Sorry that you feel{" "}
 				<span className="recom-sub">{typeOfFeeling[0]}</span>
 			</h3>
 			<p>There are some tips that can help you to feel better</p>
 
+			{/* Advice section */}
 			<div className="advice-container">
 				<ul className="advice-container-list">
 					{advice.advice.map((ad, index) => {
@@ -66,14 +67,15 @@ const Recommendation = (props: IRecommendationProps) => {
 					})}
 				</ul>
 			</div>
-
+			
+			{/* favourite users answers */}
 			<ul className="fav-container">
 				<li>
 					Do you want to talk to your favourite person?{" "}
 					<span className="fav-res">{favouriteData.favPerson}</span>
 				</li>
 				<li>
-					Why don't you go to ....{" "}
+					Why don't you go to ...
 					<span className="fav-res">{favouriteData.favPlace}</span>
 				</li>
 				<li>
@@ -94,15 +96,11 @@ const Recommendation = (props: IRecommendationProps) => {
 				</li>
 			</ul>
 
-			<div className="diary-container">
-				<h3>Did you know journaling can improve your mood ? </h3>
-				<DiaryForm />
-			</div>
-
 			<h3 className="content-container">
 				Still not feeling good? checkout our articles and videos.
 			</h3>
-
+			
+			{/* article section */}
 			<div className="article-container">
 				<ul className="article-list">
 					{article.article.map((art, index) => {
@@ -128,7 +126,7 @@ const Recommendation = (props: IRecommendationProps) => {
 					})}
 				</ul>
 			</div>
-
+			{/* video section */}
 			<div className="video-container">
 				<ul className="video-list">
 					{video.video.map((vid, index) => {
