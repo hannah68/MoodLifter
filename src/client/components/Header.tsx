@@ -66,6 +66,11 @@ const Header = (props: IHeaderProps) => {
 								</Link>
 							</li>
 							<li>
+								<Link to="/feeling" className="navbar-link">
+									Feeling
+								</Link>
+							</li>
+							<li>
 								<Link to="/journal" className="navbar-link">
 									my Journal
 								</Link>

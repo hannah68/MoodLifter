@@ -31,6 +31,11 @@ const App = () => {
 	const [user, setUser] = useState<RegisteredUserType["data"]>(null);
 	const [recomData, setRecomData] = useState(recomInit);
 	const [favouriteData, setfavouriteData] = useState<FavouriteType>(favInit);
+	const [savedQuote, setSavedQuote] = useState<RecommendationType["quote"]>([]);
+	const [savedArticle, setSavedArticle] = useState<
+		RecommendationType["article"]
+	>([]);
+	const [savedVideo, setSavedVideo] = useState<RecommendationType["video"]>([]);
 
 	const getFavourites = async () => {
 		if (user) {
@@ -93,13 +98,20 @@ const App = () => {
 							setIsLoggedIn={setIsLoggedIn}
 							/>}
 					/>
-					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile" element={<Profile savedQuote={savedQuote} savedArticle={savedArticle} savedVideo={savedVideo}/>} />
 					<Route path="/journal" element={<Journal user={user} />} />
 					<Route
 						path="/recommendation/badmood"
-						element={<Recommendation 
-							recomData={recomData} 
-							favouriteData={favouriteData}/>}
+						element={<Recommendation
+							recomData={recomData}
+							favouriteData={favouriteData}
+							setSavedQuote={setSavedQuote}
+							savedQuote={savedQuote}
+							setSavedArticle={setSavedArticle}
+							savedArticle={savedArticle}
+							setSavedVideo={setSavedVideo}
+							savedVideo={savedVideo}
+							/>}
 					/>
 					<Route path="/recommendation/goodmood" element={<GoodMood />} />
 					<Route

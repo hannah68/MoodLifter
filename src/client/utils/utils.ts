@@ -52,3 +52,17 @@ export const existFeelings = (feelingArr:  Array<string>) : boolean => {
     return res;
 }
 
+export const uniqueArrHandler = (arr: any) => {
+	const ArrOfString = arr.map((obj:any) => {
+		return JSON.stringify(obj);
+	});
+
+	const uniqueArrOfString = [...new Set(ArrOfString)];
+
+	const uniqueArrOfObj = uniqueArrOfString.map((obj: any) => {
+		return JSON.parse(obj);
+	});
+
+    return uniqueArrOfObj
+};
+
