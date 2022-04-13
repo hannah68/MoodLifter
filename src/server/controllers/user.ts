@@ -103,3 +103,48 @@ export const createProfile = async(req: Request, res: Response) => {
 
 	return res.status(HTTP_RESPONSE.OK.CODE).json({ data: createdProfile });
 }
+
+// create journal for user===============================
+export const createUserJournal = async (req: Request, res: Response) => {
+	const { text, userId} = req.body;
+
+	const journal = await prisma.diary.create({
+		data: {
+			text,
+			user: {
+				connect: {
+					id: Number(userId)
+				},
+			}
+		}
+	})
+
+	return res.status(HTTP_RESPONSE.OK.CODE).json({ data: journal });
+}
+
+// get user Journals==================================
+export const getUserJournal = async(req: Request, res: Response) => {
+	const id = Number(req.params.id)
+
+	const findUser = await prisma.user.findUnique({
+		where: {
+			id
+		}
+	});
+
+	// if(!findUser){
+
+	// }
+	if(findUser){
+		const journal = await prisma.diary.findMany({
+			where: {
+				userId: findUser.id
+			}
+		});
+		return res.status(HTTP_RESPONSE.OK.CODE).json({ data: journal });
+	}
+
+	// if(!diary){
+
+	// }
+}
