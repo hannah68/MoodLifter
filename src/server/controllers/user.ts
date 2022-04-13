@@ -148,3 +148,16 @@ export const getUserJournal = async(req: Request, res: Response) => {
 
 	// }
 }
+
+// delete user journal ===================================
+export const deleteUserJournal = async (req: Request, res: Response) => {
+	const journalId = Number(req.params.journalId);
+
+	const journal = await prisma.diary.delete({
+		where: {
+			id: journalId
+		}
+	})
+
+	return res.status(HTTP_RESPONSE.OK.CODE).json({ data: journal });
+}
