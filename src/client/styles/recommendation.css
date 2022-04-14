@@ -12,6 +12,11 @@
 	gap: 5px;
 	justify-content: space-between;
 }
+
+.quote-title span {
+	cursor: pointer;
+}
+
 .quote-author {
 	float: right;
 	color: #be6a78;
@@ -33,16 +38,20 @@
 .advice-container ul li {
 	padding-bottom: 5px;
 }
+
 .advice-container-list {
 	list-style: none;
 }
+
 .recom-sub {
 	border-bottom: 3px solid #be6a78;
 }
+
 .advice-list {
 	display: flex;
 	gap: 1.2rem;
 }
+
 .content-container {
 	padding-top: 4rem;
 }
@@ -106,4 +115,39 @@
 
 .fav-res {
 	font-weight: bold;
+}
+
+@media only screen and (max-width: 628px) {
+	.quote-container {
+		padding: 1.5rem;
+		font-size: 13px;
+	}
+
+	.advice-list,
+	.fav-container,
+	.article-container,
+	.video-container {
+		font-size: 13px;
+	}
+
+	.article-title,
+	.video-title {
+		font-size: 15px;
+	}
+}
+
+@media only screen and (max-width: 498px) {
+	.quote-container {
+		padding: 1.3rem;
+		font-size: 10px;
+	}
+
+	.subtitle,
+	.content-container {
+		font-size: 15px;
+	}
+
+	.advice-list {
+		flex-direction: column;
+	}
 }

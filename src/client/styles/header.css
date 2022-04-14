@@ -40,3 +40,57 @@ nav {
 .user-name {
 	border-bottom: 2px solid #d88492;
 }
+
+@media only screen and (max-width: 812px) {
+	.navbar {
+		gap: 0;
+		font-size: 1.2rem;
+	}
+}
+
+@media only screen and (max-width: 726px) {
+	.navbar {
+		font-size: 1rem;
+	}
+}
+
+@media only screen and (max-width: 660px) {
+	header {
+		padding-left: 1.3rem;
+		padding-right: 1.3rem;
+	}
+
+	.navbar li {
+		margin-left: 1rem;
+	}
+}
+
+@media only screen and (max-width: 510px) {
+	.navbar,
+	.logo {
+		font-size: 13px;
+	}
+	.navbar li {
+		margin-left: 13px;
+	}
+}
+
+@media only screen and (max-width: 430px) {
+	.navbar,
+	.logo {
+		font-size: 12px;
+	}
+	.navbar li {
+		margin-left: 10px;
+	}
+}
+
+@media only screen and (max-width: 370px) {
+	.logo-link img {
+		width: 70px;
+	}
+
+	.navbar li {
+		margin-left: 0;
+	}
+}
