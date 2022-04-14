@@ -5,3 +5,33 @@
 .mood-page h1{
     margin-bottom: 1rem;
 }
+
+@media only screen and (max-width: 868px) {
+	.mood-page h1{
+        font-size: 1.5rem;
+    }
+    .quote-container h2{
+        font-size: 1rem;
+        
+    }
+    .quote-container{
+        padding:1rem;
+    }
+}
+
+@media only screen and (max-width: 612px) {
+	.mood-page h1{
+        font-size: 1.2rem;
+    }
+    .quote-container h2{
+        font-size: 13px;
+    }
+
+    .quote-container{
+        padding:1rem;
+    }
+
+    .sharing-container h3{
+        font-size: 13px;
+    }
+}

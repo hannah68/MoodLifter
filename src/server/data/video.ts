@@ -1,4 +1,4 @@
-import { Video } from "../config/interfaces";
+import { Video } from "../interface/interfaces";
 
 export const videos: Array<Video> = [
 	{

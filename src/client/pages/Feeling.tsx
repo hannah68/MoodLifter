@@ -6,15 +6,21 @@ import { useNavigate } from "react-router-dom";
 import "../styles/feeling.css";
 
 import { emojis } from "../data/emoji";
-import { EmojiType } from "../data/emoji";
 
 import Emoji from "../components/Emoji";
 
-import { existFeelings, todayDate} from "../utils/utils";
-import { FavouriteType, RecommendationType } from "../interfaces";
+import { existFeelings, todayDate } from "../utils/utils";
 
-export const FeelingType: string[] = [];
+import {
+	FavouriteType,
+	RecommendationType,
+	EmojiType,
+	FeelingType,
+} from "../interface/interfaces";
 
+import { PAGE_LINK, RECOMMENDATION } from "../utils/config";
+
+// Feeling props interface==========================
 export interface IFeelingProps {
 	setRecomData: (target: RecommendationType[]) => void;
 	setfavouriteData: (target: FavouriteType) => void;
@@ -22,21 +28,24 @@ export interface IFeelingProps {
 	setIsLoggedIn: (target: boolean) => void;
 }
 
+// Feeling component================================
 const Feeling = (props: IFeelingProps) => {
-	const { setRecomData, setfavouriteData, getFavourites, setIsLoggedIn } = props;
+	const { setRecomData, setfavouriteData, getFavourites, setIsLoggedIn } =
+		props;
 	const [feeling, setFeeling] = useState(FeelingType);
 
 	const navigate = useNavigate();
 
+	// Get all recommendations=====================
 	const getAllRecommendations = async () => {
 		if (feeling) {
 			const checkTypeOfFeeling = existFeelings(feeling);
 
 			if (checkTypeOfFeeling) {
-				navigate("/recommendation/goodmood");
+				navigate(PAGE_LINK.RECOMMENDATION_GOOD);
 			} else {
 				const recomRes = await fetch(
-					`http://localhost:4000/recommendation/badmood/${feeling[0]}`
+					`${RECOMMENDATION.RECOMMENDATION_LOW}${feeling[0]}`
 				);
 				const recomData = await recomRes.json();
 
@@ -45,6 +54,7 @@ const Feeling = (props: IFeelingProps) => {
 		}
 	};
 
+	// submit feeling form=========================
 	const submitFeelingFormHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const allData = await getAllRecommendations();
@@ -55,7 +65,7 @@ const Feeling = (props: IFeelingProps) => {
 			setRecomData(allData);
 			setfavouriteData(favData);
 			setIsLoggedIn(true);
-			navigate("/recommendation/badmood");
+			navigate(PAGE_LINK.RECOMMENDATION_LOW);
 		}
 	};
 
@@ -70,13 +80,7 @@ const Feeling = (props: IFeelingProps) => {
 			</p>
 			<div className="emoji-list">
 				{emojis.map((emj: EmojiType, index: number) => {
-					return (
-						<Emoji
-							key={index}
-							emj={emj}
-							setFeeling={setFeeling}
-						/>
-					);
+					return <Emoji key={index} emj={emj} setFeeling={setFeeling} />;
 				})}
 			</div>
 			<button type="submit" className="next-btn">

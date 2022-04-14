@@ -1,13 +1,13 @@
 import { RiArticleFill } from "react-icons/ri";
 import { AiFillVideoCamera } from "react-icons/ai";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import { FaHandPointRight } from "react-icons/fa";
 
-import { iconStyle, iconStyleSize  } from "../utils/utils";
+import { iconStyle, iconStyleSize } from "../utils/utils";
 
-import { Quote, Article, Video } from "../../server/config/interfaces";
+import { Quote, Article, Video } from "../../server/interface/interfaces";
 
-import { RecommendationType, FavouriteType } from "../interfaces";
+import { RecommendationType, FavouriteType } from "../interface/interfaces";
 
 import "../styles/recommendation.css";
 
@@ -25,14 +25,16 @@ export interface IRecommendationProps {
 
 // Recommendation component =============================
 const Recommendation = (props: IRecommendationProps) => {
-	const { recomData,
+	const {
+		recomData,
 		favouriteData,
 		setSavedQuote,
 		savedQuote,
 		savedArticle,
 		setSavedArticle,
 		savedVideo,
-		setSavedVideo} = props;
+		setSavedVideo,
+	} = props;
 	const [article, video, advice, quote] = recomData;
 
 	const typeOfFeeling = quote.quote.map((qt) => {
@@ -61,7 +63,7 @@ const Recommendation = (props: IRecommendationProps) => {
 							<h3>“{qt.text}”</h3>
 							<span onClick={() => quoteHandler(qt)}>
 								{" "}
-								<AiOutlineHeart style={iconStyleSize} />
+								<AiFillHeart style={iconStyleSize} />
 							</span>
 						</div>
 
@@ -97,7 +99,7 @@ const Recommendation = (props: IRecommendationProps) => {
 					})}
 				</ul>
 			</div>
-			
+
 			{/* favourite users answers */}
 			<ul className="fav-container">
 				<li>
@@ -129,7 +131,7 @@ const Recommendation = (props: IRecommendationProps) => {
 			<h3 className="content-container">
 				Still not feeling good? checkout our articles and videos.
 			</h3>
-			
+
 			{/* article section */}
 			<div className="article-container">
 				<ul className="article-list">
@@ -144,7 +146,7 @@ const Recommendation = (props: IRecommendationProps) => {
 										<span>{art.title}</span>
 									</div>
 									<span onClick={() => articleHandler(art)}>
-										<AiOutlineHeart style={iconStyle} />
+										<AiFillHeart style={iconStyle} />
 									</span>
 								</div>
 								<p className="article-content">{art.content}...</p>
@@ -170,7 +172,7 @@ const Recommendation = (props: IRecommendationProps) => {
 										<span>{vid.title}</span>
 									</div>
 									<span onClick={() => videoHandler(vid)}>
-										<AiOutlineHeart style={iconStyle} />
+										<AiFillHeart style={iconStyle} />
 									</span>
 								</div>
 								<p className="video-content">{vid.content}...</p>

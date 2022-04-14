@@ -1,89 +1,106 @@
 .signup-page,
-.signin-page{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.signin-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	width: 100%;
 }
 
 .signup-page h3,
 .signin-page h2,
-.signin-page h3{
-    text-align: center;
+.signin-page h3 {
+	text-align: center;
 }
 
 .signup-form,
-.signin-form{
-    width: 30%;
-    /* background-color: var(--color-mint); */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 1rem;
-    gap: 1rem;
+.signin-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+	padding: 1rem;
+	gap: 1rem;
 }
 
-.input-groups{
-    display: flex;
-    align-items: flex-end;
+.input-groups {
+	display: flex;
+	align-items: flex-end;
 }
 
-.input-groups label{
-    padding-right: 5px;
-    
+.input-groups label {
+	padding-right: 5px;
 }
 
-.input-groups input{
-    width: 90%;
-    padding: 5px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    outline: none;
-    background-color: transparent;
+.input-groups input {
+	width: 90%;
+	padding: 5px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	outline: none;
+	background-color: transparent;
 }
 
-.terms{
-    font-size: 14px;
-    padding-left: 3px;
+.terms {
+	font-size: 14px;
+	padding-left: 3px;
 }
 
-.login-container{
-    border-top: 1px solid #000;
-    font-size: 13px;
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5px;
-    margin: 1rem 0;
+.login-container {
+	border-top: 1px solid #000;
+	font-size: 13px;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 5px;
+	margin: 1rem 0;
 }
 
-.logo-img{
-    width: 5rem;
+.logo-img {
+	width: 5rem;
 }
 
-.logo-link{
-    display: flex;
-    flex-direction: column;
-}
-.signin-btn{
-    cursor: pointer;
-    /* text-decoration: none; */
-    /* background-color: var(--color-yellow); */
-    /* background-color: #fff; */
-    padding: 2px;
-    border-radius: 4px;
-    color: #000;
+.logo-link {
+	display: flex;
+	flex-direction: column;
 }
 
-.register-btn{
-    cursor: pointer;
-    outline: none;
-    background-color: #d88492;
-    border: none;
-    padding: 5px;
-    border-radius: 4px;
+.signin-btn {
+	cursor: pointer;
+	padding: 2px;
+	border-radius: 4px;
+	color: #000;
 }
 
-.login{
-    margin-top: 1rem;
+.register-btn {
+	cursor: pointer;
+	outline: none;
+	background-color: #d88492;
+	border: none;
+	padding: 5px;
+	border-radius: 4px;
+}
+
+.login {
+	margin-top: 1rem;
+}
+
+@media only screen and (max-width: 410px) {
+	.signup-page h3 {
+		font-size: 1rem;
+	}
+
+	.terms {
+		font-size: 12px;
+	}
+
+	.login-container {
+		font-size: 12px;
+	}
+
+	.signin-page h3,
+	.signin-page h2 {
+		font-size: 15px;
+	}
 }

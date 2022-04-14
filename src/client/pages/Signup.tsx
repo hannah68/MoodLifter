@@ -7,15 +7,17 @@ import { useNavigate } from "react-router-dom";
 
 import "../styles/signup.css";
 
-import { USER_URL } from "../utils/config";
+import { PAGE_LINK, USER_URL } from "../utils/config";
 
-import { UserSignup, RegisteredUserType } from "../interfaces";
+import { UserSignup, RegisteredUserType } from "../interface/interfaces";
 
+// signup props interface==========================
 export interface ISignupProps {
 	setUser: (target: RegisteredUserType["data"] | null) => void;
 	setIsLoggedIn: (target: boolean) => void;
 }
 
+// Signup componenet================================
 const Signup = (props: ISignupProps) => {
 	const { setUser, setIsLoggedIn } = props;
 	const [submit, setsubmit] = useState(false);
@@ -27,6 +29,7 @@ const Signup = (props: ISignupProps) => {
 
 	const navigate = useNavigate();
 
+	// post user data to DB==========================
 	useEffect(() => {
 		if (submit) {
 			const postUserInfoToDB = async () => {
@@ -45,7 +48,7 @@ const Signup = (props: ISignupProps) => {
 				if (userData.data) {
 					localStorage.setItem("userId", userData.data.id.toString());
 					setUser(userData.data);
-					navigate("/favourite");
+					navigate(PAGE_LINK.FAVOURITE);
 				}
 			};
 			postUserInfoToDB();
@@ -116,7 +119,7 @@ const Signup = (props: ISignupProps) => {
 				</div>
 				<div className="login-container">
 					<p className="signin-text">Already have an account?</p>
-					<Link to="/signin" className="signin-btn">
+					<Link to={PAGE_LINK.LOGIN} className="signin-btn">
 						Signin
 					</Link>
 				</div>

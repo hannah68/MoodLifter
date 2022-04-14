@@ -32,8 +32,6 @@ body {
 }
 
 .app {
-	width: 50%;
-	/* min-height: 50vh; */
+	width: 70%;
 	margin: 5rem auto;
-	/* overflow: hidden; */
 }

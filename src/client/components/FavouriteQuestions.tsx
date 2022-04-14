@@ -1,15 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface AnswersType {
-	favPerson: string;
-	favPlace: string;
-	favFood: string;
-	gratitude: string;
-	passion: string;
-	accomplishment: string;
-}
+import { FEELING_URL, PAGE_LINK } from "../utils/config";
 
+import { AnswersType } from "../interface/interfaces";
+
+// Favourite uestion componenet===================
 const FavouriteQuestions = () => {
 	const [answers, setAnswers] = useState<AnswersType>({
 		favPerson: "",
@@ -22,16 +18,17 @@ const FavouriteQuestions = () => {
 
 	const navigate = useNavigate();
 
+	// post answer to DB==========================
 	const postAnswersToDB = async () => {
-		const id =  Number(localStorage.getItem('userId'));
+		const id = Number(localStorage.getItem("userId"));
 
-		const res = await fetch("http://localhost:4000/feeling/favourite", {
+		const res = await fetch(`${FEELING_URL.FAVOURITE_ROOT}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: localStorage.getItem('token') as string
+				Authorization: localStorage.getItem("token") as string,
 			},
-			body: JSON.stringify({...answers, userId: id}),
+			body: JSON.stringify({ ...answers, userId: id }),
 		});
 		const data = await res.json();
 		return data;
@@ -41,9 +38,10 @@ const FavouriteQuestions = () => {
 	const submitQuestionHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		await postAnswersToDB();
-		navigate("/signin");
+		navigate(PAGE_LINK.LOGIN);
 	};
 
+	// change handler=====================
 	const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target;
 
@@ -129,10 +127,7 @@ const FavouriteQuestions = () => {
 				/>
 			</div>
 
-			<button
-				type="submit"
-				className="save-btn"
-			>
+			<button type="submit" className="save-btn">
 				Save
 			</button>
 		</form>

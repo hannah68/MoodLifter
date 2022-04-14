@@ -6,7 +6,7 @@ import "../styles/profile.css";
 
 import { uniqueArrHandler } from "../utils/utils";
 
-import { RecommendationType } from "../interfaces";
+import { RecommendationType } from "../interface/interfaces";
 
 // profile props interface==================================
 export interface IProfileProps {

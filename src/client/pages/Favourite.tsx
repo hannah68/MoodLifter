@@ -3,7 +3,6 @@ import "../styles/feeling.css";
 import FavouriteQuestions from "../components/FavouriteQuestions";
 
 const Favourite = () => {
-
 	return (
 		<div className="feeling-page">
 			<div className="feeling-top">

@@ -1,4 +1,4 @@
-import { Article, Video, Advice, Quote, Diary } from "../server/config/interfaces";
+import { Article, Video, Advice, Quote, Diary } from "../../server/interface/interfaces";
 
 export interface UserSignup {
 	username: string;
@@ -35,3 +35,25 @@ export interface FavouriteType {
 	gratitude: string;
 	passion: string;
 }
+
+export interface AnswersType {
+	favPerson: string;
+	favPlace: string;
+	favFood: string;
+	gratitude: string;
+	passion: string;
+	accomplishment: string;
+}
+
+export interface EmojiType {
+	label: string;
+	img: string;
+}
+
+export interface questionType {
+    question: string,
+    label: string,
+    name: string
+}
+
+export const FeelingType: string[] = [];

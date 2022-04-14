@@ -1,7 +1,4 @@
-export interface EmojiType {
-	label: string;
-	img: string;
-}
+import { EmojiType } from "../interface/interfaces";
 
 export const emojis: EmojiType[] = [
 	{

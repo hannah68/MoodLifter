@@ -1,12 +1,10 @@
 .home-page {
-	width: 50%;
+	width: 70%;
 	margin: 3rem auto 1rem auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* background: rgb(255,174,188);
-    background: linear-gradient(60deg, rgba(255,174,188,1) 0%, rgba(160,231,229,1) 60%, rgba(180,248,200,1) 95%); */
 }
 
 .home-page {
@@ -39,4 +37,26 @@
 	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 	border: 0 solid;
 	font-weight: bold;
+}
+
+@media only screen and (max-width: 842px) {
+	.home-page h1,
+	.home-page h2 {
+		font-size: 1.5rem;
+	}
+}
+
+@media only screen and (max-width: 370px) {
+	.home-page h1,
+	.home-page h2 {
+		font-size: 1.2rem;
+	}
+
+	.home-page {
+		width: 100%;
+	}
+	.home-btn {
+		width: 4rem;
+		font-size: 1rem;
+	}
 }
