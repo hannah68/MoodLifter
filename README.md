@@ -2,7 +2,7 @@
 > Moodlifter is an app that recommends appropriate content based on one's instantaneous mood.
 
 <!-- ![MoodLifter Demo](public/assets/images/moodlifter.gif) -->
-<img src="public/assets/images/moodlifter.gif" width="600px"/>
+<img src="public/assets/images/moodlifterapp.gif" width="600px"/>
 
 ## How does MoodLifter works
 When in a good mood:
