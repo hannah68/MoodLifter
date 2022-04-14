@@ -27,6 +27,7 @@ The idea of MoodLifter came to my mind when I wasn't in a good mood. I wanted to
 - Node.js, Express
 - Authentication (Bcrypt, Jsonwebtoken)
 - PostgresSQl, Prisma ORM, ElephantSQL
+- ERD in <a href='https://whimsical.com/erd-AZzP7M7D3QxSgoB27RLNP5'>Whimsical</a>
 
 ## Future improvements
 1. Currently, a user can select one feeling at a time. A future improvement would be the ability to select multiple feelings and to provide relevant materials based on the all the selections.
