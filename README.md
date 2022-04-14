@@ -10,8 +10,11 @@ When in a good mood:
 
 In case of low moods:
 - depending on the selected feeling, MoodLifter uses the saved information provided by the user to remind them of ways that can improve how they feel. For instance, it suggests calling the favourite person as a potential remedy for one's low mood. 
+- It also provides relevent articles, videos and motivational quotes.
+
+In general:
+- The Users can save their favourite quote, video, motivational quotes and see them in their profile page.
 - MoodLifter allows you to keep daily journals, (Journaling, whenever users feel good, is as beneficial as when they are in a low mood. Importantly, saving users' journals into a database whenever enables us to show them that they had good days as well as bad days).
-- It provides relevent articles, videos and motivational quotes.
 
 ## What was the problem
 The idea of MoodLifter came to my mind when I wasn't in a good mood. I wanted to build an app that tracked the way I felt and allowed me to see how my mood would fluctuate over time. I was also looking for advice and helpful materials to keep up my spirits.
