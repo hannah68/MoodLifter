@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { EmojiType } from "../data/emoji";
+import { EmojiType } from "../interface/interfaces";
 
 import "../styles/feeling.css";
 

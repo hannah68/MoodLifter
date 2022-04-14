@@ -6,7 +6,6 @@ import {
 	NUMBER_OF_USERS_AND_PROFILES_TO_GENERATE,
 } from "../utils/config";
 
-
 import { fakeProfile, fakeUsers } from "../utils/faker";
 
 import { moods } from "../data/feeling";
@@ -126,9 +125,9 @@ const seedUsers = async (): Promise<void> => {
 
 		console.log("Created User:", generatedUser);
 
-		// if (!generatedUser) {
-		//     return res.status(500).json({ error: SERVER_ERROR_MESSAGE.INTERNAL_SERVER });
-		// }
+		if (!generatedUser) {
+			console.log(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
+		}
 
 		const fakedProfileGenerated = fakeProfile(generatedUser.id);
 
@@ -140,12 +139,11 @@ const seedUsers = async (): Promise<void> => {
 
 		console.log("Created Profile:", generatedProfile);
 
-		// if (!generatedProfile) {
-		//     return res.status(SERVER_ERROR.INTERNAL.CODE).json({ error: SERVER_ERROR.INTERNAL.MESSAGE });
-		// }
+		if (!generatedProfile) {
+			console.log(HTTP_RESPONSE.INTERNAL_ERROR.MESSAGE);
+		}
 	}
 };
-
 
 // get feeling================================
 const getFeeling = async (quoteType: string) => {
