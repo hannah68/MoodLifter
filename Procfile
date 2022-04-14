@@ -1,1 +1,1 @@
-web: npm run devstart
+web: node src/server/index.ts
