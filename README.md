@@ -20,8 +20,17 @@ In general:
 The idea of MoodLifter came to my mind when I wasn't in a good mood. I wanted to build an app that tracked the way I felt and allowed me to see how my mood would fluctuate over time. I was also looking for advice and helpful materials to keep up my spirits.
 
 ## How to run it
-- First, run `npm ci` to install the dependencies (need node.js for npm)
-- Finally, run `npm run devstart` to run the app via <a href="http://localhost:3000">localhost<a/>
+- Clone this repo and create an .env file
+- Add your database using ElephantSQL inside .env file like below:
+
+`DATABSE_URL="yourdatabase?schema=prisma"`
+<br/>
+ `DATABASE_SHADOW="yourshadowdatabase?schema=shadow"`
+ <br/>
+ `SECRET="thisismysecret"`
+ 
+ - Then run `npm ci`
+ - Run `npm run devstart`
 
 ## Tech stack
 - HTML, CSS, Figma
