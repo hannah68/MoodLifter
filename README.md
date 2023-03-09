@@ -32,14 +32,14 @@ The idea of MoodLifter came to my mind when I wasn't in a good mood. I wanted to
  - Then run `npm ci`
  - Run `npm run devstart`
 
-## Tech stack
-- HTML, CSS, Figma
-- React
-- Typescript
-- Node.js, Express
-- Authentication (Bcrypt, Jsonwebtoken)
-- PostgresSQl, Prisma ORM, ElephantSQL
-- ERD in <a href='https://whimsical.com/erd-AZzP7M7D3QxSgoB27RLNP5'>Whimsical</a>
+## Tech stack and methods Used
+- Used **React, Typescript, Node.js, Express, PostgresSQl, Prisma ORM**.
+- Developed **user stories** to capture the app's features from an end-user perspective
+- Utilized **Kanban board** to track progress and **Figma** for app design
+- Created an **ERD diagram** to build a relational database. ERD in <a href='https://whimsical.com/erd-AZzP7M7D3QxSgoB27RLNP5'>Whimsical</a>
+- Implemented **bcrypt** and **JWT** for authentication
+- Employed **ElephantSQL** cloud service for database
+- Applied **React Router** for UI navigation
 
 ## Future improvements
 1. Currently, a user can select one feeling at a time. A future improvement would be the ability to select multiple feelings and to provide relevant materials based on the all the selections.
