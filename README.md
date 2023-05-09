@@ -13,7 +13,7 @@ In case of low moods:
 - It also provides relevent articles, videos and motivational quotes.
 
 In general:
-- The Users can save their favourite quote, video, motivational quotes and see them in their profile page.
+- The users can create an account and save their favourite quote, video, motivational quotes and see them in their profile page.
 - MoodLifter allows you to keep daily journals, (Journaling, whenever users feel good, is as beneficial as when they are in a low mood. Importantly, saving users' journals into a database whenever enables us to show them that they had good days as well as bad days).
 
 ## What was the problem
